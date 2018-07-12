@@ -3,15 +3,9 @@ package com.conquer.sharp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.conquer.sharp.ptr.CircleProgressView;
-
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-
-    @BindView(R.id.circleProgressView)
-    CircleProgressView circleProgressView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +13,5 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
-
-        circleProgressView.setOnDraw(true);
-        new Thread(circleProgressView).start();
     }
 }

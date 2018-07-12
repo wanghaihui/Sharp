@@ -15,7 +15,7 @@ import android.view.WindowManager;
  *
  */
 
-public class CircleProgressView extends View implements Runnable {
+public class SwipeCircleProgressView extends View implements Runnable {
     // 绘制周期
     private static final int PERIOD = 16;
     private Paint progressPaint;
@@ -43,17 +43,17 @@ public class CircleProgressView extends View implements Runnable {
     private int mCircleBackgroundColor = 0xFFFFFFFF;
     private int mShadowColor = 0xFF999999;
 
-    public CircleProgressView(Context context) {
+    public SwipeCircleProgressView(Context context) {
         super(context);
         init(context);
     }
 
-    public CircleProgressView(Context context, AttributeSet attrs) {
+    public SwipeCircleProgressView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public CircleProgressView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SwipeCircleProgressView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
