@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.conquer.sharp.ptr.PullToRefreshLayout;
 
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements PullToRefreshLayo
     PullToRefreshLayout pullToRefreshLayout;
 
     private static final String[] strDatas = new String[] {
+            "first", "second", "third", "fourth", "fifth",
+            "first", "second", "third", "fourth", "fifth",
             "first", "second", "third", "fourth", "fifth"
     };
 
@@ -42,13 +45,18 @@ public class MainActivity extends AppCompatActivity implements PullToRefreshLayo
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                pullToRefreshLayout.setRefreshing(false);
+                pullToRefreshLayout.stopLoading();
             }
         }, REFRESH_PERIOD);
     }
 
     @Override
     public void onPullUpToRefresh() {
-
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                pullToRefreshLayout.stopLoading();
+            }
+        }, 1000);
     }
 }

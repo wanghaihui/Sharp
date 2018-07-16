@@ -1,4 +1,4 @@
-package com.conquer.sharp.ptr.custom;
+package com.conquer.sharp.ptr.custom.ball;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,7 +12,7 @@ import android.view.View;
 import com.conquer.sharp.R;
 import com.conquer.sharp.util.system.ScreenUtil;
 
-public class LoadingView extends View {
+public class BallLoadingView extends View {
 
     private static final float DEFAULT_RADIUS = ScreenUtil.dip2px(5);
     private static final int DEFAULT_BALL_COLOR = 0xffffffff;
@@ -48,15 +48,15 @@ public class LoadingView extends View {
 
     private boolean isNeedAnimation;
 
-    public LoadingView(Context context) {
+    public BallLoadingView(Context context) {
         this(context, null);
     }
 
-    public LoadingView(Context context, AttributeSet attrs) {
+    public BallLoadingView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public LoadingView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BallLoadingView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
     }
@@ -78,14 +78,14 @@ public class LoadingView extends View {
 
     private void init(AttributeSet attrs) {
 
-        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.LoadingView);
-        ballLeftColor = a.getColor(R.styleable.LoadingView_left_ball_color, DEFAULT_BALL_COLOR);
-        ballRightColor = a.getColor(R.styleable.LoadingView_right_ball_color, DEFAULT_BALL_COLOR);
-        radius = a.getFloat(R.styleable.LoadingView_radius, DEFAULT_RADIUS);
+        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.BallLoadingView);
+        ballLeftColor = a.getColor(R.styleable.BallLoadingView_left_ball_color, DEFAULT_BALL_COLOR);
+        ballRightColor = a.getColor(R.styleable.BallLoadingView_right_ball_color, DEFAULT_BALL_COLOR);
+        radius = a.getFloat(R.styleable.BallLoadingView_radius, DEFAULT_RADIUS);
         maxTouchDistance = (float) (radius * 2.5);
         ballMoveDistance = (float) (radius * 3.5);
-        animationSpeed = a.getFloat(R.styleable.LoadingView_animation_speed, DEFAULT_SPEED);
-        isNeedAnimation = a.getBoolean(R.styleable.LoadingView_need_animation, true);
+        animationSpeed = a.getFloat(R.styleable.BallLoadingView_animation_speed, DEFAULT_SPEED);
+        isNeedAnimation = a.getBoolean(R.styleable.BallLoadingView_need_animation, true);
         a.recycle();
         paint.setColor(ballLeftColor);
         paint.setStyle(Paint.Style.FILL);

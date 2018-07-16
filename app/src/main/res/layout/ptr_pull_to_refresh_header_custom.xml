@@ -7,14 +7,13 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
 
-        <com.conquer.sharp.ptr.custom.LoadingView
+        <com.conquer.sharp.ptr.custom.pulse.BallPulseLoadingView
             android:id="@+id/ptr_custom_loading"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_gravity="bottom"
-            app:left_ball_color="@color/left_ball_color"
-            app:need_animation="false"
-            app:right_ball_color="@color/right_ball_color"/>
+            app:srlAnimatingColor="@color/red_dark"
+            app:srlNormalColor="@color/red_light"/>
 
     </FrameLayout>
 

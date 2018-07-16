@@ -1162,6 +1162,37 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
     }
 
     /**
+     * 设置停止加载
+     *
+     * @param loadMore
+     */
+    public void setLoadMore(boolean loadMore) {
+        // 停止加载
+        if (!loadMore && mLoadMore) {
+            if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
+                mLoadMore = false;
+                pushDistance = 0;
+                updateFooterViewPosition();
+            } else {
+                animatorFooterToBottom(mFooterViewHeight, 0);
+            }
+        }
+    }
+
+    /**
+     * 停止加载
+     */
+    public void stopLoading() {
+        if (mLoadMore) {
+            // 正在加载更多
+            setLoadMore(false);
+        } else if (mRefreshing) {
+            // 正在刷新
+            setRefreshing(false);
+        }
+    }
+
+    /**
      * 下拉刷新回调
      */
     public interface OnPullRefreshListener {

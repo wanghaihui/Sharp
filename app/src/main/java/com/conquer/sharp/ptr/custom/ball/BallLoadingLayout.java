@@ -1,4 +1,4 @@
-package com.conquer.sharp.ptr.custom;
+package com.conquer.sharp.ptr.custom.ball;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
 import com.conquer.sharp.R;
+import com.conquer.sharp.ptr.custom.LoadingLayout;
 import com.conquer.sharp.util.system.ScreenUtil;
 
 /**
@@ -15,15 +16,15 @@ import com.conquer.sharp.util.system.ScreenUtil;
  *
  */
 
-public class CustomLoadingLayout extends LoadingLayout {
+public class BallLoadingLayout extends LoadingLayout {
     private FrameLayout mInnerLayout;
-    private LoadingView loadingView;
+    private BallLoadingView loadingView;
 
-    public CustomLoadingLayout(Context context) {
+    public BallLoadingLayout(Context context) {
         super(context);
         LayoutInflater.from(context).inflate(R.layout.ptr_pull_to_refresh_header_custom, this);
         mInnerLayout = (FrameLayout) findViewById(R.id.ptr_fl_inner);
-        loadingView = (LoadingView) mInnerLayout.findViewById(R.id.ptr_custom_loading);
+        loadingView = (BallLoadingView) mInnerLayout.findViewById(R.id.ptr_custom_loading);
     }
 
     @Override

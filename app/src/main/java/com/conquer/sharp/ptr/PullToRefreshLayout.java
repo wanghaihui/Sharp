@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 
 import com.conquer.sharp.R;
+import com.conquer.sharp.ptr.custom.pulse.BallPulseLoadingLayout;
 
 /**
  * Created by ac on 18/7/16.
@@ -13,6 +14,8 @@ import com.conquer.sharp.R;
  */
 
 public class PullToRefreshLayout extends SuperSwipeRefreshLayout {
+
+    private BallPulseLoadingLayout loadingLayoutUp;
 
     private OnRefreshListener onRefreshListener;
 
@@ -70,9 +73,12 @@ public class PullToRefreshLayout extends SuperSwipeRefreshLayout {
         }
 
         if (pullUp) {
+            loadingLayoutUp = new BallPulseLoadingLayout(getContext());
+            setFooterView(loadingLayoutUp);
             setOnPushLoadMoreListener(new OnPushLoadMoreListener() {
                 @Override
                 public void onLoadMore() {
+                    loadingLayoutUp.refreshing();
                     if (onRefreshListener != null) {
                         onRefreshListener.onPullUpToRefresh();
                     }
@@ -80,7 +86,10 @@ public class PullToRefreshLayout extends SuperSwipeRefreshLayout {
 
                 @Override
                 public void onPushDistance(int distance) {
-
+                    if (distance == 0) {
+                        loadingLayoutUp.reset();
+                    }
+                    loadingLayoutUp.onPull(distance * 1.0f / loadingLayoutUp.getContentSize());
                 }
 
                 @Override

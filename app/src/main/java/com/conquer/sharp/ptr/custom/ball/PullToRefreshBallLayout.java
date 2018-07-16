@@ -1,33 +1,32 @@
-package com.conquer.sharp.ptr.custom;
+package com.conquer.sharp.ptr.custom.ball;
 
 import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
 
 import com.conquer.sharp.ptr.SuperSwipeRefreshLayout;
-import com.conquer.sharp.ptr.custom.CustomLoadingLayout;
 
 /**
  * Created by ac on 18/7/16.
  *
  */
 
-public class PullToRefreshCustomLayout extends SuperSwipeRefreshLayout {
+public class PullToRefreshBallLayout extends SuperSwipeRefreshLayout {
 
-    private CustomLoadingLayout loadingLayoutDown;
-    private CustomLoadingLayout loadingLayoutUp;
+    private BallLoadingLayout loadingLayoutDown;
+    private BallLoadingLayout loadingLayoutUp;
     private OnRefreshListener onRefreshListener;
 
     public void setOnRefreshListener(OnRefreshListener onRefreshListener) {
         this.onRefreshListener = onRefreshListener;
     }
 
-    public PullToRefreshCustomLayout(Context context) {
+    public PullToRefreshBallLayout(Context context) {
         super(context);
         initLoadingView(true, true);
     }
 
-    public PullToRefreshCustomLayout(Context context, AttributeSet attrs) {
+    public PullToRefreshBallLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         initLoadingView(true, true);
     }
@@ -48,7 +47,7 @@ public class PullToRefreshCustomLayout extends SuperSwipeRefreshLayout {
 
     private void initLoadingView(boolean pullDown, boolean pullUp) {
         if (pullDown) {
-            loadingLayoutDown = new CustomLoadingLayout(getContext());
+            loadingLayoutDown = new BallLoadingLayout(getContext());
             setHeaderView(loadingLayoutDown);
             setOnPullRefreshListener(new SuperSwipeRefreshLayout.OnPullRefreshListener() {
 
@@ -76,7 +75,7 @@ public class PullToRefreshCustomLayout extends SuperSwipeRefreshLayout {
         }
 
         if (pullUp) {
-            loadingLayoutUp = new CustomLoadingLayout(getContext());
+            loadingLayoutUp = new BallLoadingLayout(getContext());
             setFooterView(loadingLayoutUp);
             setOnPushLoadMoreListener(new OnPushLoadMoreListener() {
                 @Override
