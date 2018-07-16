@@ -28,6 +28,9 @@ import android.widget.AbsListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import com.conquer.sharp.R;
+import com.conquer.sharp.util.system.ScreenUtil;
+
 /**
  * Created by ac on 18/7/9.
  *
@@ -37,13 +40,13 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
     private static final String TAG = "SuperSwipeRefreshLayout";
 
     // Header View Height(dp)
-    private static final int HEADER_VIEW_HEIGHT = 48;
+    private static final int HEADER_VIEW_HEIGHT = 40;
 
     private static final float DECELERATE_INTERPOLATION_FACTOR = 2.0f;
     private static final int INVALID_POINTER = -1;
     private static final float DRAG_RATE = 0.5f;
 
-    private static final int DEFAULT_CIRCLE_TARGET = 64;
+    private static final int DEFAULT_CIRCLE_TARGET = 52;
     private static final int SCALE_DOWN_DURATION = 150;
     private static final int ANIMATE_TO_TRIGGER_DURATION = 200;
     private static final int ANIMATE_TO_START_DURATION = 200;
@@ -320,6 +323,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
         );
         layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        layoutParams.bottomMargin = ScreenUtil.dip2px(10);
         mHeaderViewContainer = new HeaderViewContainer(getContext());
         mHeaderViewContainer.setVisibility(View.GONE);
         defaultProgressView.setVisibility(View.VISIBLE);
