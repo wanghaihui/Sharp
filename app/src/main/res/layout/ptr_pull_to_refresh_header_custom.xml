@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
 
-        <com.conquer.sharp.ptr.LoadingView
+        <com.conquer.sharp.ptr.custom.LoadingView
             android:id="@+id/ptr_custom_loading"
             android:layout_width="match_parent"
             android:layout_height="48dp"

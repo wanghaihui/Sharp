@@ -1,4 +1,4 @@
-package com.conquer.sharp.ptr;
+package com.conquer.sharp.ptr.custom;
 
 import android.content.Context;
 import android.content.res.ColorStateList;

@@ -28,7 +28,6 @@ import android.widget.AbsListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
-import com.conquer.sharp.R;
 import com.conquer.sharp.util.system.ScreenUtil;
 
 /**

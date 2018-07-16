@@ -1,8 +1,11 @@
-package com.conquer.sharp.ptr;
+package com.conquer.sharp.ptr.custom;
 
 import android.content.Context;
 import android.os.Handler;
 import android.util.AttributeSet;
+
+import com.conquer.sharp.ptr.SuperSwipeRefreshLayout;
+import com.conquer.sharp.ptr.custom.CustomLoadingLayout;
 
 /**
  * Created by ac on 18/7/16.
