@@ -2,6 +2,7 @@ package com.conquer.sharp.ptr;
 
 import android.content.Context;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 
 /**
@@ -27,7 +28,7 @@ public class PullToRefreshLayout extends SuperSwipeRefreshLayout {
         initLoadingView(true, true);
     }
 
-    //一般用于进页面第一次刷新
+    // 一般用于进页面第一次刷新
     public void autoRefresh() {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -42,6 +43,9 @@ public class PullToRefreshLayout extends SuperSwipeRefreshLayout {
 
     private void initLoadingView(boolean pullDown, boolean pullUp) {
         if (pullDown) {
+            setDefaultCircleProgressColor(ContextCompat.getColor(getContext(), android.R.color.holo_red_light));
+            setDefaultCircleBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
+            setDefaultCircleShadowColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
             setOnPullRefreshListener(new SuperSwipeRefreshLayout.OnPullRefreshListener() {
 
                 @Override

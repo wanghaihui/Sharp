@@ -69,7 +69,8 @@ public class SwipeCircleProgressView extends View implements Runnable {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         // 圆形背景带阴影
-        canvas.drawArc(getBgRect(), 0, 360, false, createBgPaint());
+        // canvas.drawArc(getBgRect(), 0, 360, false, createBgPaint());
+        canvas.drawArc(getOvalRect(), 0, 360, false, createCirclePaint());
 
         int index = startAngle / 360;
         if (index % 2 == 0) {
@@ -110,11 +111,22 @@ public class SwipeCircleProgressView extends View implements Runnable {
     private Paint createPaint() {
         if (progressPaint == null) {
             progressPaint = new Paint();
-            progressPaint.setStrokeWidth((int) (density * 3));
+            progressPaint.setStrokeWidth((int) (density * 2));
             progressPaint.setStyle(Paint.Style.STROKE);
             progressPaint.setAntiAlias(true);
         }
         progressPaint.setColor(mProgressColor);
+        return progressPaint;
+    }
+
+    private Paint createCirclePaint() {
+        if (progressPaint == null) {
+            progressPaint = new Paint();
+            progressPaint.setStrokeWidth((int) (density * 2));
+            progressPaint.setStyle(Paint.Style.STROKE);
+            progressPaint.setAntiAlias(true);
+        }
+        progressPaint.setColor(mCircleBackgroundColor);
         return progressPaint;
     }
 

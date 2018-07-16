@@ -46,7 +46,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
     private static final int INVALID_POINTER = -1;
     private static final float DRAG_RATE = 0.5f;
 
-    private static final int DEFAULT_CIRCLE_TARGET = 52;
+    private static final int DEFAULT_CIRCLE_TARGET = 48;
     private static final int SCALE_DOWN_DURATION = 150;
     private static final int ANIMATE_TO_TRIGGER_DURATION = 200;
     private static final int ANIMATE_TO_START_DURATION = 200;
@@ -1131,6 +1131,34 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
             if (mListener != null) {
                 mListener.onAnimationEnd(getAnimation());
             }
+        }
+    }
+
+    /**
+     * 设置默认下拉刷新进度条的颜色
+     *
+     * @param color
+     */
+    public void setDefaultCircleProgressColor(int color) {
+        if (usingDefaultHeader) {
+            defaultProgressView.setProgressColor(color);
+        }
+    }
+
+    /**
+     * 设置圆圈的背景色
+     *
+     * @param color
+     */
+    public void setDefaultCircleBackgroundColor(int color) {
+        if (usingDefaultHeader) {
+            defaultProgressView.setCircleBackgroundColor(color);
+        }
+    }
+
+    public void setDefaultCircleShadowColor(int color) {
+        if (usingDefaultHeader) {
+            defaultProgressView.setShadowColor(color);
         }
     }
 
