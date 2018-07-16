@@ -109,6 +109,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
     private boolean mScale;
 
     private float mStartingScale;
+    private Animation mScaleAnimation;
     private Animation mScaleDownAnimation;
     private Animation mScaleDownToStartAnimation;
 
@@ -184,6 +185,14 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
         if (usingDefaultHeader && isProgressEnable) {
             defaultProgressView.setPullDistance(distance);
         }
+    }
+
+    public void setOnPullRefreshListener(OnPullRefreshListener listener) {
+        mOnPullRefreshListener = listener;
+    }
+
+    public void setOnPushLoadMoreListener(OnPushLoadMoreListener onPushLoadMoreListener) {
+        this.mOnPushLoadMoreListener = onPushLoadMoreListener;
     }
 
     /**
@@ -1050,8 +1059,49 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
         mFooterViewContainer.layout((width / 2 - footViewWidth / 2), height,
                 (width / 2 + footViewWidth / 2), height + footViewHeight);
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * Notify the widget that refresh state has changed. Do not call this when
+     * refresh is triggered by a swipe gesture.
+     *
+     * @param refreshing Whether or not the view should show refresh progress.
+     */
+    public void setRefreshing(boolean refreshing) {
+        if (refreshing && mRefreshing != refreshing) {
+            // scale and show
+            mRefreshing = refreshing;
+            int endTarget;
+            endTarget = (int) (mSpinnerFinalOffset + mOriginalOffsetTop);
+
+            setTargetOffsetTopAndBottom(endTarget - mCurrentTargetOffsetTop, true);
+            mNotify = false;
+            startScaleUpAnimation(mRefreshListener);
+        } else {
+            setRefreshing(refreshing, false);
+            if (usingDefaultHeader) {
+                defaultProgressView.setOnDraw(false);
+            }
+        }
+    }
+
+    private void startScaleUpAnimation(Animation.AnimationListener listener) {
+        mHeaderViewContainer.setVisibility(View.VISIBLE);
+        mScaleAnimation = new Animation() {
+            @Override
+            public void applyTransformation(float interpolatedTime,
+                                            Transformation t) {
+                setAnimationProgress(interpolatedTime);
+            }
+        };
+        mScaleAnimation.setDuration(mMediumAnimationDuration);
+        if (listener != null) {
+            mHeaderViewContainer.setAnimationListener(listener);
+        }
+        mHeaderViewContainer.clearAnimation();
+        mHeaderViewContainer.startAnimation(mScaleAnimation);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
     private class HeaderViewContainer extends RelativeLayout {
         private Animation.AnimationListener mListener;
 

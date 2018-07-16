@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:id="@+id/ptr_fl_inner"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <com.conquer.sharp.ptr.LoadingView
+            android:id="@+id/ptr_custom_loading"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom"
+            app:left_ball_color="@color/left_ball_color"
+            app:need_animation="false"
+            app:right_ball_color="@color/right_ball_color"/>
+
+    </FrameLayout>
+
+</merge>

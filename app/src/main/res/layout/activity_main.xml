@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.conquer.sharp.MainActivity">
 
-    <com.conquer.sharp.ptr.SuperSwipeRefreshLayout
+    <com.conquer.sharp.ptr.PullToRefreshLayout
         android:id="@+id/circleProgressView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,47 +15,10 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ListView
+        <ListView android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </com.conquer.sharp.ptr.SuperSwipeRefreshLayout>
+    </com.conquer.sharp.ptr.PullToRefreshLayout>
 
 </android.support.constraint.ConstraintLayout>
-
-<!--
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.conquer.sharp.MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
-    <FrameLayout android:id="@+id/contentLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white">
-
-        <ListView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingBottom="48dp"
-            android:overScrollMode="never"
-            android:scrollbars="none"/>
-
-        <EditText android:id="@+id/inputView"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_gravity="bottom" />
-    </FrameLayout>
-
-</LinearLayout>
--->
