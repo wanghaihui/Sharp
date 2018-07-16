@@ -49,7 +49,7 @@ public class PullToRefreshLayout extends SuperSwipeRefreshLayout {
     private void initLoadingView(boolean pullDown, boolean pullUp) {
         if (pullDown) {
             setDefaultCircleProgressColor(ContextCompat.getColor(getContext(), android.R.color.holo_red_light));
-            setDefaultCircleBackgroundColor(ContextCompat.getColor(getContext(), R.color.red_light));
+            setDefaultCircleBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
             setDefaultCircleShadowColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
             setOnPullRefreshListener(new SuperSwipeRefreshLayout.OnPullRefreshListener() {
 

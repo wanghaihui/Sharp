@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements PullToRefreshLayout.OnRefreshListener {
 
-    private static final int REFRESH_PERIOD = 700;
+    private static final int REFRESH_PERIOD = 7000;
 
     @BindView(R.id.listView)
     ListView listView;

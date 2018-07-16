@@ -116,7 +116,7 @@ public class BallPulseLoadingView extends View {
         final View thisView = this;
         final int width = thisView.getWidth();
         final int height = thisView.getHeight();
-        float radius = (Math.min(width, height) - mCircleSpacing * 2) / 9;
+        float radius = (Math.min(width, height) - mCircleSpacing * 2) / 10;
         float x = width / 2 - (radius * 2 + mCircleSpacing);
         float y = height / 2;
         for (int i = 0; i < 3; i++) {

@@ -39,7 +39,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
     private static final String TAG = "SuperSwipeRefreshLayout";
 
     // Header View Height(dp)
-    private static final int HEADER_VIEW_HEIGHT = 40;
+    private static final int HEADER_VIEW_HEIGHT = 42;
 
     private static final float DECELERATE_INTERPOLATION_FACTOR = 2.0f;
     private static final int INVALID_POINTER = -1;
@@ -322,7 +322,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
         );
         layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        layoutParams.bottomMargin = ScreenUtil.dip2px(10);
+        layoutParams.bottomMargin = ScreenUtil.dip2px(6);
         mHeaderViewContainer = new HeaderViewContainer(getContext());
         mHeaderViewContainer.setVisibility(View.GONE);
         defaultProgressView.setVisibility(View.VISIBLE);
