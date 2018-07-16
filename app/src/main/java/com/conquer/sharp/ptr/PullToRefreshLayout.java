@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 
+import com.conquer.sharp.R;
+
 /**
  * Created by ac on 18/7/16.
  *
@@ -44,7 +46,7 @@ public class PullToRefreshLayout extends SuperSwipeRefreshLayout {
     private void initLoadingView(boolean pullDown, boolean pullUp) {
         if (pullDown) {
             setDefaultCircleProgressColor(ContextCompat.getColor(getContext(), android.R.color.holo_red_light));
-            setDefaultCircleBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
+            setDefaultCircleBackgroundColor(ContextCompat.getColor(getContext(), R.color.red_light));
             setDefaultCircleShadowColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
             setOnPullRefreshListener(new SuperSwipeRefreshLayout.OnPullRefreshListener() {
 
