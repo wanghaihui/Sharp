@@ -14,9 +14,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        initViews();
+        initViews(savedInstanceState);
     }
 
-    protected abstract void initViews();
+    protected abstract void initViews(Bundle savedInstanceState);
 
 }

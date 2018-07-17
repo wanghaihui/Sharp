@@ -1,19 +1,19 @@
 package com.conquer.sharp;
 
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.conquer.sharp.base.BaseActivity;
 import com.conquer.sharp.ptr.PullToRefreshLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements PullToRefreshLayout.OnRefreshListener {
+public class MainActivity extends BaseActivity implements PullToRefreshLayout.OnRefreshListener {
 
     private static final int REFRESH_PERIOD = 7000;
 
@@ -28,8 +28,7 @@ public class MainActivity extends AppCompatActivity implements PullToRefreshLayo
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initViews(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
