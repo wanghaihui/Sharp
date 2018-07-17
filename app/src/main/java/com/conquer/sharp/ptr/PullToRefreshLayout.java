@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 
-import com.conquer.sharp.R;
 import com.conquer.sharp.ptr.custom.pulse.BallPulseLoadingLayout;
 
 /**

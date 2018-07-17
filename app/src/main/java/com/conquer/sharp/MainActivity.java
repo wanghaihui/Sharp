@@ -3,6 +3,8 @@ package com.conquer.sharp;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -22,9 +24,7 @@ public class MainActivity extends AppCompatActivity implements PullToRefreshLayo
     PullToRefreshLayout pullToRefreshLayout;
 
     private static final String[] strDatas = new String[] {
-            "first", "second", "third", "fourth", "fifth",
-            "first", "second", "third", "fourth", "fifth",
-            "first", "second", "third", "fourth", "fifth"
+            "弹幕", "图片", "third", "fourth", "fifth"
     };
 
     @Override
@@ -37,6 +37,22 @@ public class MainActivity extends AppCompatActivity implements PullToRefreshLayo
         pullToRefreshLayout.setOnRefreshListener(this);
         listView.setAdapter(new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, strDatas));
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        // 弹幕
+                        break;
+                    case 1:
+                        // 图片
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
     }
 
     @Override
