@@ -43,6 +43,7 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
                 switch (position) {
                     case 0:
                         // 弹幕
+                        IntentManager.intentDanMu(MainActivity.this);
                         break;
                     case 1:
                         // 图片
