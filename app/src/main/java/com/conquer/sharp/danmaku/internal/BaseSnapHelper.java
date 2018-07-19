@@ -72,6 +72,21 @@ public class BaseSnapHelper extends RecyclerView.OnFlingListener {
 
     }
 
+    void snapToCenterView(ViewPagerLayoutManager layoutManager, ViewPagerLayoutManager.OnPageChangeListener listener) {
+        final int delta = layoutManager.getOffsetToCenter();
+        if (delta != 0) {
+            if (layoutManager.getOrientation() == ViewPagerLayoutManager.VERTICAL) {
+                mRecyclerView.smoothScrollBy(0, delta);
+            } else {
+                mRecyclerView.smoothScrollBy(delta, 0);
+            }
+        }
+
+        if (listener != null) {
+            listener.onPageSelected(layoutManager.getCurrentPosition());
+        }
+    }
+
     void setupCallbacks() throws IllegalStateException {
         if (mRecyclerView.getOnFlingListener() != null) {
             throw new IllegalStateException("An instance of OnFlingListener already set.");

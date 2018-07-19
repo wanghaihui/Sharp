@@ -13,8 +13,9 @@ import android.widget.Scroller;
  */
 
 public class AutoPlaySnapHelper extends BaseSnapHelper {
+    private static final String TAG = "AutoPlaySnapHelper";
 
-    final static int TIME_INTERVAL = 2000;
+    final static int TIME_INTERVAL = 1000;
 
     final static int LEFT = 1;
     final static int RIGHT = 2;
@@ -64,12 +65,18 @@ public class AutoPlaySnapHelper extends BaseSnapHelper {
             setupCallbacks();
             mGravityScroller = new Scroller(mRecyclerView.getContext(), new DecelerateInterpolator());
 
+            // snapToCenterView((ViewPagerLayoutManager) layoutManager, ((ViewPagerLayoutManager) layoutManager).onPageChangeListener);
+
             autoPlayRunnable = new Runnable() {
                 @Override
                 public void run() {
                     final int currentPosition = ((ViewPagerLayoutManager) layoutManager).getCurrentPosition();
-                    mRecyclerView.smoothScrollToPosition((direction == RIGHT || direction == BOTTOM) ? currentPosition + 1 : currentPosition - 1);
-                    handler.postDelayed(autoPlayRunnable, timeInterval);
+                    mRecyclerView.smoothScrollToPosition(currentPosition + 1);
+                    if (currentPosition == mRecyclerView.getAdapter().getItemCount() -1) {
+                        handler.removeCallbacks(autoPlayRunnable);
+                    } else {
+                        handler.postDelayed(autoPlayRunnable, timeInterval);
+                    }
                 }
             };
             handler.postDelayed(autoPlayRunnable, timeInterval);

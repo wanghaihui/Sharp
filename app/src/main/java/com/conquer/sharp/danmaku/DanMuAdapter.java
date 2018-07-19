@@ -23,10 +23,12 @@ public class DanMuAdapter extends RecyclerView.Adapter<DanMuViewHolder> {
     public DanMuAdapter(Context context) {
         this.context = context;
         list =  new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            list.add("商品记录" + i);
+        for (int i = 0; i < 5; i++) {
+            list.add("商品记录啊啊啊啊啊" + i);
+            list.add("商品记录啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" + i);
         }
-
+        list.add("");
+        list.add("");
     }
 
     public DanMuViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

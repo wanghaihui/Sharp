@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 
 import com.conquer.sharp.danmaku.internal.ViewPagerLayoutManager;
+import com.conquer.sharp.util.system.ScreenUtil;
 
 /**
  * Created by ac on 18/7/18.
@@ -11,6 +12,8 @@ import com.conquer.sharp.danmaku.internal.ViewPagerLayoutManager;
  */
 
 public class DanMuLayoutManager extends ViewPagerLayoutManager {
+
+    private static final int MAX_COUNT = 3;
 
     public DanMuLayoutManager(Context context) {
         super(context);
@@ -30,4 +33,31 @@ public class DanMuLayoutManager extends ViewPagerLayoutManager {
 
     }
 
+    protected int calItemLeft(float targetOffset) {
+        return mOrientation == VERTICAL ? ScreenUtil.dip2px(16) : (int) targetOffset;
+    }
+
+    @Override
+    protected void layoutScrap(View scrap, float targetOffset) {
+        final int left = calItemLeft(targetOffset);
+        final int top = calItemTop(targetOffset);
+
+        if (mOrientation == VERTICAL) {
+            // old version
+            /*layoutDecorated(scrap, mSpaceInOther + left, mSpaceMain + top,
+                    mSpaceInOther + left + mDecoratedMeasurementInOther, mSpaceMain + top + mDecoratedMeasurement);*/
+
+            // understand version
+            // layoutDecorated(scrap, left, top, left + scrap.getMeasuredWidth(), top + mDecoratedMeasurement);
+
+            // 底部一个开始弹 version
+            /*int startTop = (MAX_COUNT - 1) * mDecoratedMeasurement;
+            layoutDecorated(scrap, left, startTop + top, left + scrap.getMeasuredWidth(), startTop + top + mDecoratedMeasurement);*/
+
+            // 底部两个开始弹 version
+            int startTop = mDecoratedMeasurement;
+            layoutDecorated(scrap, left, startTop + top, left + scrap.getMeasuredWidth(), startTop + top + mDecoratedMeasurement);
+        }
+        setItemViewProperty(scrap, targetOffset);
+    }
 }
