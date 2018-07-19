@@ -56,13 +56,14 @@ public class DanMuActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        danMuRecyclerView.pause();
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
+        danMuRecyclerView.start();
     }
 
     @Override
