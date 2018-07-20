@@ -65,16 +65,14 @@ public class AutoPlaySnapHelper extends BaseSnapHelper {
             setupCallbacks();
             mGravityScroller = new Scroller(mRecyclerView.getContext(), new DecelerateInterpolator());
 
-            // snapToCenterView((ViewPagerLayoutManager) layoutManager, ((ViewPagerLayoutManager) layoutManager).onPageChangeListener);
-
             autoPlayRunnable = new Runnable() {
                 @Override
                 public void run() {
                     final int currentPosition = ((ViewPagerLayoutManager) layoutManager).getCurrentPosition();
-                    mRecyclerView.smoothScrollToPosition(currentPosition + 1);
                     if (currentPosition == mRecyclerView.getAdapter().getItemCount() -1) {
-                        handler.removeCallbacks(autoPlayRunnable);
+                        pause();
                     } else {
+                        mRecyclerView.smoothScrollToPosition(currentPosition + 1);
                         handler.postDelayed(autoPlayRunnable, timeInterval);
                     }
                 }
@@ -96,6 +94,13 @@ public class AutoPlaySnapHelper extends BaseSnapHelper {
     void start() {
         if (!runnableAdded) {
             handler.postDelayed(autoPlayRunnable, timeInterval);
+            runnableAdded = true;
+        }
+    }
+
+    void startNoDelay() {
+        if (!runnableAdded) {
+            handler.postDelayed(autoPlayRunnable, 0);
             runnableAdded = true;
         }
     }

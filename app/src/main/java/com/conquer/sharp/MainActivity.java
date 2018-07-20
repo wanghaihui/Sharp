@@ -24,7 +24,7 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
     PullToRefreshLayout pullToRefreshLayout;
 
     private static final String[] strDatas = new String[] {
-            "弹幕", "图片", "third", "fourth", "fifth"
+            "弹幕", "弹幕(全民K歌版)", "图片", "fourth", "fifth"
     };
 
     @Override
@@ -46,7 +46,7 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
                         IntentManager.intentDanMu(MainActivity.this);
                         break;
                     case 1:
-                        // 图片
+                        IntentManager.intentDanMuKSong(MainActivity.this);
                         break;
                     default:
                         break;

@@ -45,6 +45,10 @@ public class AutoPlayRecyclerView extends RecyclerView {
         autoPlaySnapHelper.start();
     }
 
+    public void startNoDelay() {
+        autoPlaySnapHelper.startNoDelay();
+    }
+
     public void pause() {
         autoPlaySnapHelper.pause();
     }

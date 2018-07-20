@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class DanMuAdapter extends BaseMultiRecyclerAdapter<DanMu> {
 
-    DanMuAdapter(Context context, DanMuMultiItemTypeSupport danMuMultiItemTypeSupport) {
+    public DanMuAdapter(Context context, DanMuMultiItemTypeSupport danMuMultiItemTypeSupport) {
         super(context, danMuMultiItemTypeSupport);
         mDataList = new ArrayList<>();
     }
