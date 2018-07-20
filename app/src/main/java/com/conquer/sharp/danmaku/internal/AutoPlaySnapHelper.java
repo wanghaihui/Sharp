@@ -24,7 +24,7 @@ public class AutoPlaySnapHelper extends BaseSnapHelper {
     private Interpolator mInterpolator = new LinearInterpolator();
     private int mDuration = 300;
 
-    final static int TIME_INTERVAL = 1000;
+    public final static int TIME_INTERVAL = 1000;
 
     final static int LEFT = 1;
     final static int RIGHT = 2;

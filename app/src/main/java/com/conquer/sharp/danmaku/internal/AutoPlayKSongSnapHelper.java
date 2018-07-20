@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Scroller;
 
+import com.conquer.sharp.danmaku.ksong.DanMuKSongLayoutManager;
 import com.conquer.sharp.recycler.difficult.animation.AlphaInAnimation;
 import com.conquer.sharp.recycler.difficult.animation.AlphaOutAnimation;
 
@@ -47,7 +48,21 @@ public class AutoPlayKSongSnapHelper extends AutoPlaySnapHelper {
                     if (currentPosition == mRecyclerView.getAdapter().getItemCount() -1) {
                         pause();
                     } else {
+                        View beforeView = layoutManager.findViewByPosition(currentPosition);
+                        AlphaOutAnimation animationOut = new AlphaOutAnimation();
+                        for (Animator anim : animationOut.getAnimators(beforeView)) {
+                            startAnim(anim);
+                        }
 
+                        mRecyclerView.smoothScrollToPosition(currentPosition + 1);
+
+                        View nextView = layoutManager.findViewByPosition(currentPosition + DanMuKSongLayoutManager.MAX_COUNT + 1);
+                        AlphaInAnimation animationIn = new AlphaInAnimation();
+                        for (Animator anim : animationIn.getAnimators(nextView)) {
+                            startAnim(anim);
+                        }
+
+                        handler.postDelayed(autoPlayRunnable, timeInterval);
                     }
                 }
             };

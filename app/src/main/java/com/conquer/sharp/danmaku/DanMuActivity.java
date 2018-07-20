@@ -1,7 +1,6 @@
 package com.conquer.sharp.danmaku;
 
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
 
 import com.conquer.sharp.R;
 import com.conquer.sharp.base.BaseActivity;
