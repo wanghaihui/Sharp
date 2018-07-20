@@ -38,7 +38,7 @@ public class DanMuKSongLayoutManager extends ViewPagerLayoutManager {
     }
 
     @Override
-    protected void layoutScrap(View scrap, float targetOffset) {
+    protected void layoutScrap(View scrap, float targetOffset, int adapterPosition) {
         final int left = calItemLeft(targetOffset);
         final int top = calItemTop(targetOffset);
 
@@ -48,7 +48,15 @@ public class DanMuKSongLayoutManager extends ViewPagerLayoutManager {
                     mSpaceInOther + left + mDecoratedMeasurementInOther, mSpaceMain + top + mDecoratedMeasurement);*/
 
             // understand version -- 天天K歌 version
-            layoutDecorated(scrap, left, top, left + scrap.getMeasuredWidth(), top + mDecoratedMeasurement);
+            if (adapterPosition == 0) {
+                layoutDecorated(scrap, left, top, left + scrap.getMeasuredWidth(), top + mDecoratedMeasurement);
+            } else if (adapterPosition == 1) {
+                int startTop = mDecoratedMeasurement;
+                layoutDecorated(scrap, left, startTop + top, left + scrap.getMeasuredWidth(), startTop + top + mDecoratedMeasurement);
+            } else if (adapterPosition > 1) {
+                int startTop = (MAX_COUNT - 1) * mDecoratedMeasurement;
+                layoutDecorated(scrap, left, startTop + top, left + scrap.getMeasuredWidth(), startTop + top + mDecoratedMeasurement);
+            }
 
             // 底部一个开始弹 version
             /*int startTop = (MAX_COUNT - 1) * mDecoratedMeasurement;

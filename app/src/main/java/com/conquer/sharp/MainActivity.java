@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements PullToRefreshLayout.OnRefreshListener {
 
-    private static final int REFRESH_PERIOD = 7000;
+    private static final int REFRESH_PERIOD = 3000;
 
     @BindView(R.id.listView)
     ListView listView;
@@ -34,7 +34,7 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
         ButterKnife.bind(this);
 
         pullToRefreshLayout.setOnRefreshListener(this);
-        listView.setAdapter(new ArrayAdapter<String>(this,
+        listView.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, strDatas));
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -563,7 +563,7 @@ public abstract class ViewPagerLayoutManager extends LinearLayoutManager {
                 resetViewProperty(scrap);
                 // we need i to calculate the real offset of current view
                 final float targetOffset = getProperty(i) - mOffset;
-                layoutScrap(scrap, targetOffset);
+                layoutScrap(scrap, targetOffset, adapterPosition);
                 final float orderWeight = mEnableBringCenterToFront ? setViewElevation(scrap, targetOffset) : adapterPosition;
                 if (orderWeight > lastOrderWeight) {
                     addView(scrap);
@@ -607,7 +607,7 @@ public abstract class ViewPagerLayoutManager extends LinearLayoutManager {
         return !mShouldReverseLayout ? 0 : -(getItemCount() - 1) * mInterval;
     }
 
-    protected void layoutScrap(View scrap, float targetOffset) {
+    protected void layoutScrap(View scrap, float targetOffset, int adapterPosition) {
         final int left = calItemLeft(targetOffset);
         final int top = calItemTop(targetOffset);
 

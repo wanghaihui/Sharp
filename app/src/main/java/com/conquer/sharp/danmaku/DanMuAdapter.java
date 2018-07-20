@@ -9,7 +9,6 @@ import com.conquer.sharp.recycler.easy.RecyclerViewHolder;
 
 import java.util.ArrayList;
 
-
 /**
  * Created by ac on 18/7/17.
  *

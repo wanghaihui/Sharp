@@ -8,5 +8,9 @@
             <enum name="top" value="3" />
             <enum name="bottom" value="4" />
         </attr>
+        <attr name="snapHelper" format="enum">
+            <enum name="normal" value="1" />
+            <enum name="kSong" value="2" />
+        </attr>
     </declare-styleable>
 </resources>

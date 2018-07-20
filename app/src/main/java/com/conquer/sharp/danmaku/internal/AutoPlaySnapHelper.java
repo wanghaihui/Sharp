@@ -1,11 +1,18 @@
 package com.conquer.sharp.danmaku.internal;
 
+import android.animation.Animator;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.Scroller;
+
+import com.conquer.sharp.recycler.difficult.animation.AlphaInAnimation;
+import com.conquer.sharp.recycler.difficult.animation.AlphaOutAnimation;
 
 /**
  * Created by ac on 18/7/18.
@@ -13,7 +20,9 @@ import android.widget.Scroller;
  */
 
 public class AutoPlaySnapHelper extends BaseSnapHelper {
-    private static final String TAG = "AutoPlaySnapHelper";
+
+    private Interpolator mInterpolator = new LinearInterpolator();
+    private int mDuration = 300;
 
     final static int TIME_INTERVAL = 1000;
 
@@ -22,13 +31,16 @@ public class AutoPlaySnapHelper extends BaseSnapHelper {
     final static int TOP = 3;
     final static int BOTTOM = 4;
 
-    private int timeInterval;
+    final static int NORMAL = 1;
+    final static int K_SONG = 2;
+
+    int timeInterval;
     private int direction;
 
-    private Handler handler;
+    Handler handler;
 
-    private Runnable autoPlayRunnable;
-    private boolean runnableAdded;
+    Runnable autoPlayRunnable;
+    boolean runnableAdded;
 
     AutoPlaySnapHelper(int timeInterval, int direction) {
         checkTimeInterval(timeInterval);
@@ -72,12 +84,30 @@ public class AutoPlaySnapHelper extends BaseSnapHelper {
                     if (currentPosition == mRecyclerView.getAdapter().getItemCount() -1) {
                         pause();
                     } else {
+                        // old version
                         mRecyclerView.smoothScrollToPosition(currentPosition + 1);
+
+                        // 可以扩展--是否支持动画，以及支持怎样的动画
+                        // 此时过去View做渐隐动画
+                        if (currentPosition >= 2) {
+                            View beforeView = layoutManager.findViewByPosition(currentPosition - 2);
+                            AlphaOutAnimation animation = new AlphaOutAnimation();
+                            for (Animator anim : animation.getAnimators(beforeView)) {
+                                startAnim(anim);
+                            }
+                        }
+                        // 此时未来View做渐入动画
+                        View nextView = layoutManager.findViewByPosition(currentPosition + 1);
+                        AlphaInAnimation animation = new AlphaInAnimation();
+                        for (Animator anim : animation.getAnimators(nextView)) {
+                            startAnim(anim);
+                        }
+
                         handler.postDelayed(autoPlayRunnable, timeInterval);
                     }
                 }
             };
-            handler.postDelayed(autoPlayRunnable, timeInterval);
+            startNoDelay();
             runnableAdded = true;
         }
     }
@@ -138,6 +168,11 @@ public class AutoPlaySnapHelper extends BaseSnapHelper {
         if (direction != LEFT && direction != RIGHT && direction != TOP && direction != BOTTOM) {
             throw new IllegalArgumentException("direction should be one of left or right or top or bottom");
         }
+    }
+
+    void startAnim(Animator anim) {
+        anim.setDuration(mDuration).start();
+        anim.setInterpolator(mInterpolator);
     }
 
 }

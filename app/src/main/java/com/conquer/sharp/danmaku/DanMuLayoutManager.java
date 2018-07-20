@@ -12,6 +12,7 @@ import com.conquer.sharp.util.system.ScreenUtil;
  */
 
 public class DanMuLayoutManager extends ViewPagerLayoutManager {
+    private static final String TAG = "DanMuLayoutManager";
 
     private static final int MAX_COUNT = 3;
 
@@ -38,7 +39,7 @@ public class DanMuLayoutManager extends ViewPagerLayoutManager {
     }
 
     @Override
-    protected void layoutScrap(View scrap, float targetOffset) {
+    protected void layoutScrap(View scrap, float targetOffset, int adapterPosition) {
         final int left = calItemLeft(targetOffset);
         final int top = calItemTop(targetOffset);
 
@@ -60,4 +61,6 @@ public class DanMuLayoutManager extends ViewPagerLayoutManager {
         }
         setItemViewProperty(scrap, targetOffset);
     }
+
+
 }
