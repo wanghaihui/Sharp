@@ -51,12 +51,12 @@ public class DanMuLayoutManager extends ViewPagerLayoutManager {
             // layoutDecorated(scrap, left, top, left + scrap.getMeasuredWidth(), top + mDecoratedMeasurement);
 
             // 底部一个开始弹 version
-            /*int startTop = (MAX_COUNT - 1) * mDecoratedMeasurement;
-            layoutDecorated(scrap, left, startTop + top, left + scrap.getMeasuredWidth(), startTop + top + mDecoratedMeasurement);*/
+            int startTop = (MAX_COUNT - 1) * mDecoratedMeasurement;
+            layoutDecorated(scrap, left, startTop + top, left + scrap.getMeasuredWidth(), startTop + top + mDecoratedMeasurement);
 
             // 底部两个开始弹 version
-            int startTop = mDecoratedMeasurement;
-            layoutDecorated(scrap, left, startTop + top, left + scrap.getMeasuredWidth(), startTop + top + mDecoratedMeasurement);
+            /*int startTop = mDecoratedMeasurement;
+            layoutDecorated(scrap, left, startTop + top, left + scrap.getMeasuredWidth(), startTop + top + mDecoratedMeasurement);*/
         }
         setItemViewProperty(scrap, targetOffset);
     }

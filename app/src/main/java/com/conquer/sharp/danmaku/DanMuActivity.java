@@ -39,7 +39,7 @@ public class DanMuActivity extends BaseActivity {
             DanMu danMuLong = new DanMu("商品记录啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" + i);
             danMuAdapter.getDataList().add(danMuLong);
         }
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             DanMu danMu = new DanMu("");
             danMu.type = DanMu.DanMuType.DAN_MU_PLACE_HOLDER;
             danMuAdapter.getDataList().add(danMu);
