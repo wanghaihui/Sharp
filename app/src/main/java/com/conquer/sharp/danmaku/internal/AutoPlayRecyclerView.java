@@ -31,9 +31,15 @@ public class AutoPlayRecyclerView extends RecyclerView {
         TypedArray t = context.obtainStyledAttributes(attrs, R.styleable.AutoPlayRecyclerView);
         final int timeInterval = t.getInt(R.styleable.AutoPlayRecyclerView_timeInterval, AutoPlaySnapHelper.TIME_INTERVAL);
         final int direction = t.getInt(R.styleable.AutoPlayRecyclerView_direction, AutoPlaySnapHelper.BOTTOM);
+        final int snapHelper = t.getInt(R.styleable.AutoPlayRecyclerView_snapHelper, AutoPlaySnapHelper.NORMAL);
         t.recycle();
 
-        autoPlaySnapHelper = new AutoPlaySnapHelper(timeInterval, direction);
+        if (snapHelper == AutoPlaySnapHelper.NORMAL) {
+            autoPlaySnapHelper = new AutoPlaySnapHelper(timeInterval, direction);
+        }
+        if (snapHelper == AutoPlaySnapHelper.K_SONG) {
+            autoPlaySnapHelper = new AutoPlayKSongSnapHelper(timeInterval, direction);
+        }
     }
 
     @Override
@@ -43,6 +49,10 @@ public class AutoPlayRecyclerView extends RecyclerView {
 
     public void start() {
         autoPlaySnapHelper.start();
+    }
+
+    public void startNoDelay() {
+        autoPlaySnapHelper.startNoDelay();
     }
 
     public void pause() {

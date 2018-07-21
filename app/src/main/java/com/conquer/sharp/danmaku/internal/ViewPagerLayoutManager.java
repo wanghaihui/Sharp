@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import static android.support.v7.widget.RecyclerView.NO_POSITION;
  */
 
 public abstract class ViewPagerLayoutManager extends LinearLayoutManager {
+    private static final String TAG = "ViewPagerLayoutManager";
 
     public static final int HORIZONTAL = OrientationHelper.HORIZONTAL;
     public static final int VERTICAL = OrientationHelper.VERTICAL;
@@ -32,7 +34,7 @@ public abstract class ViewPagerLayoutManager extends LinearLayoutManager {
     private static final int DIRECTION_FORWARD = 0;
     private static final int DIRECTION_BACKWARD = 1;
 
-    int mOrientation;
+    protected int mOrientation;
 
     private int mPendingScrollPosition = NO_POSITION;
     protected float mOffset;
@@ -59,8 +61,8 @@ public abstract class ViewPagerLayoutManager extends LinearLayoutManager {
     // Orientation的垂线上的长度
     protected int mDecoratedMeasurementInOther;
 
-    private int mSpaceMain;
-    private int mSpaceInOther;
+    protected int mSpaceMain;
+    protected int mSpaceInOther;
 
     // the mInterval of each item's mOffset
     protected float mInterval;
@@ -261,6 +263,7 @@ public abstract class ViewPagerLayoutManager extends LinearLayoutManager {
         measureChildWithMargins(scrap, 0, 0);
         mDecoratedMeasurement = mOrientationHelper.getDecoratedMeasurement(scrap);
         mDecoratedMeasurementInOther = mOrientationHelper.getDecoratedMeasurementInOther(scrap);
+        Log.d(TAG, "mDecoratedMeasurementInOther: " + mDecoratedMeasurementInOther);
         mSpaceMain = (mOrientationHelper.getTotalSpace() - mDecoratedMeasurement) / 2;
         if (mDistanceToBottom == INVALID_SIZE) {
             mSpaceInOther = (mOrientationHelper.getTotalSpaceInOther() - mDecoratedMeasurementInOther) / 2;
@@ -554,16 +557,18 @@ public abstract class ViewPagerLayoutManager extends LinearLayoutManager {
                     if (delta == 0) delta = itemCount;
                     adapterPosition = itemCount - delta;
                 }
+
                 final View scrap = recycler.getViewForPosition(adapterPosition);
                 measureChildWithMargins(scrap, 0, 0);
                 resetViewProperty(scrap);
                 // we need i to calculate the real offset of current view
                 final float targetOffset = getProperty(i) - mOffset;
-                layoutScrap(scrap, targetOffset);
+                layoutScrap(scrap, targetOffset, adapterPosition);
                 final float orderWeight = mEnableBringCenterToFront ? setViewElevation(scrap, targetOffset) : adapterPosition;
                 if (orderWeight > lastOrderWeight) {
                     addView(scrap);
                 } else {
+                    Log.d(TAG, "add view 2");
                     addView(scrap, 0);
                 }
                 if (i == currentPos) {
@@ -602,9 +607,10 @@ public abstract class ViewPagerLayoutManager extends LinearLayoutManager {
         return !mShouldReverseLayout ? 0 : -(getItemCount() - 1) * mInterval;
     }
 
-    private void layoutScrap(View scrap, float targetOffset) {
+    protected void layoutScrap(View scrap, float targetOffset, int adapterPosition) {
         final int left = calItemLeft(targetOffset);
         final int top = calItemTop(targetOffset);
+
         if (mOrientation == VERTICAL) {
             layoutDecorated(scrap, mSpaceInOther + left, mSpaceMain + top,
                     mSpaceInOther + left + mDecoratedMeasurementInOther, mSpaceMain + top + mDecoratedMeasurement);
@@ -636,10 +642,14 @@ public abstract class ViewPagerLayoutManager extends LinearLayoutManager {
     }
 
     public int getCurrentPosition() {
-        if (getItemCount() == 0) return 0;
+        if (getItemCount() == 0) {
+            return 0;
+        }
 
         int position = getCurrentPositionOffset();
-        if (!mInfinite) return Math.abs(position);
+        if (!mInfinite) {
+            return Math.abs(position);
+        }
 
         position = !mShouldReverseLayout ?
                 // take care of position = getItemCount()
@@ -697,8 +707,7 @@ public abstract class ViewPagerLayoutManager extends LinearLayoutManager {
             return (int) (((getCurrentPositionOffset() +
                     (!mShouldReverseLayout ? position - getCurrentPosition() : getCurrentPosition() - position)) *
                     mInterval - mOffset) * getDistanceRatio());
-        return (int) ((position *
-                (!mShouldReverseLayout ? mInterval : -mInterval) - mOffset) * getDistanceRatio());
+        return (int) ((position * (!mShouldReverseLayout ? mInterval : -mInterval) - mOffset) * getDistanceRatio());
     }
 
     public void setOnPageChangeListener(OnPageChangeListener onPageChangeListener) {
@@ -737,6 +746,13 @@ public abstract class ViewPagerLayoutManager extends LinearLayoutManager {
 
     public boolean getSmoothScrollbarEnabled() {
         return mSmoothScrollbarEnabled;
+    }
+
+    public int getOffsetToCenter() {
+        if (mInfinite) {
+            return (int) ((getCurrentPositionOffset() * mInterval - mOffset) * getDistanceRatio());
+        }
+        return (int) ((getCurrentPosition() * (!mShouldReverseLayout ? mInterval : -mInterval) - mOffset) * getDistanceRatio());
     }
 
     private static class SavedState implements Parcelable {
