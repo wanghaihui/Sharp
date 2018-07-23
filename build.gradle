@@ -16,6 +16,11 @@ allprojects {
     repositories {
         jcenter()
     }
+
+    project.ext {
+        debugApiHost = "\"http://xxx\""
+        releaseApiHost = "\"http://xxx\""
+    }
 }
 
 task clean(type: Delete) {
