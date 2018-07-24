@@ -13,7 +13,7 @@ import com.conquer.sharp.util.system.ScreenUtil;
 
 public class DanMuKSongLayoutManager extends ViewPagerLayoutManager {
 
-    private static final int MAX_COUNT = 3;
+    public static final int MAX_COUNT = 3;
 
     public DanMuKSongLayoutManager(Context context) {
         super(context);
@@ -48,15 +48,7 @@ public class DanMuKSongLayoutManager extends ViewPagerLayoutManager {
                     mSpaceInOther + left + mDecoratedMeasurementInOther, mSpaceMain + top + mDecoratedMeasurement);*/
 
             // understand version -- 天天K歌 version
-            if (adapterPosition == 0) {
-                layoutDecorated(scrap, left, top, left + scrap.getMeasuredWidth(), top + mDecoratedMeasurement);
-            } else if (adapterPosition == 1) {
-                int startTop = mDecoratedMeasurement;
-                layoutDecorated(scrap, left, startTop + top, left + scrap.getMeasuredWidth(), startTop + top + mDecoratedMeasurement);
-            } else if (adapterPosition > 1) {
-                int startTop = (MAX_COUNT - 1) * mDecoratedMeasurement;
-                layoutDecorated(scrap, left, startTop + top, left + scrap.getMeasuredWidth(), startTop + top + mDecoratedMeasurement);
-            }
+            layoutDecorated(scrap, left, top, left + scrap.getMeasuredWidth(), top + mDecoratedMeasurement);
 
             // 底部一个开始弹 version
             /*int startTop = (MAX_COUNT - 1) * mDecoratedMeasurement;
