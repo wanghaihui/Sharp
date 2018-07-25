@@ -18,7 +18,7 @@ allprojects {
     }
 
     project.ext {
-        debugApiHost = "\"http://xxx\""
+        debugApiHost = "\"https://api.huashengtravel.com\""
         releaseApiHost = "\"http://xxx\""
     }
 }
