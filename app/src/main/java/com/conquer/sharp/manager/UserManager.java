@@ -14,5 +14,4 @@ public class UserManager {
         return SingletonHolder.instance;
     }
 
-
 }

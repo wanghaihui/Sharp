@@ -26,7 +26,7 @@ public class DanMuLayoutManager extends ViewPagerLayoutManager {
 
     @Override
     protected float setInterval() {
-        return mDecoratedMeasurement;
+        return mDecoratedMeasurement + ScreenUtil.dip2px(4);
     }
 
     @Override
@@ -54,6 +54,7 @@ public class DanMuLayoutManager extends ViewPagerLayoutManager {
             // 底部一个开始弹 version
             int startTop = (MAX_COUNT - 1) * mDecoratedMeasurement;
             layoutDecorated(scrap, left, startTop + top, left + scrap.getMeasuredWidth(), startTop + top + mDecoratedMeasurement);
+            // layoutDecorated(scrap, left, ScreenUtil.dip2px(120) - scrap.getMeasuredHeight() + top, left + scrap.getMeasuredWidth(), ScreenUtil.dip2px(120));
 
             // 底部两个开始弹 version
             /*int startTop = mDecoratedMeasurement;

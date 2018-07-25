@@ -24,7 +24,7 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
     PullToRefreshLayout pullToRefreshLayout;
 
     private static final String[] strDatas = new String[] {
-            "弹幕", "弹幕(全民K歌版)", "图片", "fourth", "fifth"
+            "弹幕", "弹幕(全民K歌版)", "弹幕3", "HTTP", "图片"
     };
 
     @Override
@@ -47,6 +47,9 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
                         break;
                     case 1:
                         IntentManager.intentDanMuKSong(MainActivity.this);
+                        break;
+                    case 2:
+                        IntentManager.intentDanMu3(MainActivity.this);
                         break;
                     default:
                         break;
