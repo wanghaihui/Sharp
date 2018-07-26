@@ -18,8 +18,25 @@ import java.util.Stack;
 public class DanMuQueueView extends ViewGroup {
     private static final String TAG = "DanMuQueueView";
 
-    private int viewHeight = 0;
-    private int childViewHeight = 0;
+    // ViewGroup的宽和高
+    private int viewWidth;
+    private int viewHeight;
+
+    // 子View的宽和高
+    private int childViewWidth;
+    private int childViewHeight;
+
+    // 处理padding
+    private int paddingLeft;
+    private int paddingRight;
+    private int paddingTop;
+    private int paddingBottom;
+
+    // 处理margin
+    private int marginLeft;
+    private int marginRight;
+    private int marginTop;
+    private int marginBottom;
 
     /**
      * 所有子View
@@ -27,7 +44,7 @@ public class DanMuQueueView extends ViewGroup {
     private List<View> childViews = new ArrayList<>();
 
     /**
-     * 绘制的View栈
+     * 绘制的View栈--倒序--弹幕实现的关键
      */
     Stack<View> drawChildren = new Stack<>();
 
@@ -39,33 +56,62 @@ public class DanMuQueueView extends ViewGroup {
         super(context, attrs);
     }
 
+    private void initWidthAndHeight() {
+        childViewWidth = 0;
+        childViewHeight = 0;
+
+        marginLeft = 0;
+        marginRight = 0;
+        marginTop = 0;
+        marginBottom = 0;
+
+        paddingLeft = getPaddingLeft();
+        paddingRight = getPaddingRight();
+        paddingTop = getPaddingTop();
+        paddingBottom = getPaddingBottom();
+    }
+
+    // Padding和Margin的处理
+    // 测量时--处理Margin
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        initWidthAndHeight();
+
+        // 子View的数量
         int count = getChildCount();
 
-        int measureTempHeight = 0;
         for (int i = 0; i < count; i++) {
-            measureChild(getChildAt(i), widthMeasureSpec, heightMeasureSpec);
-            measureTempHeight = measureTempHeight + getChildAt(i).getMeasuredHeight();
+            View childView = getChildAt(i);
+
+            MarginLayoutParams layoutParams = (MarginLayoutParams) childView.getLayoutParams();
+            // 测量子View
+            measureChild(childView, widthMeasureSpec, heightMeasureSpec);
+
+            childViewWidth = Math.max(childViewWidth, childView.getMeasuredWidth());
+            childViewHeight = childViewHeight + childView.getMeasuredHeight();
+
+            marginLeft = layoutParams.leftMargin;
+            marginRight = layoutParams.rightMargin;
+            marginTop = marginTop + layoutParams.topMargin;
+            marginBottom = marginBottom + layoutParams.bottomMargin;
         }
-        childViewHeight = measureTempHeight;
 
-        setMeasuredDimension(measureWidthSize(widthMeasureSpec), measureSize(heightMeasureSpec));
-        viewHeight = getHeight();
-
-        Log.e(TAG, "childViewHeight = " + childViewHeight);
-        Log.e(TAG, "viewHeight = " + viewHeight);
+        // 用于处理ViewGroup的wrap_content的情况
+        viewWidth = paddingLeft + childViewWidth + paddingRight + marginLeft + marginRight;
+        viewHeight = paddingTop + childViewHeight + paddingBottom + marginTop + marginBottom;
+        setMeasuredDimension(measureWidthSize(widthMeasureSpec, viewWidth), measureSize(heightMeasureSpec, viewHeight));
     }
 
-    private int measureWidthSize(int widthMeasureSpec) {
+    private int measureWidthSize(int widthMeasureSpec, int viewWidth) {
         int result = 0;
         int specMode = MeasureSpec.getMode(widthMeasureSpec);
         int specSize = MeasureSpec.getSize(widthMeasureSpec);
         switch (specMode) {
             // 子容器可以是声明大小内的任意大小
             case MeasureSpec.AT_MOST:
-                result = specSize;
+                result = Math.min(viewWidth, specSize);
                 break;
             // 父容器已经为子容器设置了尺寸, 子容器应当服从这些边界, 不论子容器想要多大的空间, 比如EditTextView中的DrawLeft
             case MeasureSpec.EXACTLY:
@@ -73,22 +119,22 @@ public class DanMuQueueView extends ViewGroup {
                 break;
             // 父容器对于子容器没有任何限制, 子容器想要多大就多大, 所以完全取决于子view的大小
             case MeasureSpec.UNSPECIFIED:
-                result = 1600;
+                result = specSize;
                 break;
             default:
                 break;
         }
-        return result * 2 / 3;
+        return result;
     }
 
-    private int measureSize(int heightMeasureSpec) {
+    private int measureSize(int heightMeasureSpec, int viewHeight) {
         int result = 0;
         int specMode = MeasureSpec.getMode(heightMeasureSpec);
         int specSize = MeasureSpec.getSize(heightMeasureSpec);
         switch (specMode) {
             // 子容器可以是声明大小内的任意大小
             case MeasureSpec.AT_MOST:
-                result = specSize;
+                result = Math.min(viewHeight, specSize);
                 break;
             // 父容器已经为子容器设置了尺寸, 子容器应当服从这些边界, 不论子容器想要多大的空间, 比如EditTextView中的DrawLeft
             case MeasureSpec.EXACTLY:
@@ -96,7 +142,7 @@ public class DanMuQueueView extends ViewGroup {
                 break;
             // 父容器对于子容器没有任何限制, 子容器想要多大就多大, 所以完全取决于子view的大小
             case MeasureSpec.UNSPECIFIED:
-                result = 1600;
+                result = specSize;
                 break;
             default:
                 break;
@@ -114,11 +160,6 @@ public class DanMuQueueView extends ViewGroup {
      */
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        l = l + getPaddingLeft();
-        r = r - getPaddingRight();
-        t = t + getPaddingTop();
-        b = b - getPaddingBottom();
-
         drawChildren.clear();
         for (View view : childViews) {
             drawChildren.add(view);
@@ -128,8 +169,51 @@ public class DanMuQueueView extends ViewGroup {
         int dHeight = b;
         while (drawChildren.size() >= 1) {
             View child = drawChildren.pop();
-            child.layout(l, dHeight - child.getMeasuredHeight(), r, dHeight);
-            dHeight = dHeight - child.getHeight();
+            MarginLayoutParams layoutParams = (MarginLayoutParams) child.getLayoutParams();
+            int mLeft = paddingLeft + layoutParams.leftMargin;
+
+            Log.d(TAG, "topMargin: " + layoutParams.topMargin);
+            Log.d(TAG, "bottomMargin: " + layoutParams.bottomMargin);
+            child.layout(mLeft, dHeight - child.getMeasuredHeight() - layoutParams.topMargin - layoutParams.bottomMargin, mLeft + child.getMeasuredWidth(), dHeight);
+            dHeight = dHeight - child.getHeight() - layoutParams.topMargin - layoutParams.bottomMargin;
+        }
+    }
+
+    @Override
+    protected LayoutParams generateLayoutParams(ViewGroup.LayoutParams p) {
+        return new LayoutParams(p);
+    }
+
+    @Override
+    protected LayoutParams generateDefaultLayoutParams() {
+        return new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+    }
+
+    @Override
+    public LayoutParams generateLayoutParams(AttributeSet attrs) {
+        return new LayoutParams(getContext(), attrs);
+    }
+
+    public static class LayoutParams extends MarginLayoutParams {
+
+
+        public LayoutParams(Context c, AttributeSet attrs) {
+            super(c, attrs);
+        }
+
+
+        public LayoutParams(int width, int height) {
+            super(width, height);
+        }
+
+
+        public LayoutParams(ViewGroup.LayoutParams source) {
+            super(source);
+        }
+
+
+        public LayoutParams(ViewGroup.MarginLayoutParams source) {
+            super(source);
         }
     }
 

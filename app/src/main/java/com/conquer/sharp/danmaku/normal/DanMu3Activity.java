@@ -3,11 +3,13 @@ package com.conquer.sharp.danmaku.normal;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.conquer.sharp.R;
 import com.conquer.sharp.base.BaseActivity;
 import com.conquer.sharp.danmaku.bean.DanMu;
+import com.conquer.sharp.util.system.ScreenUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +51,11 @@ public class DanMu3Activity extends BaseActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                View addView = getLayoutInflater().inflate(R.layout.layout_dan_mu, null);
+                View addView = getLayoutInflater().inflate(R.layout.layout_dan_mu3, null);
                 ((TextView) addView.findViewById(R.id.item_tv_title)).setText("商品记录啊啊啊啊啊");
+                DanMuQueueView.LayoutParams params = new DanMuQueueView.LayoutParams(DanMuQueueView.LayoutParams.MATCH_PARENT, DanMuQueueView.LayoutParams.WRAP_CONTENT);
+                params.topMargin = ScreenUtil.dip2px(3);
+                addView.setLayoutParams(params);
                 danMuQueueView.addNewView(addView);
             }
         }, 2000);
@@ -58,8 +63,11 @@ public class DanMu3Activity extends BaseActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                View addView = getLayoutInflater().inflate(R.layout.layout_dan_mu, null);
+                View addView = getLayoutInflater().inflate(R.layout.layout_dan_mu3, null);
                 ((TextView) addView.findViewById(R.id.item_tv_title)).setText("商品记录啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊");
+                DanMuQueueView.LayoutParams params = new DanMuQueueView.LayoutParams(DanMuQueueView.LayoutParams.MATCH_PARENT, DanMuQueueView.LayoutParams.WRAP_CONTENT);
+                params.topMargin = ScreenUtil.dip2px(3);
+                addView.setLayoutParams(params);
                 danMuQueueView.addNewView(addView);
             }
         }, 4000);
@@ -67,8 +75,11 @@ public class DanMu3Activity extends BaseActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                View addView = getLayoutInflater().inflate(R.layout.layout_dan_mu, null);
+                View addView = getLayoutInflater().inflate(R.layout.layout_dan_mu3, null);
                 ((TextView) addView.findViewById(R.id.item_tv_title)).setText("商品记录啊啊啊啊啊");
+                DanMuQueueView.LayoutParams params = new DanMuQueueView.LayoutParams(DanMuQueueView.LayoutParams.MATCH_PARENT, DanMuQueueView.LayoutParams.WRAP_CONTENT);
+                params.topMargin = ScreenUtil.dip2px(3);
+                addView.setLayoutParams(params);
                 danMuQueueView.addNewView(addView);
             }
         }, 6000);
