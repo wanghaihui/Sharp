@@ -2,7 +2,6 @@ package com.conquer.sharp.danmaku.normal;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -172,13 +171,13 @@ public class DanMuQueueView extends ViewGroup {
             MarginLayoutParams layoutParams = (MarginLayoutParams) child.getLayoutParams();
             int mLeft = paddingLeft + layoutParams.leftMargin;
 
-            Log.d(TAG, "topMargin: " + layoutParams.topMargin);
-            Log.d(TAG, "bottomMargin: " + layoutParams.bottomMargin);
             child.layout(mLeft, dHeight - child.getMeasuredHeight() - layoutParams.topMargin - layoutParams.bottomMargin, mLeft + child.getMeasuredWidth(), dHeight);
             dHeight = dHeight - child.getHeight() - layoutParams.topMargin - layoutParams.bottomMargin;
         }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // LayoutParams的问题--margin的问题
     @Override
     protected LayoutParams generateLayoutParams(ViewGroup.LayoutParams p) {
         return new LayoutParams(p);
@@ -216,6 +215,7 @@ public class DanMuQueueView extends ViewGroup {
             super(source);
         }
     }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     // 添加View
     public void addNewView(View child) {

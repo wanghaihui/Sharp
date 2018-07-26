@@ -83,5 +83,29 @@ public class DanMu3Activity extends BaseActivity {
                 danMuQueueView.addNewView(addView);
             }
         }, 6000);
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                View addView = getLayoutInflater().inflate(R.layout.layout_dan_mu3, null);
+                ((TextView) addView.findViewById(R.id.item_tv_title)).setText("商品记录啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊");
+                DanMuQueueView.LayoutParams params = new DanMuQueueView.LayoutParams(DanMuQueueView.LayoutParams.MATCH_PARENT, DanMuQueueView.LayoutParams.WRAP_CONTENT);
+                params.topMargin = ScreenUtil.dip2px(3);
+                addView.setLayoutParams(params);
+                danMuQueueView.addNewView(addView);
+            }
+        }, 8000);
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                View addView = getLayoutInflater().inflate(R.layout.layout_dan_mu3, null);
+                ((TextView) addView.findViewById(R.id.item_tv_title)).setText("商品记录啊啊啊啊啊");
+                DanMuQueueView.LayoutParams params = new DanMuQueueView.LayoutParams(DanMuQueueView.LayoutParams.MATCH_PARENT, DanMuQueueView.LayoutParams.WRAP_CONTENT);
+                params.topMargin = ScreenUtil.dip2px(3);
+                addView.setLayoutParams(params);
+                danMuQueueView.addNewView(addView);
+            }
+        }, 10000);
     }
 }
