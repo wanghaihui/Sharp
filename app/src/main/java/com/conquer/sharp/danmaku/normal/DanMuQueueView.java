@@ -45,11 +45,14 @@ public class DanMuQueueView extends ViewGroup {
     private int paddingTop;
     private int paddingBottom;
 
-    // 处理margin
+    // 处理子View的margin
     private int marginLeft;
     private int marginRight;
     private int marginTop;
     private int marginBottom;
+
+    // 处理当前View的Margin
+
 
     /**
      * 所有子View
@@ -116,7 +119,8 @@ public class DanMuQueueView extends ViewGroup {
         // 用于处理ViewGroup的wrap_content的情况
         viewWidth = paddingLeft + childViewWidth + paddingRight + marginLeft + marginRight;
         viewHeight = paddingTop + childViewHeight + paddingBottom + marginTop + marginBottom;
-        setMeasuredDimension(measureWidthSize(widthMeasureSpec, viewWidth), measureSize(heightMeasureSpec, viewHeight));
+
+        setMeasuredDimension(measureWidthSize(widthMeasureSpec, viewWidth), measureHeightSize(heightMeasureSpec, viewHeight));
     }
 
     private int measureWidthSize(int widthMeasureSpec, int viewWidth) {
@@ -142,7 +146,7 @@ public class DanMuQueueView extends ViewGroup {
         return result;
     }
 
-    private int measureSize(int heightMeasureSpec, int viewHeight) {
+    private int measureHeightSize(int heightMeasureSpec, int viewHeight) {
         int result = 0;
         int specMode = MeasureSpec.getMode(heightMeasureSpec);
         int specSize = MeasureSpec.getSize(heightMeasureSpec);
@@ -187,8 +191,9 @@ public class DanMuQueueView extends ViewGroup {
             MarginLayoutParams layoutParams = (MarginLayoutParams) child.getLayoutParams();
             int mLeft = paddingLeft + layoutParams.leftMargin;
 
-            child.layout(mLeft, dHeight - child.getMeasuredHeight() - layoutParams.topMargin - layoutParams.bottomMargin, mLeft + child.getMeasuredWidth(), dHeight);
-            dHeight = dHeight - child.getHeight() - layoutParams.topMargin - layoutParams.bottomMargin;
+            child.layout(mLeft, dHeight - child.getMeasuredHeight() - layoutParams.topMargin - layoutParams.bottomMargin,
+                    mLeft + child.getMeasuredWidth(), dHeight);
+            dHeight = dHeight - child.getMeasuredHeight() - layoutParams.topMargin - layoutParams.bottomMargin;
         }
     }
 
@@ -201,7 +206,7 @@ public class DanMuQueueView extends ViewGroup {
 
     @Override
     protected LayoutParams generateDefaultLayoutParams() {
-        return new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        return new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
     }
 
     @Override
@@ -298,7 +303,7 @@ public class DanMuQueueView extends ViewGroup {
                             mCurrentPosition = 0;
                             stopDanMu();
                             setVisibility(View.GONE);
-                        } else if (mCurrentPosition < 4) {
+                        } else if (mCurrentPosition < 3) {
                             createChildView(mCurrentPosition);
                         } else {
                             createChildView(mCurrentPosition);
@@ -317,14 +322,11 @@ public class DanMuQueueView extends ViewGroup {
         }
     }
 
-    public void remove() {
-        removeViewAt(head);
-    }
-
     private Runnable removeRunnable = new Runnable() {
         @Override
         public void run() {
-            remove();
+            removeViewAt(head);
+            childViews.remove(head);
         }
     };
 
