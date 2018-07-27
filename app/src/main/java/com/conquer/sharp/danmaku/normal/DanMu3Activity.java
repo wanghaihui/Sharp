@@ -52,4 +52,10 @@ public class DanMu3Activity extends BaseActivity {
         danMuQueueView.setInterval(1000);
         danMuQueueView.startDanMu();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        danMuQueueView.release();
+    }
 }

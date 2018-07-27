@@ -311,6 +311,7 @@ public class DanMuQueueView extends ViewGroup {
     }
 
     public void stopDanMu() {
+        setVisibility(View.GONE);
         if (disposable != null) {
             disposable.dispose();
         }
