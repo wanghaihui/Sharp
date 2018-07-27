@@ -1,16 +1,30 @@
 package com.conquer.sharp.danmaku.normal;
 
 import android.content.Context;
+import android.os.Handler;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.conquer.sharp.R;
+import com.conquer.sharp.danmaku.bean.DanMu;
+import com.conquer.sharp.util.system.ScreenUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by ac on 18/7/25.
+ * Created by hai hui on 18/7/25.
  *
  */
 
@@ -46,6 +60,8 @@ public class DanMuQueueView extends ViewGroup {
      * 绘制的View栈--倒序--弹幕实现的关键
      */
     Stack<View> drawChildren = new Stack<>();
+
+    private Handler handler = new Handler();
 
     public DanMuQueueView(Context context) {
         this(context, null);
@@ -164,7 +180,7 @@ public class DanMuQueueView extends ViewGroup {
             drawChildren.add(view);
         }
 
-        // 布局子View的高度
+        // 布局子View
         int dHeight = b;
         while (drawChildren.size() >= 1) {
             View child = drawChildren.pop();
@@ -227,10 +243,97 @@ public class DanMuQueueView extends ViewGroup {
     }
 
     /*
-     * View的tag标记
+     * View的tag标记--待扩展
      */
     private class ItemTag {
         private long time;
         private boolean isMove = false;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // 弹幕相关
+    private int mCurrentPosition = 0;
+    private int mInterval;
+    private List<DanMu> danMuList = new ArrayList<>();
+    private Disposable disposable;
+    // 头View
+    private int head = 0;
+
+    public List<DanMu> getDanMuList() {
+        return danMuList;
+    }
+
+    public void setInterval(int interval) {
+        mInterval = interval;
+    }
+
+    private void createChildView(int position) {
+        if (position >= 0 && position < danMuList.size()) {
+            if (danMuList.get(position).type == DanMu.DanMuType.DAN_MU) {
+                View addView = LayoutInflater.from(getContext()).inflate(R.layout.layout_dan_mu3, null);
+                ((TextView) addView.findViewById(R.id.item_tv_title)).setText(danMuList.get(position).danMu);
+                DanMuQueueView.LayoutParams params = new DanMuQueueView.LayoutParams(DanMuQueueView.LayoutParams.MATCH_PARENT, DanMuQueueView.LayoutParams.WRAP_CONTENT);
+                params.topMargin = ScreenUtil.dip2px(3);
+                addView.setLayoutParams(params);
+                addNewView(addView);
+            } else {
+                View addView = LayoutInflater.from(getContext()).inflate(R.layout.layout_dan_mu_holder, null);
+                DanMuQueueView.LayoutParams params = new DanMuQueueView.LayoutParams(DanMuQueueView.LayoutParams.MATCH_PARENT, DanMuQueueView.LayoutParams.WRAP_CONTENT);
+                params.topMargin = ScreenUtil.dip2px(3);
+                addView.setLayoutParams(params);
+                addNewView(addView);
+            }
+        }
+    }
+
+    public void startDanMu() {
+        setVisibility(View.VISIBLE);
+        disposable = Observable.interval(0, mInterval, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        if (mCurrentPosition >= danMuList.size()) {
+                            mCurrentPosition = 0;
+                            stopDanMu();
+                            setVisibility(View.GONE);
+                        } else if (mCurrentPosition < 4) {
+                            createChildView(mCurrentPosition);
+                        } else {
+                            createChildView(mCurrentPosition);
+                            // 取一半时间再remove，解决动画不流畅问题--关键
+                            handler.postDelayed(removeRunnable, mInterval / 2);
+                        }
+                        mCurrentPosition++;
+                    }
+                });
+    }
+
+    public void stopDanMu() {
+        if (disposable != null) {
+            disposable.dispose();
+        }
+    }
+
+    public void remove() {
+        removeViewAt(head);
+    }
+
+    private Runnable removeRunnable = new Runnable() {
+        @Override
+        public void run() {
+            remove();
+        }
+    };
+
+    /**
+     * 释放资源--onDestroy时调用
+     */
+    public void release() {
+        handler.removeCallbacks(removeRunnable);
+        if (disposable != null && !disposable.isDisposed()) {
+            disposable.dispose();
+        }
     }
 }

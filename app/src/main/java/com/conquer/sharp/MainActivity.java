@@ -24,7 +24,7 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
     PullToRefreshLayout pullToRefreshLayout;
 
     private static final String[] strDatas = new String[] {
-            "弹幕", "弹幕(全民K歌版)", "弹幕3", "HTTP", "图片"
+            "弹幕(强烈推荐)", "HTTP", "图片"
     };
 
     @Override
@@ -42,13 +42,6 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        // 弹幕
-                        IntentManager.intentDanMu(MainActivity.this);
-                        break;
-                    case 1:
-                        IntentManager.intentDanMuKSong(MainActivity.this);
-                        break;
-                    case 2:
                         IntentManager.intentDanMu3(MainActivity.this);
                         break;
                     default:
