@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.conquer.sharp.danmaku.DanMuActivity;
 import com.conquer.sharp.danmaku.ksong.DanMuKSongActivity;
 import com.conquer.sharp.danmaku.normal.DanMu3Activity;
+import com.conquer.sharp.danmaku.recycler.DanMu4Activity;
 
 /**
  * Created by ac on 18/7/17.
@@ -26,6 +27,11 @@ public class IntentManager {
 
     public static void intentDanMu3(Context context) {
         Intent intent = new Intent(context, DanMu3Activity.class);
+        context.startActivity(intent);
+    }
+
+    public static void intentDanMuContent(Context context) {
+        Intent intent = new Intent(context, DanMu4Activity.class);
         context.startActivity(intent);
     }
 }

@@ -19,13 +19,16 @@
         </activity>
 
         <activity android:name=".danmaku.DanMuActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <activity android:name=".danmaku.ksong.DanMuKSongActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <activity android:name=".danmaku.normal.DanMu3Activity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".danmaku.recycler.DanMu4Activity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
