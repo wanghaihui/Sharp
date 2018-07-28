@@ -1,9 +1,12 @@
 package com.conquer.sharp.danmaku.recycler;
 
+import android.animation.Animator;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
 
 /**
  * Created by ac on 18/7/28.
@@ -11,6 +14,9 @@ import android.support.v7.widget.RecyclerView;
  */
 
 public class WrapContentSnapHelper extends BaseSnapHelper {
+
+    private Interpolator mInterpolator = new LinearInterpolator();
+    private int mDuration = 300;
 
     public final static int TIME_INTERVAL = 1000;
     private static final int START_POSITION = 1;
@@ -56,6 +62,7 @@ public class WrapContentSnapHelper extends BaseSnapHelper {
                     } else {
                         mRecyclerView.smoothScrollToPosition(currentPosition + 1);
                         mCurrentPosition = currentPosition + 1;
+
                         handler.postDelayed(autoPlayRunnable, timeInterval);
                     }
                 }
@@ -98,5 +105,10 @@ public class WrapContentSnapHelper extends BaseSnapHelper {
         if (timeInterval <= 0) {
             throw new IllegalArgumentException("time interval should greater than 0");
         }
+    }
+
+    void startAnim(Animator anim) {
+        anim.setDuration(mDuration).start();
+        anim.setInterpolator(mInterpolator);
     }
 }

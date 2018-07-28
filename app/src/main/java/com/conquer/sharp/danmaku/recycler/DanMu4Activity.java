@@ -54,7 +54,8 @@ public class DanMu4Activity extends BaseActivity {
             danMuAdapter.getDataList().add(danMu);
         }
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        SmoothLinearLayoutManger layoutManager = new SmoothLinearLayoutManger(this);
+        layoutManager.setSpeedSlow();
         danMuRecyclerView.setLayoutManager(layoutManager);
         danMuRecyclerView.setAdapter(danMuAdapter);
         danMuRecyclerView.addItemDecoration(new SpacingDecoration(0, ScreenUtil.dip2px(6), false));
