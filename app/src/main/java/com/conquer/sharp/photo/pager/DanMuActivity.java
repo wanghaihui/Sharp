@@ -1,12 +1,14 @@
-package com.conquer.sharp.danmaku;
+package com.conquer.sharp.photo.pager;
 
 import android.os.Bundle;
 
 import com.conquer.sharp.R;
 import com.conquer.sharp.base.BaseActivity;
+import com.conquer.sharp.danmaku.DanMuAdapter;
+import com.conquer.sharp.danmaku.DanMuMultiItemTypeSupport;
 import com.conquer.sharp.danmaku.bean.DanMu;
-import com.conquer.sharp.danmaku.internal.AutoPlayRecyclerView;
-import com.conquer.sharp.danmaku.internal.ViewPagerLayoutManager;
+import com.conquer.sharp.photo.pager.internal.AutoPlayRecyclerView;
+import com.conquer.sharp.photo.pager.internal.ViewPagerLayoutManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

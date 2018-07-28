@@ -1,4 +1,4 @@
-package com.conquer.sharp.danmaku.internal;
+package com.conquer.sharp.photo.pager.internal;
 
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;

@@ -1,4 +1,4 @@
-package com.conquer.sharp.danmaku.internal;
+package com.conquer.sharp.photo.pager.internal;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -36,9 +36,6 @@ public class AutoPlayRecyclerView extends RecyclerView {
 
         if (snapHelper == AutoPlaySnapHelper.NORMAL) {
             autoPlaySnapHelper = new AutoPlaySnapHelper(timeInterval, direction);
-        }
-        if (snapHelper == AutoPlaySnapHelper.K_SONG) {
-            autoPlaySnapHelper = new AutoPlayKSongSnapHelper(timeInterval, direction);
         }
     }
 

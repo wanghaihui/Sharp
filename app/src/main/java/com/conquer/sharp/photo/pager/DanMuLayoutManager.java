@@ -1,31 +1,32 @@
-package com.conquer.sharp.danmaku.ksong;
+package com.conquer.sharp.photo.pager;
 
 import android.content.Context;
 import android.view.View;
 
-import com.conquer.sharp.danmaku.internal.ViewPagerLayoutManager;
+import com.conquer.sharp.photo.pager.internal.ViewPagerLayoutManager;
 import com.conquer.sharp.util.system.ScreenUtil;
 
 /**
- * Created by ac on 18/7/20.
+ * Created by ac on 18/7/18.
  *
  */
 
-public class DanMuKSongLayoutManager extends ViewPagerLayoutManager {
+public class DanMuLayoutManager extends ViewPagerLayoutManager {
+    private static final String TAG = "DanMuLayoutManager";
 
-    public static final int MAX_COUNT = 3;
+    private static final int MAX_COUNT = 3;
 
-    public DanMuKSongLayoutManager(Context context) {
+    public DanMuLayoutManager(Context context) {
         super(context);
     }
 
-    public DanMuKSongLayoutManager(Context context, int orientation) {
+    public DanMuLayoutManager(Context context, int orientation) {
         super(context, orientation);
     }
 
     @Override
     protected float setInterval() {
-        return mDecoratedMeasurement;
+        return mDecoratedMeasurement + ScreenUtil.dip2px(4);
     }
 
     @Override
@@ -48,11 +49,12 @@ public class DanMuKSongLayoutManager extends ViewPagerLayoutManager {
                     mSpaceInOther + left + mDecoratedMeasurementInOther, mSpaceMain + top + mDecoratedMeasurement);*/
 
             // understand version -- 天天K歌 version
-            layoutDecorated(scrap, left, top, left + scrap.getMeasuredWidth(), top + mDecoratedMeasurement);
+            // layoutDecorated(scrap, left, top, left + scrap.getMeasuredWidth(), top + mDecoratedMeasurement);
 
             // 底部一个开始弹 version
-            /*int startTop = (MAX_COUNT - 1) * mDecoratedMeasurement;
-            layoutDecorated(scrap, left, startTop + top, left + scrap.getMeasuredWidth(), startTop + top + mDecoratedMeasurement);*/
+            int startTop = (MAX_COUNT - 1) * mDecoratedMeasurement;
+            layoutDecorated(scrap, left, startTop + top, left + scrap.getMeasuredWidth(), startTop + top + mDecoratedMeasurement);
+            // layoutDecorated(scrap, left, ScreenUtil.dip2px(120) - scrap.getMeasuredHeight() + top, left + scrap.getMeasuredWidth(), ScreenUtil.dip2px(120));
 
             // 底部两个开始弹 version
             /*int startTop = mDecoratedMeasurement;
@@ -60,4 +62,6 @@ public class DanMuKSongLayoutManager extends ViewPagerLayoutManager {
         }
         setItemViewProperty(scrap, targetOffset);
     }
+
+
 }

@@ -18,10 +18,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".danmaku.DanMuActivity"
-            android:screenOrientation="portrait" />
-
-        <activity android:name=".danmaku.ksong.DanMuKSongActivity"
+        <activity android:name=".photo.pager.DanMuActivity"
             android:screenOrientation="portrait" />
 
         <activity android:name=".danmaku.normal.DanMu3Activity"

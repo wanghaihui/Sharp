@@ -1,4 +1,4 @@
-package com.conquer.sharp.danmaku.internal;
+package com.conquer.sharp.photo.pager.internal;
 
 import android.animation.Animator;
 import android.os.Handler;

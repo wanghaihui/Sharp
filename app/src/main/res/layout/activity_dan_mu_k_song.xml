@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.conquer.sharp.danmaku.internal.AutoPlayRecyclerView
+    <com.conquer.sharp.photo.pager.internal.AutoPlayRecyclerView
         android:id="@+id/danMuRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="120dp"
