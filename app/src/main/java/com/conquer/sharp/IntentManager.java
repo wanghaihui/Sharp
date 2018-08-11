@@ -3,9 +3,11 @@ package com.conquer.sharp;
 import android.content.Context;
 import android.content.Intent;
 
+import com.conquer.sharp.dialog.DialogActivity;
 import com.conquer.sharp.photo.pager.DanMuActivity;
 import com.conquer.sharp.danmaku.normal.DanMu3Activity;
 import com.conquer.sharp.danmaku.recycler.DanMu4Activity;
+import com.conquer.sharp.photo.system.PhotoSelectActivity;
 
 /**
  * Created by ac on 18/7/17.
@@ -28,4 +30,15 @@ public class IntentManager {
         Intent intent = new Intent(context, DanMu4Activity.class);
         context.startActivity(intent);
     }
+
+    public static void intentPhotoSelect(Context context) {
+        Intent intent = new Intent(context, PhotoSelectActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void intentDialog(Context context) {
+        Intent intent = new Intent(context, DialogActivity.class);
+        context.startActivity(intent);
+    }
+
 }

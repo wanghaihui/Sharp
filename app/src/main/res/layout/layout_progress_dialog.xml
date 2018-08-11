@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" >
+
+        <ProgressBar
+            android:id="@+id/x_progress_bar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/x_progress_dialog_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/x_progress_bar"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="14dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</FrameLayout>

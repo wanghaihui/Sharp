@@ -24,7 +24,8 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
     PullToRefreshLayout pullToRefreshLayout;
 
     private static final String[] strDatas = new String[] {
-            "弹幕(自定义版)", "弹幕(RecyclerView版--推荐)", "HTTP", "图片"
+            "弹幕(自定义版)", "弹幕(RecyclerView版--推荐)", "照片(系统选择和拍照)",
+            "ProgressDialog", "HTTP"
     };
 
     @Override
@@ -46,6 +47,12 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
                         break;
                     case 1:
                         IntentManager.intentDanMuContent(MainActivity.this);
+                        break;
+                    case 2:
+                        IntentManager.intentPhotoSelect(MainActivity.this);
+                        break;
+                    case 3:
+                        IntentManager.intentDialog(MainActivity.this);
                         break;
                     default:
                         break;
