@@ -37,6 +37,9 @@
 
         <activity android:name=".dialog.DialogActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".deeplink.DeepLinkActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package com.conquer.sharp;
 import android.content.Context;
 import android.content.Intent;
 
+import com.conquer.sharp.deeplink.DeepLinkActivity;
 import com.conquer.sharp.dialog.DialogActivity;
 import com.conquer.sharp.photo.pager.DanMuActivity;
 import com.conquer.sharp.danmaku.normal.DanMu3Activity;
@@ -38,6 +39,11 @@ public class IntentManager {
 
     public static void intentDialog(Context context) {
         Intent intent = new Intent(context, DialogActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void intentDeepLink(Context context) {
+        Intent intent = new Intent(context, DeepLinkActivity.class);
         context.startActivity(intent);
     }
 
