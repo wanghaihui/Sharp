@@ -1,5 +1,6 @@
 package com.conquer.sharp.recycler.difficult.holder;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -12,6 +13,10 @@ import android.text.util.Linkify;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.CheckedTextView;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
@@ -200,7 +205,64 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
+    public BaseViewHolder setOnLongClickListener(int viewId, View.OnLongClickListener listener) {
+        View view = getView(viewId);
+        view.setOnLongClickListener(listener);
+        return this;
+    }
 
+    public BaseViewHolder setOnItemClickListener(int viewId, AdapterView.OnItemClickListener listener) {
+        AdapterView view = getView(viewId);
+        view.setOnItemClickListener(listener);
+        return this;
+    }
+
+    public BaseViewHolder setOnItemLongClickListener(int viewId, AdapterView.OnItemLongClickListener listener) {
+        AdapterView view = getView(viewId);
+        view.setOnItemLongClickListener(listener);
+        return this;
+    }
+
+    public BaseViewHolder setOnItemSelectedClickListener(int viewId, AdapterView.OnItemSelectedListener listener) {
+        AdapterView view = getView(viewId);
+        view.setOnItemSelectedListener(listener);
+        return this;
+    }
+
+    public BaseViewHolder setOnCheckedChangeListener(int viewId, CompoundButton.OnCheckedChangeListener listener) {
+        CompoundButton view = getView(viewId);
+        view.setOnCheckedChangeListener(listener);
+        return this;
+    }
+
+    public BaseViewHolder setTag(int viewId, Object tag) {
+        View view = getView(viewId);
+        view.setTag(tag);
+        return this;
+    }
+
+    public BaseViewHolder setTag(int viewId, int key, Object tag) {
+        View view = getView(viewId);
+        view.setTag(key, tag);
+        return this;
+    }
+
+    public BaseViewHolder setChecked(int viewId, boolean checked) {
+        View view = getView(viewId);
+        if (view instanceof CompoundButton) {
+            ((CompoundButton) view).setChecked(checked);
+        } else if (view instanceof CheckedTextView) {
+            ((CheckedTextView) view).setChecked(checked);
+        }
+        return this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public BaseViewHolder setAdapter(int viewId, Adapter adapter) {
+        AdapterView view = getView(viewId);
+        view.setAdapter(adapter);
+        return this;
+    }
 
     @SuppressWarnings("unchecked")
     public <T extends View> T getView(int viewId) {
@@ -210,5 +272,20 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
             views.put(viewId, view);
         }
         return (T) view;
+    }
+
+    public void setAssociatedObject(Object associatedObject) {
+        this.associatedObject = associatedObject;
+    }
+
+    public Object getAssociatedObject() {
+        return associatedObject;
+    }
+
+    public Context getContext() {
+        if (convertView == null) {
+            return null;
+        }
+        return convertView.getContext();
     }
 }
