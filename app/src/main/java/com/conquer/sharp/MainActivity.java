@@ -25,7 +25,7 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
 
     private static final String[] strDatas = new String[] {
             "弹幕(自定义版)", "弹幕(RecyclerView版--推荐)", "照片(系统选择和拍照)",
-            "ProgressDialog", "音频(oboe)", "Deep Link", "HTTP"
+            "ProgressDialog", "音频(oboe)", "Deep Link", "Instant Run", "HTTP"
     };
 
     @Override

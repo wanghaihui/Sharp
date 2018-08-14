@@ -1,0 +1,23 @@
+1.ArrayList
+ArrayList实现List、RandomAccess接口--可以插入空数据，也支持随机访问
+ArrayList中最重要的两个属性分别是: elementData数组，size大小
+ArrayList的主要消耗是数组扩容以及在指定位置添加数据--尽量减少扩容和减少在指定位置插入数据的操作
+数组扩容--数组复制的过程
+ArrayList是基于动态数组实现的，所以并不是所有的空间都被使用---因此使用了transient修饰，可以防止被自动序列化
+transient Object[] elementData
+ArrayList--自定义了序列化与反序列化
+当对象中自定义了writeObject和readObject方法时，JVM会调用这两个自定义方法来实现序列化与反序列化
+
+2.Vector
+Vector底层数据结构和ArrayList一样，动态数组存放数据，不过是在add()方法的时候使用synchronized进行同步写数据，但是开销较大，所以Vector是一个同步容器并不是一个并发容器
+
+3.LinkedList
+LinkedList底层是基于双向链表实现的，实现List接口
+每次插入都是移动指针，和ArrayList的拷贝数组来说效率要高上不少
+使用二分查找--index离size中间距离来判断是从头结点正序查还是从尾节点倒序查
+这样的效率是非常低的，特别是当index越接近size的中间值时
+LinkedList插入，删除都是移动指针，效率很高
+查找需要进行遍历查询，效率较低
+
+
+
