@@ -33,9 +33,8 @@ public class LoginFragment extends BaseFragment {
         sendVCode("18501371784");
     }
 
-    @SuppressWarnings("unchecked")
     private void sendVCode(String mobile) {
-        TreeMap map = new TreeMap<String, String>();
+        TreeMap<String, String> map = new TreeMap<>();
         map.put("mobile", mobile);
 
         Disposable disposable = XRetrofit.instance().get()
