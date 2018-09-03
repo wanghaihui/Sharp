@@ -37,7 +37,9 @@ public class SwipeCircleProgressView extends View implements Runnable {
     private int speed = 8;
     private float density = 1.0f;
 
-    private int swipeAngle;
+    private int sweepAngle = 0;
+    // 控制angle
+    private int controlAngle = 0;
 
     private int mProgressColor = 0xFFCCCCCC;
     private int mCircleBackgroundColor = 0xFFFFFFFF;
@@ -61,8 +63,10 @@ public class SwipeCircleProgressView extends View implements Runnable {
     private void init(Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         final DisplayMetrics metrics = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics(metrics);
-        density = metrics.density;
+        if (wm != null) {
+            wm.getDefaultDisplay().getMetrics(metrics);
+            density = metrics.density;
+        }
     }
 
     @Override
@@ -71,15 +75,13 @@ public class SwipeCircleProgressView extends View implements Runnable {
         // 圆形背景带阴影
         // canvas.drawArc(getBgRect(), 0, 360, false, createBgPaint());
         canvas.drawArc(getOvalRect(), 0, 360, false, createCirclePaint());
-
         int index = startAngle / 360;
         if (index % 2 == 0) {
-            swipeAngle = (startAngle % 720) / 2;
+            sweepAngle = (startAngle % 720) / 2;
         } else {
-            swipeAngle = 360 - (startAngle % 720) / 2;
+            sweepAngle = 360 - (startAngle % 720) / 2;
         }
-
-        canvas.drawArc(getOvalRect(), startAngle, swipeAngle, false, createPaint());
+        canvas.drawArc(getOvalRect(), startAngle, sweepAngle, false, createPaint());
     }
 
     private RectF getBgRect() {

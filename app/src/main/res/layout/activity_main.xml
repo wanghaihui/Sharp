@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/transparent"
     tools:context="com.conquer.sharp.MainActivity">
 
     <com.conquer.sharp.ptr.PullToRefreshLayout
         android:id="@+id/pullToRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -17,7 +19,8 @@
 
         <ListView android:id="@+id/listView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@android:color/white"/>
 
     </com.conquer.sharp.ptr.PullToRefreshLayout>
 

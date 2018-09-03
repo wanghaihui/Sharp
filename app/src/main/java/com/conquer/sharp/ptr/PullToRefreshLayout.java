@@ -4,7 +4,10 @@ import android.content.Context;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 
+import com.conquer.sharp.ptr.custom.ball.BallLoadingLayout;
+import com.conquer.sharp.ptr.custom.donut.DonutLayout;
 import com.conquer.sharp.ptr.custom.pulse.BallPulseLoadingLayout;
 
 /**
@@ -14,6 +17,9 @@ import com.conquer.sharp.ptr.custom.pulse.BallPulseLoadingLayout;
 
 public class PullToRefreshLayout extends SuperSwipeRefreshLayout {
 
+    public static final int HEADER_VIEW_HEIGHT = 48;
+
+    private DonutLayout loadingLayoutDown;
     private BallPulseLoadingLayout loadingLayoutUp;
 
     private OnRefreshListener onRefreshListener;
@@ -47,7 +53,7 @@ public class PullToRefreshLayout extends SuperSwipeRefreshLayout {
 
     private void initLoadingView(boolean pullDown, boolean pullUp) {
         if (pullDown) {
-            setDefaultCircleProgressColor(ContextCompat.getColor(getContext(), android.R.color.holo_red_light));
+            /*setDefaultCircleProgressColor(ContextCompat.getColor(getContext(), android.R.color.holo_red_light));
             setDefaultCircleBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
             setDefaultCircleShadowColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
             setOnPullRefreshListener(new SuperSwipeRefreshLayout.OnPullRefreshListener() {
@@ -62,6 +68,33 @@ public class PullToRefreshLayout extends SuperSwipeRefreshLayout {
                 @Override
                 public void onPullDistance(int distance) {
 
+                }
+
+                @Override
+                public void onPullEnable(boolean enable) {
+
+                }
+            });*/
+            loadingLayoutDown = new DonutLayout(getContext());
+            setHeaderView(loadingLayoutDown);
+            setOnPullRefreshListener(new SuperSwipeRefreshLayout.OnPullRefreshListener() {
+
+                @Override
+                public void onRefresh() {
+                    loadingLayoutDown.refreshing();
+                    if (onRefreshListener != null) {
+                        onRefreshListener.onPullDownToRefresh();
+                    }
+                }
+
+                @Override
+                public void onPullDistance(int distance) {
+                    if (distance == 0) {
+                        loadingLayoutDown.reset();
+                    }
+                    Log.d("haihui", "distance: " + distance);
+                    Log.d("haihui", "content size: " + loadingLayoutDown.getContentSize());
+                    loadingLayoutDown.onPull(distance * 1.0f / loadingLayoutDown.getContentSize());
                 }
 
                 @Override

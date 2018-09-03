@@ -7,6 +7,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,7 +40,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
     private static final String TAG = "SuperSwipeRefreshLayout";
 
     // Header View Height(dp)
-    private static final int HEADER_VIEW_HEIGHT = 42;
+    protected static final int HEADER_VIEW_HEIGHT = 48;
 
     private static final float DECELERATE_INTERPOLATION_FACTOR = 2.0f;
     private static final int INVALID_POINTER = -1;
@@ -119,6 +120,8 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
     private boolean pullDownEnable = true;
     private boolean pullUpEnable = true;
 
+    private int mDistanceHeight;
+
     /**
      * 下拉时，超过距离之后，弹回来的动画监听器
      */
@@ -151,7 +154,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
                     // 回弹动画
                     final int from = mTarget.getTop();
                     final int to = 0;
-                    ValueAnimator animator = ValueAnimator.ofFloat(0, 1).setDuration(250);
+                    ValueAnimator animator = ValueAnimator.ofFloat(0, 1).setDuration(150);
                     animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                         @Override
                         public void onAnimationUpdate(ValueAnimator animation) {
@@ -250,11 +253,11 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
 
         // 距离--表示滑动的时候，手的移动要大于这个距离才开始移动控件，如果小于这个距离就不触发此控件
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
-
+        // 中等动画时长
         mMediumAnimationDuration = getResources().getInteger(android.R.integer.config_mediumAnimTime);
-
         // 表示会重写onDraw
         setWillNotDraw(false);
+        // 减速插值器
         mDecelerateInterpolator = new DecelerateInterpolator(DECELERATE_INTERPOLATION_FACTOR);
 
         final TypedArray a = context.obtainStyledAttributes(attrs, LAYOUT_ATTRS);
@@ -276,6 +279,8 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
         ViewCompat.setChildrenDrawingOrderEnabled(this, true);
         mSpinnerFinalOffset = DEFAULT_CIRCLE_TARGET * metrics.density;
         mTotalDragDistance = mSpinnerFinalOffset;
+
+        mDistanceHeight = mHeaderViewHeight;
     }
 
     /**
@@ -329,6 +334,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
         defaultProgressView.setOnDraw(false);
         mHeaderViewContainer.addView(defaultProgressView, layoutParams);
         addView(mHeaderViewContainer);
+
     }
 
     /**
@@ -463,7 +469,6 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
         }
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
-
     /**
      * 主要判断是否拦截子View的事件，如果拦截，则交给自己的onTouchEvent处理，否则，交给子View处理
      * @param ev
@@ -471,19 +476,20 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         ensureTarget();
-
         final int action = MotionEventCompat.getActionMasked(ev);
-        if (!isEnabled() || mRefreshing || mLoadMore
-                || (!isChildScrollToTop() && !isChildScrollToBottom())) {
-            // 满足这些条件之一，事件交给子View处理
+        if (!isChildScrollToTop() && !isChildScrollToBottom()) {
             return false;
         }
-
         // 下拉刷新判断
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                // 手指按下，就会恢复HeaderView的初始位置
-                setTargetOffsetTopAndBottom(mOriginalOffsetTop - mHeaderViewContainer.getTop(), true);
+                if (!isEnabled() || mRefreshing || mLoadMore) {
+
+                } else {
+                    // 恢复HeaderView的初始位置
+                    setTargetOffsetTopAndBottom(mOriginalOffsetTop - mHeaderViewContainer.getTop(), true);
+                }
+
                 mActivePointerId = ev.getPointerId(0);
                 mIsBeingDragged = false;
                 final float initialMotionY = getMotionEventY(ev, mActivePointerId);
@@ -503,21 +509,43 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
                     return false;
                 }
 
-                float yDiff = 0;
-                if (isChildScrollToBottom() && parentAllowPullUp()) {
-                    // 计算上拉距离
-                    yDiff = mInitialMotionY - y;
-                    // 判断是否下拉的距离足够
-                    if (yDiff > mTouchSlop && !mIsBeingDragged && pullUpEnable) {
-                        mIsBeingDragged = true;
-                        requestParentDisallowInterceptTouchEvent(true);
+                if (!isEnabled() || mRefreshing || mLoadMore) {
+                    if (mRefreshing) {
+                        float dy = y - mInitialMotionY;
+                        if (dy < 0) {
+                            if (mDistanceHeight >= (int) Math.abs(dy)) {
+                                setTargetOffsetTopAndBottom((int) dy, true);
+                                mDistanceHeight -= (int) Math.abs(dy);
+                            } else {
+                                if (mDistanceHeight > 0) {
+                                    int top = mTarget.getTop();
+                                    setTargetOffsetTopAndBottom(0 - top, true);
+                                } else {
+                                    setTargetOffsetTopAndBottom(mDistanceHeight, true);
+                                }
+                                mDistanceHeight = mHeaderViewHeight;
+                                setRefreshing(false);
+                                return super.onInterceptTouchEvent(ev);
+                            }
+                        }
                     }
                 } else {
-                    // 计算下拉距离
-                    yDiff = y - mInitialMotionY;
-                    if (yDiff > mTouchSlop && !mIsBeingDragged && pullDownEnable) {
-                        mIsBeingDragged = true;
-                        requestParentDisallowInterceptTouchEvent(true);
+                    float yDiff;
+                    if (isChildScrollToBottom() && parentAllowPullUp()) {
+                        // 计算上拉距离
+                        yDiff = mInitialMotionY - y;
+                        // 判断是否下拉的距离足够
+                        if (yDiff > mTouchSlop && !mIsBeingDragged && pullUpEnable) {
+                            mIsBeingDragged = true;
+                            requestParentDisallowInterceptTouchEvent(true);
+                        }
+                    } else {
+                        // 计算下拉距离
+                        yDiff = y - mInitialMotionY;
+                        if (yDiff > mTouchSlop && !mIsBeingDragged && pullDownEnable) {
+                            mIsBeingDragged = true;
+                            requestParentDisallowInterceptTouchEvent(true);
+                        }
                     }
                 }
                 break;
@@ -539,16 +567,25 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         final int action = MotionEventCompat.getActionMasked(ev);
-        if (!isEnabled() || (!isChildScrollToTop() && !isChildScrollToBottom())) {
-            return false;
+
+        if (!isEnabled() || mRefreshing || mLoadMore) {
+            return true;
         }
 
-        if (isChildScrollToBottom()) {
-            // 上拉加载
-            return handlePushTouchEvent(ev, action);
+        if (!isEnabled() && (!isChildScrollToTop() && !isChildScrollToBottom())) {
+            return super.onTouchEvent(ev);
+        }
+
+        if (mIsBeingDragged) {
+            if (isChildScrollToBottom()) {
+                // 上拉加载
+                return handlePushTouchEvent(ev, action);
+            } else {
+                // 下拉刷新
+                return handlePullTouchEvent(ev, action);
+            }
         } else {
-            // 下拉刷新
-            return handlePullTouchEvent(ev, action);
+            return super.onTouchEvent(ev);
         }
     }
 
@@ -752,7 +789,6 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
     }
 
     private void setTargetOffsetTopAndBottom(int offset, boolean requireUpdate) {
-        mHeaderViewContainer.bringToFront();
         mHeaderViewContainer.offsetTopAndBottom(offset);
         mCurrentTargetOffsetTop = mHeaderViewContainer.getTop();
         if (requireUpdate && Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
@@ -855,6 +891,11 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
         return true;
     }
 
+    @Override
+    public void requestDisallowInterceptTouchEvent(boolean b) {
+        // Nope.
+    }
+
     private void requestParentDisallowInterceptTouchEvent(boolean disallowIntercept) {
         final ViewParent parent = getParent();
         if (parent != null) {
@@ -884,6 +925,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
         if (mRefreshing != refreshing) {
             mNotify = notify;
             ensureTarget();
+
             mRefreshing = refreshing;
             if (mRefreshing) {
                 animateOffsetToCorrectPosition(mCurrentTargetOffsetTop, mRefreshListener);
@@ -988,6 +1030,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
     private void updateFooterViewPosition() {
         mFooterViewContainer.setVisibility(View.VISIBLE);
         mFooterViewContainer.bringToFront();
+        mFooterViewContainer.setBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
         // 针对4.4及之前版本的兼容
         if (Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.KITKAT) {
             mFooterViewContainer.getParent().requestLayout();
@@ -1079,6 +1122,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
             setTargetOffsetTopAndBottom(endTarget - mCurrentTargetOffsetTop, true);
             mNotify = false;
             startScaleUpAnimation(mRefreshListener);
+
         } else {
             setRefreshing(refreshing, false);
             if (usingDefaultHeader) {
@@ -1161,6 +1205,10 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
         }
     }
 
+    public void setHeaderViewBackgroundColor(int color) {
+        mHeaderViewContainer.setBackgroundColor(color);
+    }
+
     /**
      * 设置停止加载
      *
@@ -1190,6 +1238,10 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
             // 正在刷新
             setRefreshing(false);
         }
+    }
+
+    public boolean isRefreshing() {
+        return mRefreshing;
     }
 
     /**

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:id="@+id/ptr_inner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
+
+        <ProgressBar
+            android:id="@+id/pull_to_loading_progress"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:indeterminateBehavior="repeat"
+            android:indeterminateDrawable="@drawable/progress_loading"
+            android:indeterminateOnly="true"
+            android:progress="50"
+            android:visibility="gone" />
+
+        <com.conquer.sharp.ptr.custom.donut.DonutProgress
+            android:id="@+id/ptr_custom_loading"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            app:donut_finished_color="@color/main_color_all"
+            app:donut_finished_stroke_width="2dp"
+            app:donut_progress="0"
+            app:donut_text=""
+            app:donut_unfinished_color="@color/color_cccccc"
+            app:donut_unfinished_stroke_width="2dp" />
+
+    </FrameLayout>
+
+</merge>

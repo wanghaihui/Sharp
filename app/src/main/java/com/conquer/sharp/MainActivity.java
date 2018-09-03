@@ -2,7 +2,9 @@ package com.conquer.sharp;
 
 import android.os.Handler;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -15,7 +17,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements PullToRefreshLayout.OnRefreshListener {
 
-    private static final int REFRESH_PERIOD = 3000;
+    private static final int REFRESH_PERIOD = 5000;
 
     @BindView(R.id.listView)
     ListView listView;
@@ -24,6 +26,12 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
     PullToRefreshLayout pullToRefreshLayout;
 
     private static final String[] strDatas = new String[] {
+            "弹幕(自定义版)", "弹幕(RecyclerView版--推荐)", "照片(系统选择和拍照)",
+            "ProgressDialog", "音频(oboe)", "Deep Link", "Instant Run", "HTTP",
+            "弹幕(自定义版)", "弹幕(RecyclerView版--推荐)", "照片(系统选择和拍照)",
+            "ProgressDialog", "音频(oboe)", "Deep Link", "Instant Run", "HTTP",
+            "弹幕(自定义版)", "弹幕(RecyclerView版--推荐)", "照片(系统选择和拍照)",
+            "ProgressDialog", "音频(oboe)", "Deep Link", "Instant Run", "HTTP",
             "弹幕(自定义版)", "弹幕(RecyclerView版--推荐)", "照片(系统选择和拍照)",
             "ProgressDialog", "音频(oboe)", "Deep Link", "Instant Run", "HTTP"
     };
@@ -37,6 +45,16 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
         pullToRefreshLayout.setOnRefreshListener(this);
         listView.setAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, strDatas));
+
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+            }
+        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -68,12 +86,13 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
 
     @Override
     public void onPullDownToRefresh() {
-        new Handler().postDelayed(new Runnable() {
+        pullToRefreshLayout.setHeaderViewBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
+        /*new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 pullToRefreshLayout.stopLoading();
             }
-        }, REFRESH_PERIOD);
+        }, REFRESH_PERIOD);*/
     }
 
     @Override

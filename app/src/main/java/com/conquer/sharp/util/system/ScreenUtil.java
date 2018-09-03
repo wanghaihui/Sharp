@@ -44,4 +44,8 @@ public class ScreenUtil {
     public static int dip2px(float dipValue) {
         return (int) (dipValue * density + 0.5f);
     }
+
+    public static float sp2px(float sp){
+        return sp * scaleDensity;
+    }
 }
