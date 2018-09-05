@@ -1,6 +1,7 @@
 package com.conquer.sharp.recycler.easy;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
 /**
@@ -23,6 +24,7 @@ public abstract class BaseMultiRecyclerAdapter<T> extends BaseRecyclerAdapter<T>
     }
 
     @Override
+    @NonNull
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         int layoutId = mMultiItemTypeSupport.getLayoutId(viewType);
         return RecyclerViewHolder.get(mContext, parent, layoutId);

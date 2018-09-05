@@ -2,11 +2,9 @@ package com.conquer.sharp.ptr;
 
 import android.content.Context;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 
-import com.conquer.sharp.ptr.custom.ball.BallLoadingLayout;
 import com.conquer.sharp.ptr.custom.donut.DonutLayout;
 import com.conquer.sharp.ptr.custom.pulse.BallPulseLoadingLayout;
 

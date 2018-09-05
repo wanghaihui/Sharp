@@ -8,9 +8,9 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 public class SpacingDecoration extends RecyclerView.ItemDecoration {
-    private int mHorizontalSpacing = 0;
-    private int mVerticalSpacing = 0;
-    private boolean mIncludeEdge = false;
+    private int mHorizontalSpacing;
+    private int mVerticalSpacing;
+    private boolean mIncludeEdge;
 
     public SpacingDecoration(int hSpacing, int vSpacing, boolean includeEdge) {
         mHorizontalSpacing = hSpacing;

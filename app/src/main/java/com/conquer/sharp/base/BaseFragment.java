@@ -39,7 +39,7 @@ public abstract class BaseFragment extends Fragment {
         return mainView;
     }
 
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         if (!isInit) {
             isInit = true;
             initViews();
