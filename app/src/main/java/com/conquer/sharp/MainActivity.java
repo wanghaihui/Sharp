@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements PullToRefreshLayout.OnRefreshListener {
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final int REFRESH_PERIOD = 5000;
 
@@ -28,12 +29,7 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
     private static final String[] strDatas = new String[] {
             "弹幕(自定义版)", "弹幕(RecyclerView版--推荐)", "照片(系统选择和拍照)",
             "ProgressDialog", "音频(oboe)", "Deep Link", "Instant Run", "HTTP",
-            "弹幕(自定义版)", "弹幕(RecyclerView版--推荐)", "照片(系统选择和拍照)",
-            "ProgressDialog", "音频(oboe)", "Deep Link", "Instant Run", "HTTP",
-            "弹幕(自定义版)", "弹幕(RecyclerView版--推荐)", "照片(系统选择和拍照)",
-            "ProgressDialog", "音频(oboe)", "Deep Link", "Instant Run", "HTTP",
-            "弹幕(自定义版)", "弹幕(RecyclerView版--推荐)", "照片(系统选择和拍照)",
-            "ProgressDialog", "音频(oboe)", "Deep Link", "Instant Run", "HTTP"
+            "Cocos", "OpenGL"
     };
 
     @Override
@@ -87,12 +83,12 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
     @Override
     public void onPullDownToRefresh() {
         pullToRefreshLayout.setHeaderViewBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
-        /*new Handler().postDelayed(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 pullToRefreshLayout.stopLoading();
             }
-        }, REFRESH_PERIOD);*/
+        }, REFRESH_PERIOD);
     }
 
     @Override
