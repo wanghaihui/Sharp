@@ -35,7 +35,6 @@ public class DonutLayout extends LoadingLayout {
 
     @Override
     public void onPull(float scaleOfLayout) {
-        Log.d("haihui", "scale layout: " + scaleOfLayout);
         mPrepareLoading.setProgress((int) (scaleOfLayout >= 1 ? 100 : scaleOfLayout * 100));
     }
 

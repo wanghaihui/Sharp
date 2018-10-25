@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.conquer.sharp.deeplink.DeepLinkActivity;
 import com.conquer.sharp.dialog.DialogActivity;
+import com.conquer.sharp.opengl.OpenGLActivity;
 import com.conquer.sharp.photo.pager.DanMuActivity;
 import com.conquer.sharp.danmaku.normal.DanMu3Activity;
 import com.conquer.sharp.danmaku.recycler.DanMu4Activity;
@@ -44,6 +45,11 @@ public class IntentManager {
 
     public static void intentDeepLink(Context context) {
         Intent intent = new Intent(context, DeepLinkActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void intentOpenGL(Context context) {
+        Intent intent = new Intent(context, OpenGLActivity.class);
         context.startActivity(intent);
     }
 

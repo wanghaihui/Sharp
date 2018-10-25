@@ -90,8 +90,6 @@ public class PullToRefreshLayout extends SuperSwipeRefreshLayout {
                     if (distance == 0) {
                         loadingLayoutDown.reset();
                     }
-                    Log.d("haihui", "distance: " + distance);
-                    Log.d("haihui", "content size: " + loadingLayoutDown.getContentSize());
                     loadingLayoutDown.onPull(distance * 1.0f / loadingLayoutDown.getContentSize());
                 }
 

@@ -73,6 +73,8 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
                     case 5:
                         IntentManager.intentDeepLink(MainActivity.this);
                         break;
+                    case 9:
+                        IntentManager.intentOpenGL(MainActivity.this);
                     default:
                         break;
                 }
