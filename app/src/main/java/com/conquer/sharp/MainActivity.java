@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.conquer.sharp.base.BaseActivity;
+import com.conquer.sharp.dialog.fragment.DirectoryDialogFragment;
 import com.conquer.sharp.ptr.PullToRefreshLayout;
 
 import butterknife.BindView;
@@ -27,9 +28,9 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
     PullToRefreshLayout pullToRefreshLayout;
 
     private static final String[] strDatas = new String[] {
-            "弹幕(自定义版)", "弹幕(RecyclerView版--推荐)", "照片(系统选择和拍照)",
-            "ProgressDialog", "音频(oboe)", "Deep Link", "Instant Run", "HTTP",
-            "Cocos", "OpenGL"
+            "0.弹幕(自定义版)", "1.弹幕(RecyclerView版--推荐)", "2.照片(系统选择和拍照)",
+            "3.ProgressDialog", "4.音频(oboe)", "5.Deep Link", "6.Instant Run", "7.HTTP",
+            "8.Cocos", "9.OpenGL", "10.DialogFragment"
     };
 
     @Override
@@ -75,6 +76,8 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
                         break;
                     case 9:
                         IntentManager.intentOpenGL(MainActivity.this);
+                    case 10:
+                        DirectoryDialogFragment.newInstance().show(getSupportFragmentManager(), "DirectoryDialogFragment");
                     default:
                         break;
                 }

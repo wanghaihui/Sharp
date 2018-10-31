@@ -1,3 +1,4 @@
 include ':app'
 include ':oboe'
 include ':exoplayer'
+include ':gpuimage'
