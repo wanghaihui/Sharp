@@ -12,8 +12,11 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.conquer.sharp.R;
+import com.gyf.barlibrary.ImmersionBar;
 
 public abstract class BaseDialogFragment extends DialogFragment {
+
+    protected ImmersionBar mImmersionBar;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +38,21 @@ public abstract class BaseDialogFragment extends DialogFragment {
         }
 
         return createView(inflater, container);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        mImmersionBar = ImmersionBar.with(this);
+        mImmersionBar.init();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mImmersionBar != null)
+            mImmersionBar.destroy();
     }
 
     protected abstract View createView(LayoutInflater inflater, ViewGroup container);

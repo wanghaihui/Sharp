@@ -49,5 +49,7 @@ dependencies {
     compile "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
     compile "com.squareup.okhttp3:mockwebserver:${versions.okhttp}"
 
+    compile 'com.gyf.immersionbar:immersionbar:2.3.2-beta01'
+
     testCompile 'junit:junit:4.12'
 }

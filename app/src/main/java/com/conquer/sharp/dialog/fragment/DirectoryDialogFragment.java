@@ -46,4 +46,9 @@ public class DirectoryDialogFragment extends BaseDialogFragment {
             window.setAttributes(windowParams);
         }
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }
