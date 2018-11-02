@@ -49,6 +49,9 @@ dependencies {
     compile "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
     compile "com.squareup.okhttp3:mockwebserver:${versions.okhttp}"
 
+    compile 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+
     compile 'com.gyf.immersionbar:immersionbar:2.3.2-beta01'
 
     testCompile 'junit:junit:4.12'

@@ -3,6 +3,7 @@ package com.conquer.sharp;
 import android.content.Context;
 import android.content.Intent;
 
+import com.conquer.sharp.business.LuckyActivity;
 import com.conquer.sharp.deeplink.DeepLinkActivity;
 import com.conquer.sharp.dialog.DialogActivity;
 import com.conquer.sharp.opengl.OpenGLActivity;
@@ -50,6 +51,11 @@ public class IntentManager {
 
     public static void intentOpenGL(Context context) {
         Intent intent = new Intent(context, OpenGLActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void intentLucky(Context context) {
+        Intent intent = new Intent(context, LuckyActivity.class);
         context.startActivity(intent);
     }
 

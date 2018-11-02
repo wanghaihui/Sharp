@@ -30,7 +30,7 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
     private static final String[] strDatas = new String[] {
             "0.弹幕(自定义版)", "1.弹幕(RecyclerView版--推荐)", "2.照片(系统选择和拍照)",
             "3.ProgressDialog", "4.音频(oboe)", "5.Deep Link", "6.Instant Run", "7.HTTP",
-            "8.Cocos", "9.OpenGL", "10.DialogFragment"
+            "8.Cocos", "9.OpenGL", "10.DialogFragment", "11.转盘抽奖"
     };
 
     @Override
@@ -76,8 +76,13 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
                         break;
                     case 9:
                         IntentManager.intentOpenGL(MainActivity.this);
+                        break;
                     case 10:
                         DirectoryDialogFragment.newInstance().show(getSupportFragmentManager(), "DirectoryDialogFragment");
+                        break;
+                    case 11:
+                        IntentManager.intentLucky(MainActivity.this);
+                        break;
                     default:
                         break;
                 }
