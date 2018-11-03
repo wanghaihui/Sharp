@@ -9,6 +9,7 @@ import com.conquer.sharp.base.BaseActivity;
 import com.conquer.sharp.base.GlideApp;
 import com.conquer.sharp.bean.LuckyBean;
 import com.conquer.sharp.widget.LuckyLayout;
+import com.conquer.sharp.widget.StarLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,9 @@ public class LuckyActivity extends BaseActivity {
 
     @BindView(R.id.turn)
     Button turn;
+
+    @BindView(R.id.starLayout)
+    StarLayout starLayout;
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
@@ -55,5 +59,7 @@ public class LuckyActivity extends BaseActivity {
                 luckyLayout.turnByCount(turnCount);
             }
         });
+
+        starLayout.setLevel(3);
     }
 }

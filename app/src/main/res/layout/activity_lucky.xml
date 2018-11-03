@@ -20,7 +20,8 @@
         android:layout_gravity="center_horizontal"
         app:arc_cropDirection="cropOutside"
         app:arc_position="bottom"
-        app:arc_height="48dp">
+        app:arc_height="48dp"
+        android:visibility="gone">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -44,5 +45,12 @@
         </com.conquer.sharp.widget.ArcLayout>
 
     </com.conquer.sharp.widget.ArcLayout>
+
+    <com.conquer.sharp.widget.StarLayout
+        android:id="@+id/starLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </com.conquer.sharp.widget.StarLayout>
 
 </LinearLayout>
