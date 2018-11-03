@@ -3,11 +3,13 @@ package com.conquer.sharp;
 import android.os.Handler;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.conquer.sharp.base.BaseActivity;
 import com.conquer.sharp.dialog.fragment.DirectoryDialogFragment;
@@ -38,6 +40,8 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+
+        initActionBar();
 
         pullToRefreshLayout.setOnRefreshListener(this);
         listView.setAdapter(new ArrayAdapter<>(this,
@@ -88,6 +92,14 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
                 }
             }
         });
+    }
+
+    private void initActionBar() {
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+        ((TextView) findViewById(R.id.toolbar_title)).setText(getResources().getString(R.string.main_page));
     }
 
     @Override
