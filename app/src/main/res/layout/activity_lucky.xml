@@ -55,6 +55,13 @@
 
         </com.conquer.sharp.widget.StarLayout>
 
+        <ProgressBar android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:progressDrawable="@drawable/score_progress_drawable" />
+
     </LinearLayout>
 
 </ScrollView>

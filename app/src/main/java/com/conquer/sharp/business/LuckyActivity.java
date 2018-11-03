@@ -3,6 +3,7 @@ package com.conquer.sharp.business;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.conquer.sharp.R;
 import com.conquer.sharp.base.BaseActivity;
@@ -28,6 +29,9 @@ public class LuckyActivity extends BaseActivity {
 
     @BindView(R.id.starLayout)
     StarLayout starLayout;
+
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
@@ -61,5 +65,9 @@ public class LuckyActivity extends BaseActivity {
         });
 
         starLayout.setLevel(3);
+
+        progressBar.setMax(100);
+        progressBar.setProgress(50);
+        progressBar.setSecondaryProgress(100);
     }
 }
