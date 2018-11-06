@@ -62,6 +62,10 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:progressDrawable="@drawable/score_progress_drawable" />
 
+        <Button android:id="@+id/luckyBtn"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
+
     </LinearLayout>
 
 </ScrollView>

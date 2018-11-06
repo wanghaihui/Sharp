@@ -9,6 +9,8 @@ import com.conquer.sharp.R;
 import com.conquer.sharp.base.BaseActivity;
 import com.conquer.sharp.base.GlideApp;
 import com.conquer.sharp.bean.LuckyBean;
+import com.conquer.sharp.dialog.fragment.DirectoryDialogFragment;
+import com.conquer.sharp.dialog.fragment.LuckyDialogFragment;
 import com.conquer.sharp.widget.LuckyLayout;
 import com.conquer.sharp.widget.StarLayout;
 
@@ -32,6 +34,9 @@ public class LuckyActivity extends BaseActivity {
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+
+    @BindView(R.id.luckyBtn)
+    Button luckyBtn;
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
@@ -69,5 +74,12 @@ public class LuckyActivity extends BaseActivity {
         progressBar.setMax(100);
         progressBar.setProgress(50);
         progressBar.setSecondaryProgress(100);
+
+        luckyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LuckyDialogFragment.newInstance().show(getSupportFragmentManager(), "LuckyDialogFragment");
+            }
+        });
     }
 }
