@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.conquer.sharp.widget.LuckyLayout
         android:id="@+id/luckyLayout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp" />
 
-</FrameLayout>
+    <ImageView android:id="@+id/start"
+        android:contentDescription="@string/content_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/luckyLayout"
+        android:src="@drawable/start_lucky" />
+
+</RelativeLayout>

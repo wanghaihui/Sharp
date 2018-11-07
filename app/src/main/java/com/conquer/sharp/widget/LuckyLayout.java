@@ -81,7 +81,9 @@ public class LuckyLayout extends FrameLayout {
 
     private void init() {
         mLuckyWheelView = new LuckyWheelView(getContext());
-        addView(mLuckyWheelView, new LayoutParams(ScreenUtil.dip2px(300), ScreenUtil.dip2px(300)));
+        LayoutParams layoutParams = new LayoutParams(ScreenUtil.dip2px(300), ScreenUtil.dip2px(300));
+        layoutParams.gravity = Gravity.CENTER;
+        addView(mLuckyWheelView, layoutParams);
         mLuckyPointer = new ImageView(getContext());
         mLuckyPointer.setImageResource(R.drawable.ic_lucky_pointer);
         LayoutParams params = new LayoutParams(ScreenUtil.dip2px(80), ScreenUtil.dip2px(80));
@@ -107,7 +109,7 @@ public class LuckyLayout extends FrameLayout {
 
     private void turning(View target, int turnCount, float perAngle) {
         float startAngle = target.getRotation();
-        float endAngle = startAngle + turnCount * perAngle;
+        float endAngle = startAngle + turnCount * perAngle - (perAngle / 2);
 
         // 开启GPU的off-screen缓存区, 提高动画的流畅度, 一定要记得在动画完成之后回收该缓存
         target.setLayerType(LAYER_TYPE_HARDWARE, null);
@@ -137,5 +139,19 @@ public class LuckyLayout extends FrameLayout {
 
     public void setRotationType(@RotationType int rotationType) {
         this.rotationType = rotationType;
+    }
+
+    public void setBackground(int level) {
+        switch (level) {
+            case 1:
+                setBackgroundResource(R.drawable.bg_lucky_third);
+                break;
+            case 2:
+                setBackgroundResource(R.drawable.bg_lucky_second);
+                break;
+            case 3:
+                setBackgroundResource(R.drawable.bg_lucky_champion);
+                break;
+        }
     }
 }

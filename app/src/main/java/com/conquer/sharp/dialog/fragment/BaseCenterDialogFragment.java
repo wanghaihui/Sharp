@@ -1,5 +1,7 @@
 package com.conquer.sharp.dialog.fragment;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -28,10 +30,11 @@ public abstract class BaseCenterDialogFragment extends DialogFragment {
         Window window = getDialog().getWindow();
         if (window != null) {
             WindowManager.LayoutParams lp = window.getAttributes();
-            lp.gravity = Gravity.CENTER; // 底部
+            lp.gravity = Gravity.TOP;
             lp.width = WindowManager.LayoutParams.MATCH_PARENT;
             lp.dimAmount = 0.0f;
             window.setAttributes(lp);
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
 
         return createView(inflater, container);

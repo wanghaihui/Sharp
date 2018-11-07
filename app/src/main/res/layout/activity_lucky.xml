@@ -11,11 +11,14 @@
         <com.conquer.sharp.widget.LuckyLayout
             android:id="@+id/luckyLayout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:visibility="gone" />
 
         <Button android:id="@+id/turn"
             android:layout_width="match_parent"
-            android:layout_height="48dp" />
+            android:layout_height="48dp"
+            android:visibility="gone"/>
 
         <com.conquer.sharp.widget.ArcLayout
             android:layout_width="250dp"
@@ -23,7 +26,8 @@
             android:layout_gravity="center_horizontal"
             app:arc_cropDirection="cropOutside"
             app:arc_position="bottom"
-            app:arc_height="48dp">
+            app:arc_height="48dp"
+            android:visibility="gone">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -51,7 +55,8 @@
         <com.conquer.sharp.widget.StarLayout
             android:id="@+id/starLayout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
         </com.conquer.sharp.widget.StarLayout>
 
@@ -60,11 +65,17 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="16dp"
             style="?android:attr/progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/score_progress_drawable" />
+            android:progressDrawable="@drawable/score_progress_drawable"
+            android:visibility="gone"/>
 
         <Button android:id="@+id/luckyBtn"
             android:layout_width="match_parent"
-            android:layout_height="48dp" />
+            android:layout_height="48dp"
+            android:layout_marginTop="32dp"
+            android:textSize="@dimen/text_size_16sp"
+            android:textColor="@android:color/black"
+            android:text="@string/wheel"
+            android:gravity="center" />
 
     </LinearLayout>
 

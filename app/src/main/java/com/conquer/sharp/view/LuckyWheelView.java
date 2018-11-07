@@ -106,7 +106,8 @@ public class LuckyWheelView extends ViewGroup {
         int width = getWidth() - paddingLeft - paddingRight;
         int height = getHeight() - paddingTop - paddingBottom;
 
-        float startAngle = - (mAngle / 2) - 90;
+        // float startAngle = - (mAngle / 2) - 90;
+        float startAngle = -90;
         for (int i = 0; i < getChildCount(); i++) {
             int imgWidth = (mRadius * 2) / 5;
 
@@ -126,11 +127,11 @@ public class LuckyWheelView extends ViewGroup {
     public void onDraw(final Canvas canvas) {
         super.onDraw(canvas);
         // 绘制扇形
-        float startAngle = - (mAngle / 2) - 90;
-        mPaint.setColor(Color.YELLOW);
+        // float startAngle = - (mAngle / 2) - 90;
+        float startAngle = -90;
+        mPaint.setColor(Color.TRANSPARENT);
         mPaint.setAntiAlias(true);
         for (int i = 0; i < mCount; i++) {
-            // 范围是整个圆盘
             mRectF.left = mCenter - mRadius;
             mRectF.top = mCenter - mRadius;
             mRectF.right = mCenter + mRadius;
@@ -141,9 +142,10 @@ public class LuckyWheelView extends ViewGroup {
         }
 
         // 绘制间隔线
-        startAngle = - (mAngle / 2) - 90;
+        // startAngle = - (mAngle / 2) - 90;
+        startAngle = -90;
         mPaint.reset();
-        mPaint.setColor(Color.parseColor("#fd466e"));
+        mPaint.setColor(Color.parseColor("#E8517F"));
         mPaint.setStrokeWidth(3.0f);
         mPaint.setAntiAlias(true);
         for (int i = 0; i < mCount; i++) {

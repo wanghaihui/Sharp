@@ -34,7 +34,7 @@ public class StarLayout extends LinearLayout {
         if (level > 0) {
             for (int i = 0; i < level; i++) {
                 ImageView imageView = new ImageView(getContext());
-                imageView.setImageResource(R.drawable.ic_lucky_pointer);
+                imageView.setImageResource(R.drawable.ic_star);
                 addView(imageView);
             }
         }

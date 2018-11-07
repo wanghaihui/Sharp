@@ -9,7 +9,6 @@ import com.conquer.sharp.R;
 import com.conquer.sharp.base.BaseActivity;
 import com.conquer.sharp.base.GlideApp;
 import com.conquer.sharp.bean.LuckyBean;
-import com.conquer.sharp.dialog.fragment.DirectoryDialogFragment;
 import com.conquer.sharp.dialog.fragment.LuckyDialogFragment;
 import com.conquer.sharp.widget.LuckyLayout;
 import com.conquer.sharp.widget.StarLayout;
@@ -50,6 +49,7 @@ public class LuckyActivity extends BaseActivity {
             luckyBeanList.add(luckyBean);
         }
 
+        luckyLayout.setBackground(2);
         luckyLayout.setRotationType(LuckyLayout.ROTATION_TYPE_POINTER);
         luckyLayout.getLuckyWheelView().setCount(luckyBeanList.size());
         luckyLayout.getLuckyWheelView().setData(luckyBeanList);
