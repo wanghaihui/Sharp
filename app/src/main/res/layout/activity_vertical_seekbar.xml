@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="48dp"/>
+
+    <com.conquer.sharp.widget.VerticalSeekBar3
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:max="100"
+        android:progress="0" />
+
+    <com.conquer.sharp.widget.VerticalSeekBarWrapper
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal">
+
+        <com.conquer.sharp.widget.VerticalSeekBar
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:maxHeight="2dp"
+            android:minHeight="2dp"
+            android:max="100"
+            android:progress="0"
+            style="@style/VerticalSeekBarStyle"
+            android:progressDrawable="@drawable/vertical_seek_bar_style"
+            android:thumb="@drawable/progress_thumb"
+            app:seekBarRotation="CW90" />
+
+    </com.conquer.sharp.widget.VerticalSeekBarWrapper>
+
+</LinearLayout>

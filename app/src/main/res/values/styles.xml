@@ -25,4 +25,8 @@
         <item name="android:windowExitAnimation">@anim/top_to_bottom</item>
     </style>
 
+    <style name="VerticalSeekBarStyle">
+        <!-- 属性兼容 具体在values-v21 -->
+    </style>
+
 </resources>

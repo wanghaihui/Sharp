@@ -47,6 +47,9 @@
         <activity android:name=".business.LuckyActivity"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".business.VerticalSeekBarActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

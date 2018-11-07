@@ -28,12 +28,12 @@ public class PullToRefreshLayout extends SuperSwipeRefreshLayout {
 
     public PullToRefreshLayout(Context context) {
         super(context);
-        initLoadingView(true, true);
+        initLoadingView(true, false);
     }
 
     public PullToRefreshLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initLoadingView(true, true);
+        initLoadingView(true, false);
     }
 
     // 一般用于进页面第一次刷新
