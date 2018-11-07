@@ -15,7 +15,7 @@ import android.view.WindowManager;
 
 import com.gyf.barlibrary.ImmersionBar;
 
-public abstract class BaseCenterDialogFragment extends DialogFragment {
+public abstract class BaseTopDialogFragment extends DialogFragment {
 
     protected ImmersionBar mImmersionBar;
 

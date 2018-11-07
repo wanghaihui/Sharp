@@ -1,8 +1,6 @@
 package com.conquer.sharp.dialog.fragment;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +20,7 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class LuckyDialogFragment extends BaseCenterDialogFragment {
+public class LuckyDialogFragment extends BaseTopDialogFragment {
 
     @BindView(R.id.luckyLayout)
     LuckyLayout luckyLayout;

@@ -10,6 +10,7 @@ import com.conquer.sharp.base.BaseActivity;
 import com.conquer.sharp.base.GlideApp;
 import com.conquer.sharp.bean.LuckyBean;
 import com.conquer.sharp.dialog.fragment.LuckyDialogFragment;
+import com.conquer.sharp.dialog.fragment.ScoreDialogFragment;
 import com.conquer.sharp.widget.LuckyLayout;
 import com.conquer.sharp.widget.StarLayout;
 
@@ -36,6 +37,8 @@ public class LuckyActivity extends BaseActivity {
 
     @BindView(R.id.luckyBtn)
     Button luckyBtn;
+    @BindView(R.id.scoreBtn)
+    Button scoreBtn;
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
@@ -79,6 +82,13 @@ public class LuckyActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 LuckyDialogFragment.newInstance().show(getSupportFragmentManager(), "LuckyDialogFragment");
+            }
+        });
+
+        scoreBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ScoreDialogFragment.newInstance().show(getSupportFragmentManager(), "ScoreDialogFragment");
             }
         });
     }

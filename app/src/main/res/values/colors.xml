@@ -11,4 +11,7 @@
     <color name="color_f5fb8378">#f5fb8378</color>
 
     <color name="color_313131">#313131</color>
+    <color name="color_fff035">#FFF035</color>
+
+    <color name="dash_line_color">#61FFFFFF</color>
 </resources>
