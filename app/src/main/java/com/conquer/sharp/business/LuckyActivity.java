@@ -12,6 +12,7 @@ import com.conquer.sharp.bean.LuckyBean;
 import com.conquer.sharp.dialog.fragment.LuckyDialogFragment;
 import com.conquer.sharp.dialog.fragment.ScoreDialogFragment;
 import com.conquer.sharp.widget.LuckyLayout;
+import com.conquer.sharp.widget.ProgressLayout;
 import com.conquer.sharp.widget.StarLayout;
 
 import java.util.ArrayList;
@@ -39,6 +40,12 @@ public class LuckyActivity extends BaseActivity {
     Button luckyBtn;
     @BindView(R.id.scoreBtn)
     Button scoreBtn;
+    @BindView(R.id.progressLayout)
+    ProgressLayout progressLayout;
+    @BindView(R.id.progressLayout2)
+    ProgressLayout progressLayout2;
+    @BindView(R.id.progressLayout3)
+    ProgressLayout progressLayout3;
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
@@ -91,5 +98,17 @@ public class LuckyActivity extends BaseActivity {
                 ScoreDialogFragment.newInstance().show(getSupportFragmentManager(), "ScoreDialogFragment");
             }
         });
+
+        progressLayout.setProgress("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541084565388&di=2a53429265557c0479a412fe24d8e507&imgtype=0&src=http%3A%2F%2Fcdnq.duitang.com%2Fuploads%2Fitem%2F201207%2F23%2F20120723154623_Nh4WF.thumb.700_0.jpeg"
+        , 50, 1);
+        progressLayout.setText("1000", 1);
+
+        progressLayout2.setProgress("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541084565388&di=2a53429265557c0479a412fe24d8e507&imgtype=0&src=http%3A%2F%2Fcdnq.duitang.com%2Fuploads%2Fitem%2F201207%2F23%2F20120723154623_Nh4WF.thumb.700_0.jpeg"
+                , 50, 2);
+        progressLayout2.setText("1000", 2);
+
+        progressLayout3.setProgress("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541084565388&di=2a53429265557c0479a412fe24d8e507&imgtype=0&src=http%3A%2F%2Fcdnq.duitang.com%2Fuploads%2Fitem%2F201207%2F23%2F20120723154623_Nh4WF.thumb.700_0.jpeg"
+                , 50, 3);
+        progressLayout3.setText("1000", 3);
     }
 }

@@ -6,4 +6,9 @@
     <string name="main_page">首页</string>
     <string name="wheel">转盘</string>
     <string name="score">成绩</string>
+    <string name="award">奖励</string>
+    <string name="need_score">还差%s分开启</string>
+    <string name="first_level">1级</string>
+    <string name="second_level">2级</string>
+    <string name="third_level">3级</string>
 </resources>

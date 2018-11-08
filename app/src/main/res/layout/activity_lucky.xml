@@ -87,6 +87,30 @@
             android:text="@string/score"
             android:gravity="center" />
 
+        <com.conquer.sharp.widget.ProgressLayout
+            android:id="@+id/progressLayout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="32dp">
+
+        </com.conquer.sharp.widget.ProgressLayout>
+
+        <com.conquer.sharp.widget.ProgressLayout
+            android:id="@+id/progressLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="32dp">
+
+        </com.conquer.sharp.widget.ProgressLayout>
+
+        <com.conquer.sharp.widget.ProgressLayout
+            android:id="@+id/progressLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="32dp">
+
+        </com.conquer.sharp.widget.ProgressLayout>
+
     </LinearLayout>
 
 </ScrollView>

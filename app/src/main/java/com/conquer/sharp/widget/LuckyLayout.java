@@ -154,4 +154,15 @@ public class LuckyLayout extends FrameLayout {
                 break;
         }
     }
+
+    public void reset() {
+        // stop animation
+        if (mObjectAnimator != null && mObjectAnimator.isRunning()) {
+            mObjectAnimator.cancel();
+        }
+
+        // reset rotation.
+        mLuckyWheelView.setRotation(0);
+        mLuckyPointer.setRotation(0);
+    }
 }
