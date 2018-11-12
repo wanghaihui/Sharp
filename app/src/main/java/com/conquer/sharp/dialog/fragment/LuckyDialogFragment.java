@@ -9,7 +9,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.conquer.sharp.R;
-import com.conquer.sharp.base.GlideApp;
+import com.conquer.sharp.base.glide.GlideApp;
 import com.conquer.sharp.bean.LuckyBean;
 import com.conquer.sharp.widget.LuckyLayout;
 
@@ -60,14 +60,17 @@ public class LuckyDialogFragment extends BaseTopDialogFragment {
         }
 
         luckyLayout.setBackground(3);
-        luckyLayout.setRotationType(LuckyLayout.ROTATION_TYPE_POINTER);
+        luckyLayout.setRotationType(LuckyLayout.ROTATION_TYPE_WHEEL);
         luckyLayout.getLuckyWheelView().setCount(luckyBeanList.size());
         luckyLayout.getLuckyWheelView().setData(luckyBeanList);
 
+        float startAngle = 0f;
         for (int i = 0; i < luckyBeanList.size(); i++) {
+            luckyLayout.getLuckyWheelView().getImageList().get(i).setRotation(startAngle);
             GlideApp.with(this)
                     .load(luckyBeanList.get(i).url)
                     .into(luckyLayout.getLuckyWheelView().getImageList().get(i));
+            startAngle = startAngle + luckyLayout.getLuckyWheelView().getAngle();
         }
 
         startTurn.setOnClickListener(new View.OnClickListener() {

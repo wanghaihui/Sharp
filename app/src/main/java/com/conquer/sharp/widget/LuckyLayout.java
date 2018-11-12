@@ -3,6 +3,7 @@ package com.conquer.sharp.widget;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.support.annotation.IntDef;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -81,12 +82,16 @@ public class LuckyLayout extends FrameLayout {
 
     private void init() {
         mLuckyWheelView = new LuckyWheelView(getContext());
-        LayoutParams layoutParams = new LayoutParams(ScreenUtil.dip2px(300), ScreenUtil.dip2px(300));
+        // 根据图片的宽度来设置大小
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        BitmapFactory.decodeResource(getResources(), R.drawable.bg_lucky_champion, options);
+        LayoutParams layoutParams = new LayoutParams(options.outWidth - 96,
+                options.outWidth - 96);
         layoutParams.gravity = Gravity.CENTER;
         addView(mLuckyWheelView, layoutParams);
         mLuckyPointer = new ImageView(getContext());
         mLuckyPointer.setImageResource(R.drawable.ic_lucky_pointer);
-        LayoutParams params = new LayoutParams(ScreenUtil.dip2px(80), ScreenUtil.dip2px(80));
+        LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         params.gravity = Gravity.CENTER;
         addView(mLuckyPointer, params);
     }
@@ -109,7 +114,7 @@ public class LuckyLayout extends FrameLayout {
 
     private void turning(View target, int turnCount, float perAngle) {
         float startAngle = target.getRotation();
-        float endAngle = startAngle + turnCount * perAngle - (perAngle / 2);
+        float endAngle = startAngle + turnCount * perAngle;
 
         // 开启GPU的off-screen缓存区, 提高动画的流畅度, 一定要记得在动画完成之后回收该缓存
         target.setLayerType(LAYER_TYPE_HARDWARE, null);

@@ -7,7 +7,7 @@ import android.widget.ProgressBar;
 
 import com.conquer.sharp.R;
 import com.conquer.sharp.base.BaseActivity;
-import com.conquer.sharp.base.GlideApp;
+import com.conquer.sharp.base.glide.GlideApp;
 import com.conquer.sharp.bean.LuckyBean;
 import com.conquer.sharp.dialog.fragment.LuckyDialogFragment;
 import com.conquer.sharp.dialog.fragment.ScoreDialogFragment;
@@ -60,7 +60,7 @@ public class LuckyActivity extends BaseActivity {
         }
 
         luckyLayout.setBackground(2);
-        luckyLayout.setRotationType(LuckyLayout.ROTATION_TYPE_POINTER);
+        luckyLayout.setRotationType(LuckyLayout.ROTATION_TYPE_WHEEL);
         luckyLayout.getLuckyWheelView().setCount(luckyBeanList.size());
         luckyLayout.getLuckyWheelView().setData(luckyBeanList);
 

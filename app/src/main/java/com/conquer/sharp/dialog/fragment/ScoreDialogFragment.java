@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.conquer.sharp.R;
-import com.conquer.sharp.base.GlideApp;
+import com.conquer.sharp.base.glide.GlideApp;
 import com.conquer.sharp.widget.StarLayout;
 
 import java.text.DecimalFormat;

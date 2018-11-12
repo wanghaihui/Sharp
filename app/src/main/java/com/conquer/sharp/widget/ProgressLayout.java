@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.conquer.sharp.R;
-import com.conquer.sharp.base.GlideApp;
+import com.conquer.sharp.base.glide.GlideApp;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
