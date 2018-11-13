@@ -10,14 +10,6 @@
         android:layout_height="20dp"
         android:layout_marginTop="48dp"/>
 
-    <com.conquer.sharp.widget.VerticalSeekBar3
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_horizontal"
-        android:max="100"
-        android:progress="0" />
-
     <com.conquer.sharp.widget.VerticalSeekBarWrapper
         android:layout_width="wrap_content"
         android:layout_height="300dp"
