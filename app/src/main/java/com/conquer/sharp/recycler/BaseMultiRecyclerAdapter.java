@@ -1,6 +1,7 @@
-package com.conquer.sharp.recycler.easy;
+package com.conquer.sharp.recycler;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
@@ -11,23 +12,25 @@ import android.view.ViewGroup;
 
 public abstract class BaseMultiRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
 
-    protected MultiItemTypeSupport<T> mMultiItemTypeSupport;
+    private MultiItemTypeSupport<T> mMultiItemTypeSupport;
+    protected Bundle extra;
 
     public BaseMultiRecyclerAdapter(Context context, MultiItemTypeSupport<T> multiItemTypeSupport) {
         super(context);
         mMultiItemTypeSupport = multiItemTypeSupport;
+        extra = new Bundle();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return mMultiItemTypeSupport.getItemViewType(position, mDataList.get(position));
+        return mMultiItemTypeSupport.getItemViewType(position, mDataList.get(position), extra);
     }
 
     @Override
     @NonNull
-    public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         int layoutId = mMultiItemTypeSupport.getLayoutId(viewType);
-        return RecyclerViewHolder.get(mContext, parent, layoutId);
+        return RecyclerViewHolder.get(mContext, parent, layoutId, viewType);
     }
 
 }

@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ProgressBar android:id="@+id/load_more_progress"
+        android:layout_width="20dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="6dp"
+        android:layout_gravity="top|center_horizontal"
+        android:indeterminateBehavior="repeat"
+        android:indeterminateDrawable="@drawable/progress_loading"
+        android:indeterminateOnly="true"
+        android:progress="50"
+        android:visibility="gone" />
 
-    <FrameLayout
-        android:id="@+id/ptr_fl_inner"
+    <TextView android:id="@+id/bottom_end"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="@android:color/transparent">
+        android:layout_height="32dp"
+        android:layout_marginBottom="6dp"
+        android:layout_gravity="top|center_horizontal"
+        android:gravity="center"
+        android:text="@string/no_more"
+        android:textSize="@dimen/text_size_12sp"
+        android:textColor="@color/color_484848"
+        android:visibility="gone" />
+</FrameLayout>
 
-        <com.conquer.sharp.ptr.custom.pulse.BallPulseLoadingView
-            android:id="@+id/ptr_custom_loading"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_gravity="bottom"
-            app:srlAnimatingColor="@color/red_dark"
-            app:srlNormalColor="@color/red_light"/>
-
-    </FrameLayout>
-
-</merge>

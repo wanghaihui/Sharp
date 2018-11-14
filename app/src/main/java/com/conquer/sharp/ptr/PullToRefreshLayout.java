@@ -1,12 +1,13 @@
 package com.conquer.sharp.ptr;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 
+import com.conquer.sharp.R;
+import com.conquer.sharp.ptr.custom.LoadMoreLayout;
 import com.conquer.sharp.ptr.custom.donut.DonutLayout;
-import com.conquer.sharp.ptr.custom.pulse.BallPulseLoadingLayout;
 
 /**
  * Created by ac on 18/7/16.
@@ -18,7 +19,7 @@ public class PullToRefreshLayout extends SuperSwipeRefreshLayout {
     public static final int HEADER_VIEW_HEIGHT = 48;
 
     private DonutLayout loadingLayoutDown;
-    private BallPulseLoadingLayout loadingLayoutUp;
+    private LoadMoreLayout loadingLayoutUp;
 
     private OnRefreshListener onRefreshListener;
 
@@ -27,13 +28,15 @@ public class PullToRefreshLayout extends SuperSwipeRefreshLayout {
     }
 
     public PullToRefreshLayout(Context context) {
-        super(context);
-        initLoadingView(true, false);
+        this(context, null);
     }
 
     public PullToRefreshLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initLoadingView(true, false);
+        final TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.PullToRefreshLayout);
+        boolean pullUp = ta.getBoolean(R.styleable.PullToRefreshLayout_pullUp, true);
+        ta.recycle();
+        initLoadingView(true, pullUp);
     }
 
     // 一般用于进页面第一次刷新
@@ -41,7 +44,11 @@ public class PullToRefreshLayout extends SuperSwipeRefreshLayout {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                targetToTop();
                 setRefreshing(true);
+                if (loadingLayoutDown != null) {
+                    loadingLayoutDown.refreshing();
+                }
                 if (onRefreshListener != null) {
                     onRefreshListener.onPullDownToRefresh();
                 }
@@ -51,28 +58,6 @@ public class PullToRefreshLayout extends SuperSwipeRefreshLayout {
 
     private void initLoadingView(boolean pullDown, boolean pullUp) {
         if (pullDown) {
-            /*setDefaultCircleProgressColor(ContextCompat.getColor(getContext(), android.R.color.holo_red_light));
-            setDefaultCircleBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
-            setDefaultCircleShadowColor(ContextCompat.getColor(getContext(), android.R.color.transparent));
-            setOnPullRefreshListener(new SuperSwipeRefreshLayout.OnPullRefreshListener() {
-
-                @Override
-                public void onRefresh() {
-                    if (onRefreshListener != null) {
-                        onRefreshListener.onPullDownToRefresh();
-                    }
-                }
-
-                @Override
-                public void onPullDistance(int distance) {
-
-                }
-
-                @Override
-                public void onPullEnable(boolean enable) {
-
-                }
-            });*/
             loadingLayoutDown = new DonutLayout(getContext());
             setHeaderView(loadingLayoutDown);
             setOnPullRefreshListener(new SuperSwipeRefreshLayout.OnPullRefreshListener() {
@@ -101,7 +86,7 @@ public class PullToRefreshLayout extends SuperSwipeRefreshLayout {
         }
 
         if (pullUp) {
-            loadingLayoutUp = new BallPulseLoadingLayout(getContext());
+            loadingLayoutUp = new LoadMoreLayout(getContext());
             setFooterView(loadingLayoutUp);
             setOnPushLoadMoreListener(new OnPushLoadMoreListener() {
                 @Override
@@ -125,6 +110,9 @@ public class PullToRefreshLayout extends SuperSwipeRefreshLayout {
 
                 }
             });
+        } else {
+            // 设置禁用上拉加载
+            setPullUpUnable();
         }
     }
 

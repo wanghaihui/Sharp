@@ -1,9 +1,9 @@
 package com.conquer.sharp.ptr.custom;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.content.res.ColorStateList;
 
 /**
  * Created by ac on 18/7/16.

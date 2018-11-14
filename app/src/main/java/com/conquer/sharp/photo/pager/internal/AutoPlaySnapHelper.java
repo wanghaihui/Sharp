@@ -11,8 +11,8 @@ import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.Scroller;
 
-import com.conquer.sharp.recycler.difficult.animation.AlphaInAnimation;
-import com.conquer.sharp.recycler.difficult.animation.AlphaOutAnimation;
+import com.conquer.sharp.recycler.anim.AlphaInAnimation;
+import com.conquer.sharp.recycler.anim.AlphaOutAnimation;
 
 /**
  * Created by ac on 18/7/18.

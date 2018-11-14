@@ -1,19 +1,21 @@
-package com.conquer.sharp;
+package com.conquer.sharp.main;
 
-import android.os.Handler;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
+import android.os.Handler;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import com.conquer.sharp.IntentManager;
+import com.conquer.sharp.R;
 import com.conquer.sharp.base.BaseActivity;
 import com.conquer.sharp.dialog.fragment.DirectoryDialogFragment;
 import com.conquer.sharp.ptr.PullToRefreshLayout;
+import com.conquer.sharp.recycler.OnRVItemClickListener;
+import com.conquer.sharp.recycler.decoration.SpacingDecoration;
+import com.conquer.sharp.recycler.extend.HFRecyclerAdapter;
+import com.conquer.sharp.recycler.photo.QuickPhotoRecyclerView;
+import com.conquer.sharp.util.system.ScreenUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,18 +23,19 @@ import butterknife.ButterKnife;
 public class MainActivity extends BaseActivity implements PullToRefreshLayout.OnRefreshListener {
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private static final int REFRESH_PERIOD = 5000;
+    @BindView(R.id.refreshLayout)
+    PullToRefreshLayout mRefreshLayout;
+    @BindView(R.id.recyclerView)
+    QuickPhotoRecyclerView mRecyclerView;
 
-    @BindView(R.id.listView)
-    ListView listView;
+    protected HFRecyclerAdapter hfRecyclerAdapter;
+    private MainAdapter mMainAdapter;
 
-    @BindView(R.id.pullToRefreshLayout)
-    PullToRefreshLayout pullToRefreshLayout;
-
-    private static final String[] strDatas = new String[] {
+    private static final String[] strData = new String[] {
             "0.弹幕(自定义版)", "1.弹幕(RecyclerView版--推荐)", "2.照片(系统选择和拍照)",
             "3.ProgressDialog", "4.音频(oboe)", "5.Deep Link", "6.Instant Run", "7.HTTP",
-            "8.Cocos", "9.OpenGL", "10.DialogFragment", "11.转盘抽奖", "12.Vertical SeekBar"
+            "8.Cocos", "9.OpenGL", "10.DialogFragment", "11.转盘抽奖", "12.Vertical SeekBar",
+            "13.Wait/Notify/NotifyAll"
     };
 
     @Override
@@ -43,23 +46,25 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
 
         initActionBar();
 
-        pullToRefreshLayout.setOnRefreshListener(this);
-        listView.setAdapter(new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, strDatas));
+        mRefreshLayout.setOnRefreshListener(this);
 
-        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView absListView, int i) {
-            }
+        mMainAdapter = new MainAdapter(this, R.layout.layout_main);
 
-            @Override
-            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-            }
-        });
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        hfRecyclerAdapter = new HFRecyclerAdapter(mMainAdapter);
+        mRecyclerView.setAdapter(hfRecyclerAdapter);
+        mRecyclerView.addItemDecoration(new SpacingDecoration(0, ScreenUtil.dip2px(12),
+                false));
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        for (String name : strData) {
+            mMainAdapter.getDataList().add(name);
+        }
+
+        mMainAdapter.notifyDataSetChanged();
+
+        mMainAdapter.setOnRVItemClickListener(new OnRVItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(int position) {
                 switch (position) {
                     case 0:
                         IntentManager.intentDanMu3(MainActivity.this);
@@ -107,22 +112,18 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
 
     @Override
     public void onPullDownToRefresh() {
-        pullToRefreshLayout.setHeaderViewBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                pullToRefreshLayout.stopLoading();
+                if (mRefreshLayout.isRefreshing()) {
+                    mRefreshLayout.stopLoading();
+                }
             }
-        }, REFRESH_PERIOD);
+        }, 2000);
     }
 
     @Override
     public void onPullUpToRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                pullToRefreshLayout.stopLoading();
-            }
-        }, 1000);
+        // 使用RecyclerView的LoadMore
     }
 }

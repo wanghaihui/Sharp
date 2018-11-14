@@ -1,4 +1,4 @@
-package com.conquer.sharp.recycler.easy;
+package com.conquer.sharp.recycler;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -38,7 +38,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
     @Override
     @NonNull
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return RecyclerViewHolder.get(mContext, parent, mLayoutId);
+        return RecyclerViewHolder.get(mContext, parent, mLayoutId, viewType);
     }
 
     @Override

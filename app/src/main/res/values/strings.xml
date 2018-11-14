@@ -11,4 +11,5 @@
     <string name="first_level">1级</string>
     <string name="second_level">2级</string>
     <string name="third_level">3级</string>
+    <string name="no_more">已经到底了</string>
 </resources>

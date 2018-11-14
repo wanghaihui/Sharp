@@ -1,8 +1,10 @@
 package com.conquer.sharp.danmaku;
 
+import android.os.Bundle;
+
 import com.conquer.sharp.R;
 import com.conquer.sharp.danmaku.bean.DanMu;
-import com.conquer.sharp.recycler.easy.MultiItemTypeSupport;
+import com.conquer.sharp.recycler.MultiItemTypeSupport;
 
 /**
  * Created by ac on 18/7/19.
@@ -22,7 +24,7 @@ public class DanMuMultiItemTypeSupport implements MultiItemTypeSupport<DanMu> {
     }
 
     @Override
-    public int getItemViewType(int position, DanMu danMu) {
+    public int getItemViewType(int position, DanMu danMu, Bundle bundle) {
         if (danMu.type == DanMu.DanMuType.DAN_MU_PLACE_HOLDER) {
             return TYPE_HOLDER;
         } else {

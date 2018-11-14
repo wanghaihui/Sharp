@@ -122,6 +122,8 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
 
     private int mDistanceHeight;
 
+    private boolean mAutoLoadMore = false;
+
     /**
      * 下拉时，超过距离之后，弹回来的动画监听器
      */
@@ -480,6 +482,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
         if (!isChildScrollToTop() && !isChildScrollToBottom()) {
             return false;
         }
+
         // 下拉刷新判断
         switch (action) {
             case MotionEvent.ACTION_DOWN:
@@ -532,12 +535,16 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
                 } else {
                     float yDiff;
                     if (isChildScrollToBottom() && parentAllowPullUp()) {
-                        // 计算上拉距离
-                        yDiff = mInitialMotionY - y;
-                        // 判断是否下拉的距离足够
-                        if (yDiff > mTouchSlop && !mIsBeingDragged && pullUpEnable) {
-                            mIsBeingDragged = true;
-                            requestParentDisallowInterceptTouchEvent(true);
+                        if (mAutoLoadMore) {
+                            return super.onInterceptTouchEvent(ev);
+                        } else {
+                            // 计算上拉距离
+                            yDiff = mInitialMotionY - y;
+                            // 判断是否上拉的距离足够
+                            if (yDiff > mTouchSlop && !mIsBeingDragged && pullUpEnable) {
+                                mIsBeingDragged = true;
+                                requestParentDisallowInterceptTouchEvent(true);
+                            }
                         }
                     } else {
                         // 计算下拉距离
@@ -843,6 +850,16 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
             int count = recyclerView.getAdapter().getItemCount();
             if (layoutManager instanceof LinearLayoutManager && count > 0) {
                 LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
+                // 处理item高度超过一屏幕时的情况
+                View lastVisibleChild = recyclerView.getChildAt(recyclerView.getChildCount() - 1);
+                if (lastVisibleChild != null && lastVisibleChild.getMeasuredHeight() >= recyclerView.getMeasuredHeight()) {
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                        return !(ViewCompat.canScrollVertically(recyclerView, 1) || recyclerView.getScrollY() < 0);
+                    } else {
+                        return !ViewCompat.canScrollVertically(recyclerView, 1);
+                    }
+                }
+
                 if (linearLayoutManager.findLastCompletelyVisibleItemPosition() == count - 1) {
                     return true;
                 }
@@ -882,6 +899,107 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
         }
 
         return false;
+    }
+
+    private void addTargetListener() {
+        ensureTarget();
+        if (mTarget == null) {
+            return;
+        }
+
+        if (mTarget instanceof RecyclerView) {
+            ((RecyclerView) mTarget).addOnScrollListener(recyclerListener);
+        } else if (mTarget instanceof AbsListView) {
+
+        } else if (mTarget instanceof ScrollView) {
+
+        }
+
+    }
+
+    private RecyclerView.OnScrollListener recyclerListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+
+            RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+            int lastVisibleItemPosition = 0;
+            int[] lastPositions;
+
+            if (layoutManager instanceof LinearLayoutManager) {
+                lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastCompletelyVisibleItemPosition();
+            } else if (layoutManager instanceof StaggeredGridLayoutManager) {
+                StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
+                lastPositions = new int[staggeredGridLayoutManager.getSpanCount()];
+                staggeredGridLayoutManager.findLastCompletelyVisibleItemPositions(lastPositions);
+                lastVisibleItemPosition = findMax(lastPositions);
+            }
+
+            int visibleItemCount = layoutManager.getChildCount();
+            int totalItemCount = layoutManager.getItemCount();
+            if (visibleItemCount > 0 && recyclerView.getScrollState() == RecyclerView.SCROLL_STATE_IDLE) {
+                // 处理item高度超过一屏幕时的情况
+                View lastVisibleChild = recyclerView.getChildAt(recyclerView.getChildCount() - 1);
+                if (lastVisibleChild != null && lastVisibleChild.getMeasuredHeight() >= recyclerView.getMeasuredHeight()) {
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                        if (!(ViewCompat.canScrollVertically(recyclerView, 1) || recyclerView.getScrollY() < 0)) {
+                            if (!mLoadMore) {
+                                if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
+                                    updateFooterViewPosition();
+                                    if (mOnPushLoadMoreListener != null) {
+                                        mLoadMore = true;
+                                        mOnPushLoadMoreListener.onLoadMore();
+                                    }
+                                } else {
+                                    animatorFooterToBottom(0, mFooterViewHeight);
+                                }
+                            }
+                        }
+                    } else {
+                        if (!ViewCompat.canScrollVertically(recyclerView, 1)) {
+                            if (!mLoadMore) {
+                                if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
+                                    updateFooterViewPosition();
+                                    if (mOnPushLoadMoreListener != null) {
+                                        mLoadMore = true;
+                                        mOnPushLoadMoreListener.onLoadMore();
+                                    }
+                                } else {
+                                    animatorFooterToBottom(0, mFooterViewHeight);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // -1是为了提前预加载，优化体验
+            if (visibleItemCount > 0 && recyclerView.getScrollState() == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItemPosition >= totalItemCount - 1) {
+                if (!mLoadMore) {
+                    if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
+                        updateFooterViewPosition();
+                        if (mOnPushLoadMoreListener != null) {
+                            mLoadMore = true;
+                            mOnPushLoadMoreListener.onLoadMore();
+                        }
+                    } else {
+                        animatorFooterToBottom(0, mFooterViewHeight);
+                    }
+                }
+            } else {
+
+            }
+        }
+    };
+
+    private int findMax(int[] lastPositions) {
+        int max = lastPositions[0];
+        for (int value : lastPositions) {
+            if (value > max) {
+                max = value;
+            }
+        }
+        return max;
     }
 
     /**
@@ -1106,6 +1224,14 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
                 (width / 2 + footViewWidth / 2), height + footViewHeight);
     }
 
+    // 自定义
+    public void targetToTop() {
+        ensureTarget();
+        if (mTarget instanceof RecyclerView) {
+            ((RecyclerView) mTarget).scrollToPosition(0);
+        }
+    }
+
     /**
      * Notify the widget that refresh state has changed. Do not call this when
      * refresh is triggered by a swipe gesture.
@@ -1214,7 +1340,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
      *
      * @param loadMore
      */
-    public void setLoadMore(boolean loadMore) {
+    private void setLoadMore(boolean loadMore) {
         // 停止加载
         if (!loadMore && mLoadMore) {
             if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
@@ -1242,6 +1368,16 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
 
     public boolean isRefreshing() {
         return mRefreshing;
+    }
+
+    // 自动加载更多
+    public void setAutoLoadMore() {
+        mAutoLoadMore = true;
+        addTargetListener();
+    }
+
+    public void setPullUpUnable() {
+        pullUpEnable = false;
     }
 
     /**

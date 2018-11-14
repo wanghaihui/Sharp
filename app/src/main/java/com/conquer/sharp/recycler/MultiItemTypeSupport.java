@@ -1,4 +1,6 @@
-package com.conquer.sharp.recycler.easy;
+package com.conquer.sharp.recycler;
+
+import android.os.Bundle;
 
 /**
  * Created by ac on 18/6/25.
@@ -7,5 +9,5 @@ package com.conquer.sharp.recycler.easy;
 
 public interface MultiItemTypeSupport<T> {
     int getLayoutId(int itemType);
-    int getItemViewType(int position, T t);
+    int getItemViewType(int position, T t, Bundle extra);
 }

@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.conquer.sharp.R;
 import com.conquer.sharp.danmaku.bean.DanMu;
-import com.conquer.sharp.recycler.easy.BaseMultiRecyclerAdapter;
-import com.conquer.sharp.recycler.easy.RecyclerViewHolder;
+import com.conquer.sharp.recycler.BaseMultiRecyclerAdapter;
+import com.conquer.sharp.recycler.RecyclerViewHolder;
 
 import java.util.ArrayList;
 

@@ -7,7 +7,7 @@ import com.conquer.sharp.base.BaseActivity;
 import com.conquer.sharp.danmaku.DanMuAdapter;
 import com.conquer.sharp.danmaku.DanMuMultiItemTypeSupport;
 import com.conquer.sharp.danmaku.bean.DanMu;
-import com.conquer.sharp.recycler.difficult.decoration.SpacingDecoration;
+import com.conquer.sharp.recycler.decoration.SpacingDecoration;
 import com.conquer.sharp.util.system.ScreenUtil;
 
 import butterknife.BindView;
