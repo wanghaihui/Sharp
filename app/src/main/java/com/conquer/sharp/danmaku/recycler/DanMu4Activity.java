@@ -8,7 +8,7 @@ import com.conquer.sharp.danmaku.DanMuAdapter;
 import com.conquer.sharp.danmaku.DanMuMultiItemTypeSupport;
 import com.conquer.sharp.danmaku.bean.DanMu;
 import com.conquer.sharp.recycler.decoration.SpacingDecoration;
-import com.conquer.sharp.util.system.ScreenUtil;
+import com.conquer.sharp.util.system.ScreenUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,7 +57,7 @@ public class DanMu4Activity extends BaseActivity {
         layoutManager.setSpeedSlow();
         danMuRecyclerView.setLayoutManager(layoutManager);
         danMuRecyclerView.setAdapter(danMuAdapter);
-        danMuRecyclerView.addItemDecoration(new SpacingDecoration(0, ScreenUtil.dip2px(6), false));
+        danMuRecyclerView.addItemDecoration(new SpacingDecoration(0, ScreenUtils.dip2px(6), false));
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

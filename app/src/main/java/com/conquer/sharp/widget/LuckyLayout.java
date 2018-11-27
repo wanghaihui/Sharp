@@ -13,7 +13,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.conquer.sharp.R;
-import com.conquer.sharp.util.system.ScreenUtil;
 import com.conquer.sharp.view.LuckyWheelView;
 
 import java.lang.annotation.Retention;

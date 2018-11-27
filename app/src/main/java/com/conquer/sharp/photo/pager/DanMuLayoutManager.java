@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.View;
 
 import com.conquer.sharp.photo.pager.internal.ViewPagerLayoutManager;
-import com.conquer.sharp.util.system.ScreenUtil;
+import com.conquer.sharp.util.system.ScreenUtils;
 
 /**
  * Created by ac on 18/7/18.
@@ -26,7 +26,7 @@ public class DanMuLayoutManager extends ViewPagerLayoutManager {
 
     @Override
     protected float setInterval() {
-        return mDecoratedMeasurement + ScreenUtil.dip2px(4);
+        return mDecoratedMeasurement + ScreenUtils.dip2px(4);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class DanMuLayoutManager extends ViewPagerLayoutManager {
     }
 
     protected int calItemLeft(float targetOffset) {
-        return mOrientation == VERTICAL ? ScreenUtil.dip2px(16) : (int) targetOffset;
+        return mOrientation == VERTICAL ? ScreenUtils.dip2px(16) : (int) targetOffset;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class DanMuLayoutManager extends ViewPagerLayoutManager {
             // 底部一个开始弹 version
             int startTop = (MAX_COUNT - 1) * mDecoratedMeasurement;
             layoutDecorated(scrap, left, startTop + top, left + scrap.getMeasuredWidth(), startTop + top + mDecoratedMeasurement);
-            // layoutDecorated(scrap, left, ScreenUtil.dip2px(120) - scrap.getMeasuredHeight() + top, left + scrap.getMeasuredWidth(), ScreenUtil.dip2px(120));
+            // layoutDecorated(scrap, left, ScreenUtils.dip2px(120) - scrap.getMeasuredHeight() + top, left + scrap.getMeasuredWidth(), ScreenUtils.dip2px(120));
 
             // 底部两个开始弹 version
             /*int startTop = mDecoratedMeasurement;

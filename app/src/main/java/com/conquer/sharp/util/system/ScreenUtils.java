@@ -10,7 +10,7 @@ import com.conquer.sharp.api.SharpUIKit;
  *
  */
 
-public class ScreenUtil {
+public class ScreenUtils {
     public static int screenWidth;
     public static int screenHeight;
     public static int screenMin;// 宽高中，小的一边

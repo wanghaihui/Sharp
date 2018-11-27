@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
 import com.conquer.sharp.R;
 import com.conquer.sharp.ptr.PullToRefreshLayout;
 import com.conquer.sharp.ptr.custom.LoadingLayout;
-import com.conquer.sharp.util.system.ScreenUtil;
+import com.conquer.sharp.util.system.ScreenUtils;
 
 public class DonutLayout extends LoadingLayout {
 
@@ -67,7 +67,7 @@ public class DonutLayout extends LoadingLayout {
 
     @Override
     public int getContentSize() {
-        return ScreenUtil.dip2px(PullToRefreshLayout.HEADER_VIEW_HEIGHT);
+        return ScreenUtils.dip2px(PullToRefreshLayout.HEADER_VIEW_HEIGHT);
     }
 
     @Override

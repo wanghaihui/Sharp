@@ -15,7 +15,7 @@ import com.conquer.sharp.recycler.OnRVItemClickListener;
 import com.conquer.sharp.recycler.decoration.SpacingDecoration;
 import com.conquer.sharp.recycler.extend.HFRecyclerAdapter;
 import com.conquer.sharp.recycler.photo.QuickPhotoRecyclerView;
-import com.conquer.sharp.util.system.ScreenUtil;
+import com.conquer.sharp.util.system.ScreenUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,13 +29,12 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
     QuickPhotoRecyclerView mRecyclerView;
 
     protected HFRecyclerAdapter hfRecyclerAdapter;
-    private MainAdapter mMainAdapter;
 
     private static final String[] strData = new String[] {
             "0.弹幕(自定义版)", "1.弹幕(RecyclerView版--推荐)", "2.照片(系统选择和拍照)",
             "3.ProgressDialog", "4.音频(oboe)", "5.Deep Link", "6.Instant Run", "7.HTTP",
             "8.Cocos", "9.OpenGL", "10.DialogFragment", "11.转盘抽奖", "12.Vertical SeekBar",
-            "13.Wait/Notify/NotifyAll"
+            "13.Wait/Notify/NotifyAll", "14.Camera", "15.爱唱Camera"
     };
 
     @Override
@@ -48,12 +47,12 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
 
         mRefreshLayout.setOnRefreshListener(this);
 
-        mMainAdapter = new MainAdapter(this, R.layout.layout_main);
+        MainAdapter mMainAdapter = new MainAdapter(this, R.layout.layout_main);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         hfRecyclerAdapter = new HFRecyclerAdapter(mMainAdapter);
         mRecyclerView.setAdapter(hfRecyclerAdapter);
-        mRecyclerView.addItemDecoration(new SpacingDecoration(0, ScreenUtil.dip2px(12),
+        mRecyclerView.addItemDecoration(new SpacingDecoration(0, ScreenUtils.dip2px(12),
                 false));
 
         for (String name : strData) {
@@ -94,6 +93,14 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
                         break;
                     case 12:
                         IntentManager.intentVerticalSeekBar(MainActivity.this);
+                        break;
+                    case 13:
+                        break;
+                    case 14:
+                        IntentManager.intentCamera(MainActivity.this);
+                        break;
+                    case 15:
+                        IntentManager.intentAiCamera(MainActivity.this);
                         break;
                     default:
                         break;

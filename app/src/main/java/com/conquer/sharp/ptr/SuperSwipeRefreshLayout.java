@@ -29,7 +29,7 @@ import android.widget.AbsListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
-import com.conquer.sharp.util.system.ScreenUtil;
+import com.conquer.sharp.util.system.ScreenUtils;
 
 /**
  * Created by ac on 18/7/9.
@@ -329,7 +329,7 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
         );
         layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        layoutParams.bottomMargin = ScreenUtil.dip2px(6);
+        layoutParams.bottomMargin = ScreenUtils.dip2px(6);
         mHeaderViewContainer = new HeaderViewContainer(getContext());
         mHeaderViewContainer.setVisibility(View.GONE);
         defaultProgressView.setVisibility(View.VISIBLE);

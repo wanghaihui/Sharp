@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.conquer.sharp.R;
-import com.conquer.sharp.util.system.ScreenUtil;
+import com.conquer.sharp.util.system.ScreenUtils;
 
 /**
  * Created by ac on 18/7/16.
@@ -30,7 +30,7 @@ public class LoadMoreLayout extends LoadingLayout {
     private void init(Context context) {
         View view = inflate(context, R.layout.ptr_pull_to_refresh_header_custom, this);
 
-        setLayoutParams(new ViewGroup.LayoutParams(ScreenUtil.screenWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
+        setLayoutParams(new ViewGroup.LayoutParams(ScreenUtils.screenWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         mLoadMoreProgress = view.findViewById(R.id.load_more_progress);
         mEndView = view.findViewById(R.id.bottom_end);
@@ -73,7 +73,7 @@ public class LoadMoreLayout extends LoadingLayout {
 
     @Override
     public int getContentSize() {
-        return ScreenUtil.screenWidth;
+        return ScreenUtils.screenWidth;
     }
 
 

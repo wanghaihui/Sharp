@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.conquer.sharp.R;
 import com.conquer.sharp.danmaku.bean.DanMu;
-import com.conquer.sharp.util.system.ScreenUtil;
+import com.conquer.sharp.util.system.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -278,13 +278,13 @@ public class DanMuQueueView extends ViewGroup {
                 View addView = LayoutInflater.from(getContext()).inflate(R.layout.layout_dan_mu3, null);
                 ((TextView) addView.findViewById(R.id.item_tv_title)).setText(danMuList.get(position).danMu);
                 DanMuQueueView.LayoutParams params = new DanMuQueueView.LayoutParams(DanMuQueueView.LayoutParams.MATCH_PARENT, DanMuQueueView.LayoutParams.WRAP_CONTENT);
-                params.topMargin = ScreenUtil.dip2px(3);
+                params.topMargin = ScreenUtils.dip2px(3);
                 addView.setLayoutParams(params);
                 addNewView(addView);
             } else {
                 View addView = LayoutInflater.from(getContext()).inflate(R.layout.layout_dan_mu_holder, null);
                 DanMuQueueView.LayoutParams params = new DanMuQueueView.LayoutParams(DanMuQueueView.LayoutParams.MATCH_PARENT, DanMuQueueView.LayoutParams.WRAP_CONTENT);
-                params.topMargin = ScreenUtil.dip2px(3);
+                params.topMargin = ScreenUtils.dip2px(3);
                 addView.setLayoutParams(params);
                 addNewView(addView);
             }

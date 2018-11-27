@@ -50,6 +50,12 @@
         <activity android:name=".business.VerticalSeekBarActivity"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".camera.CameraActivity" />
+
+        <activity android:name=".camera.aichang.ACCameraActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:screenOrientation="landscape" />
+
     </application>
 
 </manifest>

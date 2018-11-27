@@ -16,7 +16,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.conquer.sharp.R;
-import com.conquer.sharp.util.system.ScreenUtil;
+import com.conquer.sharp.util.system.ScreenUtils;
 
 public class DonutProgress extends View {
     private Paint finishedPaint;
@@ -92,10 +92,10 @@ public class DonutProgress extends View {
     public DonutProgress(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        default_text_size = ScreenUtil.sp2px(18);
-        min_size = ScreenUtil.dip2px(100);
-        default_stroke_width = ScreenUtil.dip2px(10);
-        default_inner_bottom_text_size = ScreenUtil.sp2px(18);
+        default_text_size = ScreenUtils.sp2px(18);
+        min_size = ScreenUtils.dip2px(100);
+        default_stroke_width = ScreenUtils.dip2px(10);
+        default_inner_bottom_text_size = ScreenUtils.sp2px(18);
 
         final TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.DonutProgress, defStyleAttr, 0);
         initByAttributes(attributes);
@@ -341,7 +341,6 @@ public class DonutProgress extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         setMeasuredDimension(measure(widthMeasureSpec), measure(heightMeasureSpec));
 
-        //TODO calculate inner circle height and then position bottom text at the bottom (3/4)
         innerBottomTextHeight = getHeight() - (getHeight() * 3) / 4;
     }
 
