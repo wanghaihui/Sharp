@@ -860,17 +860,13 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
                     }
                 }
 
-                if (linearLayoutManager.findLastCompletelyVisibleItemPosition() == count - 1) {
-                    return true;
-                }
+                return linearLayoutManager.findLastCompletelyVisibleItemPosition() == count - 1;
             } else if (layoutManager instanceof StaggeredGridLayoutManager) {
                 StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
                 int[] lastItems = new int[2];
                 staggeredGridLayoutManager.findLastCompletelyVisibleItemPositions(lastItems);
                 int lastItem = Math.max(lastItems[0], lastItems[1]);
-                if (lastItem == count - 1) {
-                    return true;
-                }
+                return lastItem == count - 1;
             }
 
             return false;
@@ -882,19 +878,14 @@ public class SuperSwipeRefreshLayout extends ViewGroup {
                 return false;
             }
             int lastPos = absListView.getLastVisiblePosition();
-            if (lastPos > 0 && count > 0 && lastPos == count - 1) {
-                return true;
-            }
+            return lastPos > 0 && count > 0 && lastPos == count - 1;
 
-            return false;
         } else if (mTarget instanceof ScrollView) {
             ScrollView scrollView = (ScrollView) mTarget;
             View view = scrollView.getChildAt(scrollView.getChildCount() - 1);
             if (view != null) {
                 int diff = view.getBottom() - (scrollView.getHeight() + scrollView.getScrollY());
-                if (diff == 0) {
-                    return true;
-                }
+                return diff == 0;
             }
         }
 

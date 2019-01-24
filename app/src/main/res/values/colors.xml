@@ -21,4 +21,8 @@
 
     <color name="color_484848">#484848</color>
     <color name="color_f1f1f1">#F1F1F1</color>
+
+    <!-- 主色调 -->
+    <color name="main_color">#FFC335</color>
+
 </resources>

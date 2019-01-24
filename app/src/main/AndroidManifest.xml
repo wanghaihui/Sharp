@@ -52,9 +52,14 @@
 
         <activity android:name=".camera.CameraActivity" />
 
-        <activity android:name=".camera.aichang.ACCameraActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"
-            android:screenOrientation="landscape" />
+        <activity android:name=".cs.CSActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".photo.preview.PreviewPhotoActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".guide.GuideActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

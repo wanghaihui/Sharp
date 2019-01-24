@@ -4,7 +4,8 @@
     <dimen name="text_size_12sp">12sp</dimen>
     <dimen name="text_size_16sp">16sp</dimen>
     <dimen name="text_size_17sp">17sp</dimen>
+    <dimen name="text_size_18sp">18sp</dimen>
     <dimen name="text_size_32sp">32sp</dimen>
 
-    <dimen name="action_bar_height">48dip</dimen>
+    <dimen name="action_bar_height">48dp</dimen>
 </resources>

@@ -1,13 +1,15 @@
 package com.conquer.sharp.main;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.conquer.sharp.IntentManager;
-import com.conquer.sharp.R;
+import com.conquer.sharp.api.SharpUIKit;
 import com.conquer.sharp.base.BaseActivity;
 import com.conquer.sharp.dialog.fragment.DirectoryDialogFragment;
 import com.conquer.sharp.ptr.PullToRefreshLayout;
@@ -15,7 +17,10 @@ import com.conquer.sharp.recycler.OnRVItemClickListener;
 import com.conquer.sharp.recycler.decoration.SpacingDecoration;
 import com.conquer.sharp.recycler.extend.HFRecyclerAdapter;
 import com.conquer.sharp.recycler.photo.QuickPhotoRecyclerView;
+import com.conquer.sharp.util.common.FileUtils;
 import com.conquer.sharp.util.system.ScreenUtils;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,7 +39,8 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
             "0.弹幕(自定义版)", "1.弹幕(RecyclerView版--推荐)", "2.照片(系统选择和拍照)",
             "3.ProgressDialog", "4.音频(oboe)", "5.Deep Link", "6.Instant Run", "7.HTTP",
             "8.Cocos", "9.OpenGL", "10.DialogFragment", "11.转盘抽奖", "12.Vertical SeekBar",
-            "13.Wait/Notify/NotifyAll", "14.Camera", "15.爱唱Camera"
+            "13.Wait/Notify/NotifyAll", "14.Camera", "15.Google Software Engineer",
+            "16.文件拷贝之assetsToSDCard", "17.引导图"
     };
 
     @Override
@@ -52,7 +58,7 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         hfRecyclerAdapter = new HFRecyclerAdapter(mMainAdapter);
         mRecyclerView.setAdapter(hfRecyclerAdapter);
-        mRecyclerView.addItemDecoration(new SpacingDecoration(0, ScreenUtils.dip2px(12),
+        mRecyclerView.addItemDecoration(new SpacingDecoration(0, ScreenUtils.dip2px(2),
                 false));
 
         for (String name : strData) {
@@ -95,12 +101,18 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
                         IntentManager.intentVerticalSeekBar(MainActivity.this);
                         break;
                     case 13:
-                        break;
                     case 14:
                         IntentManager.intentCamera(MainActivity.this);
                         break;
                     case 15:
-                        IntentManager.intentAiCamera(MainActivity.this);
+                        IntentManager.intentCS(MainActivity.this);
+                        break;
+                    case 16:
+                        // 涉及权限的动态申请--参看permission
+                        copyAssetsToSDCard();
+                        break;
+                    case 17:
+                        IntentManager.intentGuide(MainActivity.this);
                         break;
                     default:
                         break;
@@ -115,6 +127,7 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
         ((TextView) findViewById(R.id.toolbar_title)).setText(getResources().getString(R.string.main_page));
+        ((TextView) findViewById(R.id.toolbar_title)).setTextColor(ContextCompat.getColor(this, android.R.color.white));
     }
 
     @Override
@@ -133,4 +146,20 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
     public void onPullUpToRefresh() {
         // 使用RecyclerView的LoadMore
     }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    private void copyAssetsToSDCard() {
+        new FileAsyncTask().execute();
+    }
+
+    private static class FileAsyncTask extends AsyncTask<Void, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            FileUtils.copyAssetsToSDCard(SharpUIKit.getContext(), "mv",
+                    FileUtils.getRootPath() + File.separator + "mv");
+            return true;
+        }
+    }
 }
+

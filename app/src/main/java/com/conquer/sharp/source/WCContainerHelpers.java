@@ -14,6 +14,10 @@ public class WCContainerHelpers {
         return idealByteArraySize(need * 4) / 4;
     }
 
+    public static int idealLongArraySize(int need) {
+        return idealByteArraySize(need * 8) / 8;
+    }
+
     /**
      * 字节数组的理想化大小--https://blog.csdn.net/litefish/article/details/44078857
      */
@@ -25,6 +29,10 @@ public class WCContainerHelpers {
         }
 
         return need;
+    }
+
+    public static boolean equal(Object a, Object b) {
+        return a == b || (a != null && a.equals(b));
     }
 
     // This is Arrays.binarySearch(), but doesn't do any argument validation(参数验证).
@@ -45,5 +53,22 @@ public class WCContainerHelpers {
         }
         // ~位非
         return ~lo;  // value not present(不存在)
+    }
+
+    static int binarySearch(long[] array, int size, long value) {
+        int lo = 0;
+        int hi = size - 1;
+        while (lo <= hi) {
+            final int mid = (lo + hi) >>> 1;
+            final long midVal = array[mid];
+            if (midVal < value) {
+                lo = mid + 1;
+            } else if (midVal > value) {
+                hi = mid - 1;
+            } else {
+                return mid;  // value found
+            }
+        }
+        return ~lo;  // value not present
     }
 }

@@ -1,16 +1,17 @@
 package com.conquer.sharp.business;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
-import com.conquer.sharp.R;
 import com.conquer.sharp.base.BaseActivity;
-import com.conquer.sharp.base.glide.GlideApp;
+//import com.conquer.sharp.base.glide.GlideApp;
 import com.conquer.sharp.bean.LuckyBean;
 import com.conquer.sharp.dialog.fragment.LuckyDialogFragment;
 import com.conquer.sharp.dialog.fragment.ScoreDialogFragment;
+import com.conquer.sharp.util.system.ScreenUtils;
 import com.conquer.sharp.widget.LuckyLayout;
 import com.conquer.sharp.widget.ProgressLayout;
 import com.conquer.sharp.widget.StarLayout;
@@ -24,34 +25,34 @@ import butterknife.ButterKnife;
 
 public class LuckyActivity extends BaseActivity {
 
-    @BindView(R.id.luckyLayout)
+    //@BindView(R.id.luckyLayout)
     LuckyLayout luckyLayout;
 
-    @BindView(R.id.turn)
+    //@BindView(R.id.turn)
     Button turn;
 
-    @BindView(R.id.starLayout)
+    //@BindView(R.id.starLayout)
     StarLayout starLayout;
 
-    @BindView(R.id.progressBar)
+    //@BindView(R.id.progressBar)
     ProgressBar progressBar;
 
-    @BindView(R.id.luckyBtn)
+    //@BindView(R.id.luckyBtn)
     Button luckyBtn;
-    @BindView(R.id.scoreBtn)
+    //@BindView(R.id.scoreBtn)
     Button scoreBtn;
-    @BindView(R.id.progressLayout)
+    //@BindView(R.id.progressLayout)
     ProgressLayout progressLayout;
-    @BindView(R.id.progressLayout2)
+    //@BindView(R.id.progressLayout2)
     ProgressLayout progressLayout2;
-    @BindView(R.id.progressLayout3)
+    //@BindView(R.id.progressLayout3)
     ProgressLayout progressLayout3;
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
         setContentView(R.layout.activity_lucky);
 
-        ButterKnife.bind(this);
+        // ButterKnife.bind(this);
 
         final List<LuckyBean> luckyBeanList = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
@@ -65,9 +66,9 @@ public class LuckyActivity extends BaseActivity {
         luckyLayout.getLuckyWheelView().setData(luckyBeanList);
 
         for (int i = 0; i < luckyBeanList.size(); i++) {
-            GlideApp.with(this)
+            /*GlideApp.with(this)
                     .load(luckyBeanList.get(i).url)
-                    .into(luckyLayout.getLuckyWheelView().getImageList().get(i));
+                    .into(luckyLayout.getLuckyWheelView().getImageList().get(i));*/
         }
 
         turn.setOnClickListener(new View.OnClickListener() {
@@ -110,5 +111,7 @@ public class LuckyActivity extends BaseActivity {
         progressLayout3.setProgress("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541084565388&di=2a53429265557c0479a412fe24d8e507&imgtype=0&src=http%3A%2F%2Fcdnq.duitang.com%2Fuploads%2Fitem%2F201207%2F23%2F20120723154623_Nh4WF.thumb.700_0.jpeg"
                 , 50, 3);
         progressLayout3.setText("1000", 3);
+
+        Log.d("LuckyActivity", "screen width: " + ScreenUtils.screenWidth);
     }
 }

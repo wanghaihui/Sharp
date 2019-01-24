@@ -3,29 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_f1f1f1"
-    android:orientation="vertical"
-    android:fitsSystemWindows="true">
+    android:background="@color/main_color"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
-    <include android:id="@+id/action_bar_container"
-        layout="@layout/layout_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <include
+        android:id="@+id/action_bar_container"
+        layout="@layout/layout_toolbar" />
 
     <com.conquer.sharp.ptr.PullToRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/color_f1f1f1"
         app:pullUp="false">
 
         <com.conquer.sharp.recycler.photo.QuickPhotoRecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical"
-            android:scrollbarThumbVertical="@color/color_cccccc"
+            android:overScrollMode="never"
             android:scrollbarSize="2dp"
-            android:overScrollMode="never" />
+            android:scrollbarThumbVertical="@color/color_cccccc"
+            android:scrollbars="vertical" />
 
     </com.conquer.sharp.ptr.PullToRefreshLayout>
 

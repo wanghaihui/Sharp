@@ -108,16 +108,21 @@ public class LuckyWheelView extends ViewGroup {
 
         float startAngle = - (mAngle / 2) - 90;
         for (int i = 0; i < getChildCount(); i++) {
+            // 图片宽度
             int imgWidth = (mRadius * 2) / 5;
 
             float angle = (float) Math.toRadians(startAngle + mAngle / 2);
 
-            float x = ( float ) (width / 2 + (mRadius / 2 + mRadius / 12) * Math.cos(angle));
-            float y = ( float ) (height / 2 + (mRadius / 2 + mRadius / 12) * Math.sin(angle));
+            /*float x = ( float ) (width / 2 + (mRadius / 2 + mRadius / 12) * Math.cos(angle));
+            float y = ( float ) (height / 2 + (mRadius / 2 + mRadius / 12) * Math.sin(angle));*/
+            float x = ( float ) (width / 2 + (mRadius / 2 + mRadius / 5) * Math.cos(angle));
+            float y = ( float ) (height / 2 + (mRadius / 2 + mRadius / 5) * Math.sin(angle));
 
             getChildAt(i).layout((int) (x - imgWidth / 2), (int) (y - imgWidth / 2),
                     (int) (x + imgWidth / 2), (int) (y + imgWidth / 2));
 
+            // 背景
+            // getChildAt(i).setBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.black));
             startAngle = startAngle + mAngle;
         }
     }
@@ -184,6 +189,7 @@ public class LuckyWheelView extends ViewGroup {
         // 设置ImageView
         for (int i = 0; i < luckyList.size(); i++) {
             ImageView imageView = new ImageView(getContext());
+            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
             addView(imageView);
             mImageList.add(imageView);
         }

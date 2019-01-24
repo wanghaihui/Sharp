@@ -57,7 +57,7 @@ public class XProgressDialog extends Dialog {
         super.onCreate(savedInstanceState);
 
         setContentView(mLayoutId);
-        tvMessage = (TextView) findViewById(R.id.x_progress_dialog_message);
+        tvMessage = findViewById(R.id.x_progress_dialog_message);
         showMessage();
     }
 

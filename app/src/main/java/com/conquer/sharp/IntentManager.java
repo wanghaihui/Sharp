@@ -6,9 +6,10 @@ import android.content.Intent;
 import com.conquer.sharp.business.LuckyActivity;
 import com.conquer.sharp.business.VerticalSeekBarActivity;
 import com.conquer.sharp.camera.CameraActivity;
-import com.conquer.sharp.camera.aichang.ACCameraActivity;
+import com.conquer.sharp.cs.CSActivity;
 import com.conquer.sharp.deeplink.DeepLinkActivity;
 import com.conquer.sharp.dialog.DialogActivity;
+import com.conquer.sharp.guide.GuideActivity;
 import com.conquer.sharp.opengl.OpenGLActivity;
 import com.conquer.sharp.photo.pager.DanMuActivity;
 import com.conquer.sharp.danmaku.normal.DanMu3Activity;
@@ -72,8 +73,14 @@ public class IntentManager {
         context.startActivity(intent);
     }
 
-    public static void intentAiCamera(Context context) {
-        Intent intent = new Intent(context, ACCameraActivity.class);
+    public static void intentCS(Context context) {
+        Intent intent = new Intent(context, CSActivity.class);
         context.startActivity(intent);
     }
+
+    public static void intentGuide(Context context) {
+        Intent intent = new Intent(context, GuideActivity.class);
+        context.startActivity(intent);
+    }
+
 }

@@ -2,7 +2,6 @@ package com.conquer.sharp.business;
 
 import android.os.Bundle;
 
-import com.conquer.sharp.R;
 import com.conquer.sharp.base.BaseActivity;
 
 /**

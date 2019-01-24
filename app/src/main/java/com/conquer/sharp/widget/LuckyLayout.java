@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.support.annotation.IntDef;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -13,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.conquer.sharp.R;
+import com.conquer.sharp.util.system.ScreenUtils;
 import com.conquer.sharp.view.LuckyWheelView;
 
 import java.lang.annotation.Retention;
@@ -29,6 +31,7 @@ public class LuckyLayout extends FrameLayout {
     @IntDef({ROTATION_TYPE_WHEEL, ROTATION_TYPE_POINTER})
     @Retention(RetentionPolicy.SOURCE)
     public @interface RotationType {
+
     }
 
     private LuckyWheelView mLuckyWheelView;
@@ -84,8 +87,12 @@ public class LuckyLayout extends FrameLayout {
         // 根据图片的宽度来设置大小
         BitmapFactory.Options options = new BitmapFactory.Options();
         BitmapFactory.decodeResource(getResources(), R.drawable.bg_lucky_champion, options);
-        LayoutParams layoutParams = new LayoutParams(options.outWidth - 96,
-                options.outWidth - 96);
+        int desireWidth = options.outWidth - 96;
+        if (ScreenUtils.screenWidth < desireWidth) {
+            desireWidth = ScreenUtils.screenWidth - 132;
+        }
+        Log.d("LuckyLayout", "desireWidth : " + desireWidth);
+        LayoutParams layoutParams = new LayoutParams(desireWidth, desireWidth);
         layoutParams.gravity = Gravity.CENTER;
         addView(mLuckyWheelView, layoutParams);
         mLuckyPointer = new ImageView(getContext());

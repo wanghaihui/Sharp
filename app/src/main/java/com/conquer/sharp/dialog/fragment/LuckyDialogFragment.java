@@ -8,7 +8,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.conquer.sharp.R;
 import com.conquer.sharp.base.glide.GlideApp;
 import com.conquer.sharp.bean.LuckyBean;
 import com.conquer.sharp.widget.LuckyLayout;

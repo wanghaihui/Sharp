@@ -298,7 +298,7 @@ public class DanMuQueueView extends ViewGroup {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {
                     @Override
-                    public void accept(Long aLong) throws Exception {
+                    public void accept(Long aLong) {
                         if (mCurrentPosition >= danMuList.size()) {
                             mCurrentPosition = 0;
                             stopDanMu();
