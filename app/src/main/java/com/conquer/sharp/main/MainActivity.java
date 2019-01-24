@@ -102,6 +102,8 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
                         IntentManager.intentVerticalSeekBar(MainActivity.this);
                         break;
                     case 13:
+                        IntentManager.intentWaitNotify(MainActivity.this);
+                        break;
                     case 14:
                         IntentManager.intentCamera(MainActivity.this);
                         break;

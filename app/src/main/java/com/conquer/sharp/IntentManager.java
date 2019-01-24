@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.conquer.sharp.business.LuckyActivity;
 import com.conquer.sharp.business.VerticalSeekBarActivity;
+import com.conquer.sharp.business.WaitNotifyActivity;
 import com.conquer.sharp.camera.CameraActivity;
 import com.conquer.sharp.cs.CSActivity;
 import com.conquer.sharp.deeplink.DeepLinkActivity;
@@ -65,6 +66,11 @@ public class IntentManager {
 
     public static void intentVerticalSeekBar(Context context) {
         Intent intent = new Intent(context, VerticalSeekBarActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void intentWaitNotify(Context context) {
+        Intent intent = new Intent(context, WaitNotifyActivity.class);
         context.startActivity(intent);
     }
 

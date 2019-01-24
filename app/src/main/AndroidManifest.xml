@@ -50,6 +50,9 @@
         <activity android:name=".business.VerticalSeekBarActivity"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".business.WaitNotifyActivity"
+            android:screenOrientation="portrait" />
+
         <activity android:name=".camera.CameraActivity" />
 
         <activity android:name=".cs.CSActivity"
