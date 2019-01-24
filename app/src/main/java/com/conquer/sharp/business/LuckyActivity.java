@@ -6,8 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import com.conquer.sharp.R;
 import com.conquer.sharp.base.BaseActivity;
-//import com.conquer.sharp.base.glide.GlideApp;
+import com.conquer.sharp.base.glide.GlideApp;
 import com.conquer.sharp.bean.LuckyBean;
 import com.conquer.sharp.dialog.fragment.LuckyDialogFragment;
 import com.conquer.sharp.dialog.fragment.ScoreDialogFragment;
@@ -25,34 +26,34 @@ import butterknife.ButterKnife;
 
 public class LuckyActivity extends BaseActivity {
 
-    //@BindView(R.id.luckyLayout)
+    @BindView(R.id.luckyLayout)
     LuckyLayout luckyLayout;
 
-    //@BindView(R.id.turn)
+    @BindView(R.id.turn)
     Button turn;
 
-    //@BindView(R.id.starLayout)
+    @BindView(R.id.starLayout)
     StarLayout starLayout;
 
-    //@BindView(R.id.progressBar)
+    @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
-    //@BindView(R.id.luckyBtn)
+    @BindView(R.id.luckyBtn)
     Button luckyBtn;
-    //@BindView(R.id.scoreBtn)
+    @BindView(R.id.scoreBtn)
     Button scoreBtn;
-    //@BindView(R.id.progressLayout)
+    @BindView(R.id.progressLayout)
     ProgressLayout progressLayout;
-    //@BindView(R.id.progressLayout2)
+    @BindView(R.id.progressLayout2)
     ProgressLayout progressLayout2;
-    //@BindView(R.id.progressLayout3)
+    @BindView(R.id.progressLayout3)
     ProgressLayout progressLayout3;
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
         setContentView(R.layout.activity_lucky);
 
-        // ButterKnife.bind(this);
+        ButterKnife.bind(this);
 
         final List<LuckyBean> luckyBeanList = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
@@ -66,9 +67,9 @@ public class LuckyActivity extends BaseActivity {
         luckyLayout.getLuckyWheelView().setData(luckyBeanList);
 
         for (int i = 0; i < luckyBeanList.size(); i++) {
-            /*GlideApp.with(this)
+            GlideApp.with(this)
                     .load(luckyBeanList.get(i).url)
-                    .into(luckyLayout.getLuckyWheelView().getImageList().get(i));*/
+                    .into(luckyLayout.getLuckyWheelView().getImageList().get(i));
         }
 
         turn.setOnClickListener(new View.OnClickListener() {

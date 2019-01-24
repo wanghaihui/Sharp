@@ -12,7 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-//import com.conquer.sharp.base.glide.GlideApp;
+import com.conquer.sharp.R;
+import com.conquer.sharp.base.glide.GlideApp;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,10 +54,10 @@ public class ProgressLayout extends LinearLayout {
     }
 
     public void setProgress(String url, int progress, int level) {
-        /*GlideApp.with(getContext())
+        GlideApp.with(getContext())
                 .load(url)
                 .circleCrop()
-                .into(avatar);*/
+                .into(avatar);
 
         progressBar.setSecondaryProgress(100);
         progressBar.setProgress(progress);
