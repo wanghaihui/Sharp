@@ -11,6 +11,7 @@ import com.conquer.sharp.cs.CSActivity;
 import com.conquer.sharp.deeplink.DeepLinkActivity;
 import com.conquer.sharp.dialog.DialogActivity;
 import com.conquer.sharp.guide.GuideActivity;
+import com.conquer.sharp.leak.LeakActivity;
 import com.conquer.sharp.opengl.OpenGLActivity;
 import com.conquer.sharp.photo.pager.DanMuActivity;
 import com.conquer.sharp.danmaku.normal.DanMu3Activity;
@@ -86,6 +87,11 @@ public class IntentManager {
 
     public static void intentGuide(Context context) {
         Intent intent = new Intent(context, GuideActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void intentLeak(Context context) {
+        Intent intent = new Intent(context, LeakActivity.class);
         context.startActivity(intent);
     }
 

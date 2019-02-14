@@ -23,16 +23,19 @@ public class MainAdapter extends BaseRecyclerAdapter<String> {
         mDataList = new ArrayList<>();
     }
 
-    public void convert(final RecyclerViewHolder holder, String name, final int position) {
+    public void convert(RecyclerViewHolder holder, String name, int position) {
         holder.setText(R.id.tvName, name);
 
-        holder.getConvertView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (onRVItemClickListener != null) {
-                    onRVItemClickListener.onItemClick(position);
-                }
-            }
-        });
+        holder.getConvertView().setTag(position);
+        holder.getConvertView().setOnClickListener(onClickListener);
     }
+
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (onRVItemClickListener != null) {
+                onRVItemClickListener.onItemClick((Integer) view.getTag());
+            }
+        }
+    };
 }

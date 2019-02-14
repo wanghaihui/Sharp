@@ -41,7 +41,7 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
             "3.ProgressDialog", "4.音频(oboe)", "5.Deep Link", "6.Instant Run", "7.HTTP",
             "8.Cocos", "9.OpenGL", "10.DialogFragment", "11.转盘抽奖", "12.Vertical SeekBar",
             "13.Wait/Notify/NotifyAll", "14.Camera", "15.Google Software Engineer",
-            "16.文件拷贝之assetsToSDCard", "17.引导图"
+            "16.文件拷贝之assetsToSDCard", "17.引导图", "18.内存泄漏"
     };
 
     @Override
@@ -116,6 +116,9 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
                         break;
                     case 17:
                         IntentManager.intentGuide(MainActivity.this);
+                        break;
+                    case 18:
+                        IntentManager.intentLeak(MainActivity.this);
                         break;
                     default:
                         break;
