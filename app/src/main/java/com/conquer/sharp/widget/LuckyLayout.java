@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -106,7 +107,7 @@ public class LuckyLayout extends FrameLayout {
 
     }
 
-    public void turnByCount(int turnCount) {
+    public void turnByCount(int turnCount, int seconds) {
         int giftCount = mLuckyWheelView.getData().size();
         if (isRotating || giftCount == 0 || turnCount == 0) {
             return;
@@ -115,17 +116,17 @@ public class LuckyLayout extends FrameLayout {
         View target = rotationType == ROTATION_TYPE_WHEEL ? mLuckyWheelView : mLuckyPointer;
         int perAngle = 360 / giftCount;
 
-        turning(target, turnCount, perAngle);
+        turning(target, turnCount, perAngle, seconds);
     }
 
-    private void turning(View target, int turnCount, float perAngle) {
+    private void turning(View target, int turnCount, float perAngle, int seconds) {
         float startAngle = target.getRotation();
         float endAngle = startAngle + turnCount * perAngle;
 
         // 开启GPU的off-screen缓存区, 提高动画的流畅度, 一定要记得在动画完成之后回收该缓存
         target.setLayerType(LAYER_TYPE_HARDWARE, null);
 
-        mObjectAnimator = ObjectAnimator.ofFloat(target, View.ROTATION, startAngle, endAngle).setDuration(turnCount * 100);
+        mObjectAnimator = ObjectAnimator.ofFloat(target, View.ROTATION, startAngle, endAngle).setDuration(seconds * 1000);
         mObjectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         mObjectAnimator.addListener(mAnimatorListener);
         mObjectAnimator.start();

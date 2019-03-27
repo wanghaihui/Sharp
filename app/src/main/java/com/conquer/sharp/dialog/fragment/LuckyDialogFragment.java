@@ -77,8 +77,8 @@ public class LuckyDialogFragment extends BaseTopDialogFragment {
             @Override
             public void onClick(View v) {
                 Random random = new Random();
-                int turnCount = 8 * (5 + random.nextInt(5)) + random.nextInt(8);
-                luckyLayout.turnByCount(turnCount);
+                int turnCount = 8 * ( 10 + random.nextInt(10)) + random.nextInt(8);
+                luckyLayout.turnByCount(turnCount, 10);
             }
         });
     }
