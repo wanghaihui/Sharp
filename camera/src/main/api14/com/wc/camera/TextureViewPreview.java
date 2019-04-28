@@ -44,7 +44,7 @@ public class TextureViewPreview extends PreviewImpl {
 
     @Override
     public Surface getSurface() {
-        return new Surface()
+        return new Surface();
     }
 
     public abstract View getView();

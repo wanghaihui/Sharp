@@ -9,11 +9,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/camera" />
-            <option value="$PROJECT_DIR$/exoplayer" />
             <option value="$PROJECT_DIR$/gpuimage" />
             <option value="$PROJECT_DIR$/haha" />
-            <option value="$PROJECT_DIR$/leak" />
             <option value="$PROJECT_DIR$/oboe" />
           </set>
         </option>

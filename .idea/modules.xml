@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Sharp.iml" filepath="$PROJECT_DIR$/Sharp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Sharp.iml" filepath="$PROJECT_DIR$/.idea/Sharp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/camera/camera.iml" filepath="$PROJECT_DIR$/camera/camera.iml" />
-      <module fileurl="file://$PROJECT_DIR$/exoplayer/exoplayer.iml" filepath="$PROJECT_DIR$/exoplayer/exoplayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/gpuimage/gpuimage.iml" filepath="$PROJECT_DIR$/gpuimage/gpuimage.iml" />
       <module fileurl="file://$PROJECT_DIR$/haha/haha.iml" filepath="$PROJECT_DIR$/haha/haha.iml" />
-      <module fileurl="file://$PROJECT_DIR$/leak/leak.iml" filepath="$PROJECT_DIR$/leak/leak.iml" />
       <module fileurl="file://$PROJECT_DIR$/oboe/oboe.iml" filepath="$PROJECT_DIR$/oboe/oboe.iml" />
     </modules>
   </component>
