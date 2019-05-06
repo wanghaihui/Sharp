@@ -3,6 +3,7 @@ package com.conquer.sharp;
 import android.content.Context;
 import android.content.Intent;
 
+import com.conquer.sharp.base.glide.GlideApp;
 import com.conquer.sharp.business.LuckyActivity;
 import com.conquer.sharp.business.VerticalSeekBarActivity;
 import com.conquer.sharp.business.WaitNotifyActivity;
@@ -10,6 +11,7 @@ import com.conquer.sharp.camera.CameraActivity;
 import com.conquer.sharp.cs.CSActivity;
 import com.conquer.sharp.deeplink.DeepLinkActivity;
 import com.conquer.sharp.dialog.DialogActivity;
+import com.conquer.sharp.glide.GlideActivity;
 import com.conquer.sharp.guide.GuideActivity;
 import com.conquer.sharp.leak.LeakActivity;
 import com.conquer.sharp.opengl.OpenGLActivity;
@@ -95,4 +97,8 @@ public class IntentManager {
         context.startActivity(intent);
     }
 
+    public static void intentGlide(Context context) {
+        Intent intent = new Intent(context, GlideActivity.class);
+        context.startActivity(intent);
+    }
 }

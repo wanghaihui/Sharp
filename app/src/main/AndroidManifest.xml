@@ -66,6 +66,12 @@
 
         <activity android:name=".leak.LeakActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".glide.GlideActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".annotation.AnnotationActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
