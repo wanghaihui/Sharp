@@ -2,6 +2,7 @@ package com.conquer.sharp;
 
 import android.app.Application;
 
+import com.conquer.sharp.agora.live.WorkerThread;
 import com.conquer.sharp.api.SharpUIKit;
 
 /**
@@ -19,6 +20,31 @@ public class SharpApplication extends Application {
 
     private void init() {
         SharpUIKit.init(this);
+    }
+
+    private WorkerThread mWorkerThread;
+
+    public synchronized void initWorkerThread() {
+        if (mWorkerThread == null) {
+            mWorkerThread = new WorkerThread(getApplicationContext());
+            mWorkerThread.start();
+
+            mWorkerThread.waitForReady();
+        }
+    }
+
+    public synchronized void deInitWorkerThread() {
+        mWorkerThread.exit();
+        try {
+            mWorkerThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        mWorkerThread = null;
+    }
+
+    public synchronized WorkerThread getWorkerThread() {
+        return mWorkerThread;
     }
 
 }

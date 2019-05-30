@@ -1,5 +1,6 @@
 package com.conquer.sharp.main;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.conquer.sharp.IntentManager;
 import com.conquer.sharp.R;
+import com.conquer.sharp.agora.live.LiveRoomActivity;
 import com.conquer.sharp.api.SharpUIKit;
 import com.conquer.sharp.base.BaseActivity;
 import com.conquer.sharp.dialog.fragment.DirectoryDialogFragment;
@@ -21,10 +23,19 @@ import com.conquer.sharp.recycler.photo.QuickPhotoRecyclerView;
 import com.conquer.sharp.util.common.FileUtils;
 import com.conquer.sharp.util.system.ScreenUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MainActivity extends BaseActivity implements PullToRefreshLayout.OnRefreshListener {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -123,6 +134,9 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
                     case 19:
                         IntentManager.intentGlide(MainActivity.this);
                         break;
+                    case 20:
+                        enterLiveRoom();
+                        break;
                     default:
                         break;
                 }
@@ -170,5 +184,57 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
             return true;
         }
     }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private void enterLiveRoom() {
+        String roomName = "RoomT1";
+        int uid = (int) (Math.random() * 1000000);
+        if (uid <= 0) {
+            return;
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("http://api.mengliaoba.cn/apiv5/live/agoraio.php?");
+        sb.append("cmd=token");
+        sb.append("&");
+        sb.append("rid=");
+        sb.append(roomName);
+        sb.append("&");
+        sb.append("uid=");
+        sb.append(String.valueOf(uid));
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        final Request request = new Request.Builder()
+                .url(sb.toString())
+                .get()
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject jo = new JSONObject(response.body().string());
+                            JSONObject resultJO = jo.getJSONObject("result");
+                            String token = resultJO.getString("token");
+                            LiveRoomActivity.launch(MainActivity.this, io.agora.rtc.Constants.CLIENT_ROLE_BROADCASTER,
+                                    roomName, uid, token);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
 }
 
