@@ -16,8 +16,6 @@ import java.util.List;
 
 /**
  * 涟漪效果
- *
- * layout_width和layout_height--只能设置match_parent或者具体数值，不能设置wrap_content
  */
 public class RippleView extends View {
     private static final int DESIRED_WIDTH_HEIGHT = 96;
