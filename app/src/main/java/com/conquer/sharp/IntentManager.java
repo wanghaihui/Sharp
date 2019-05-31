@@ -3,7 +3,7 @@ package com.conquer.sharp;
 import android.content.Context;
 import android.content.Intent;
 
-import com.conquer.sharp.base.glide.GlideApp;
+import com.conquer.sharp.business.CustomViewActivity;
 import com.conquer.sharp.business.LuckyActivity;
 import com.conquer.sharp.business.VerticalSeekBarActivity;
 import com.conquer.sharp.business.WaitNotifyActivity;
@@ -99,6 +99,11 @@ public class IntentManager {
 
     public static void intentGlide(Context context) {
         Intent intent = new Intent(context, GlideActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void intentCustomView(Context context) {
+        Intent intent = new Intent(context, CustomViewActivity.class);
         context.startActivity(intent);
     }
 }
