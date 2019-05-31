@@ -28,9 +28,6 @@ public class RippleView extends View {
     private int mRippleSpeed;
     // 密度
     private int mRippleDensity;
-    // 透明度变化--随半径而变化
-
-    // 画圆
 
     // 画笔
     private Paint mPaint;
@@ -111,7 +108,6 @@ public class RippleView extends View {
         super.onDraw(canvas);
         // 绘制正方形的内切圆
         drawInCircle(canvas);
-
     }
 
     private void drawInCircle(Canvas canvas) {
@@ -138,7 +134,6 @@ public class RippleView extends View {
                 mRippleList.add(new Circle(0, 255));
             }
         }
-
         invalidate();
 
         canvas.restore();
