@@ -133,7 +133,7 @@ public class RippleView extends View {
             }
         }
 
-        if (mRippleList.size() > 0 && (mRippleList.size() < (mWidth / (2 * ScreenUtils.dip2px(mRippleDensity))))) {
+        if (mRippleList.size() > 0 && (mRippleList.size() <= (mWidth / (2 * ScreenUtils.dip2px(mRippleDensity))))) {
             if (mRippleList.get(mRippleList.size() - 1).radius > ScreenUtils.dip2px(mRippleDensity)) {
                 mRippleList.add(new Circle(0, 255));
             }
