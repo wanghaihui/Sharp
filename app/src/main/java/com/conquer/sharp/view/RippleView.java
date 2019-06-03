@@ -23,7 +23,7 @@ public class RippleView extends View {
     // 颜色
     private int mRippleColor;
     // 速度
-    private int mRippleSpeed;
+    private float mRippleSpeed;
     // 密度
     private int mRippleDensity;
 
@@ -50,8 +50,8 @@ public class RippleView extends View {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.RippleView);
         mRippleColor = ta.getColor(R.styleable.RippleView_ripple_color, ContextCompat.getColor(context,
                 R.color.color_da3156));
-        mRippleSpeed = ta.getInteger(R.styleable.RippleView_ripple_speed, 1);
-        mRippleDensity = ta.getInteger(R.styleable.RippleView_ripple_density, 6);
+        mRippleSpeed = ta.getFloat(R.styleable.RippleView_ripple_speed, 0.5f);
+        mRippleDensity = ta.getInteger(R.styleable.RippleView_ripple_density, 8);
         ta.recycle();
         init();
     }
@@ -139,11 +139,11 @@ public class RippleView extends View {
 
     public static class Circle {
         // 半径
-        int radius;
+        float radius;
         // 透明度
         int alpha;
 
-        Circle(int radius, int alpha) {
+        Circle(float radius, int alpha) {
             this.radius = radius;
             this.alpha = alpha;
         }
