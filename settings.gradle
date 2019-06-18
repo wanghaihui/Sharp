@@ -1,4 +1,4 @@
-include ':app', ':annotation'
+include ':app', ':annotation', ':compat'
 // include ':camera'
 include ':haha'
 // include ':leak'

@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/Sharp.iml" filepath="$PROJECT_DIR$/.idea/Sharp.iml" />
       <module fileurl="file://$PROJECT_DIR$/annotation/annotation.iml" filepath="$PROJECT_DIR$/annotation/annotation.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/compat/compat.iml" filepath="$PROJECT_DIR$/compat/compat.iml" />
       <module fileurl="file://$PROJECT_DIR$/gpuimage/gpuimage.iml" filepath="$PROJECT_DIR$/gpuimage/gpuimage.iml" />
       <module fileurl="file://$PROJECT_DIR$/haha/haha.iml" filepath="$PROJECT_DIR$/haha/haha.iml" />
       <module fileurl="file://$PROJECT_DIR$/oboe/oboe.iml" filepath="$PROJECT_DIR$/oboe/oboe.iml" />

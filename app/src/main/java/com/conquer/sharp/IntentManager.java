@@ -19,6 +19,7 @@ import com.conquer.sharp.photo.pager.DanMuActivity;
 import com.conquer.sharp.danmaku.normal.DanMu3Activity;
 import com.conquer.sharp.danmaku.recycler.DanMu4Activity;
 import com.conquer.sharp.photo.system.PhotoSelectActivity;
+import com.conquer.sharp.reflect.ReflectActivity;
 
 /**
  * Created by ac on 18/7/17.
@@ -104,6 +105,11 @@ public class IntentManager {
 
     public static void intentCustomView(Context context) {
         Intent intent = new Intent(context, CustomViewActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void intentReflect(Context context) {
+        Intent intent = new Intent(context, ReflectActivity.class);
         context.startActivity(intent);
     }
 }

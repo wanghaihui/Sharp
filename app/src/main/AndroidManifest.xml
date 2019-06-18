@@ -82,6 +82,9 @@
 
         <activity android:name=".business.CustomViewActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".reflect.ReflectActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

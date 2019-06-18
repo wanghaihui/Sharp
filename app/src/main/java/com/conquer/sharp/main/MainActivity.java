@@ -141,6 +141,9 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
                     case 21:
                         IntentManager.intentCustomView(MainActivity.this);
                         break;
+                    case 22:
+                        IntentManager.intentReflect(MainActivity.this);
+                        break;
                     default:
                         break;
                 }
