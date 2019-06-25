@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 from method import my_abs
 
 a = 100
@@ -37,3 +40,4 @@ print(hex(255))
 print(hex(1000))
 
 print(my_abs(-2))
+print(my_abs(-12.5))
