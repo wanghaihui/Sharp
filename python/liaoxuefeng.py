@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from method import my_abs
+from method import my_add
 
 a = 100
 if a >= 0:
@@ -41,3 +42,5 @@ print(hex(1000))
 
 print(my_abs(-2))
 print(my_abs(-12.5))
+
+print(my_add(-5, 6, abs))
