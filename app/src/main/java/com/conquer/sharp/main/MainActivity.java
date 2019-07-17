@@ -15,6 +15,7 @@ import com.conquer.sharp.agora.live.LiveRoomActivity;
 import com.conquer.sharp.api.SharpUIKit;
 import com.conquer.sharp.base.BaseActivity;
 import com.conquer.sharp.binder.AIDLActivity;
+import com.conquer.sharp.business.KeyboardActivity;
 import com.conquer.sharp.dialog.fragment.DirectoryDialogFragment;
 import com.conquer.sharp.ptr.PullToRefreshLayout;
 import com.conquer.sharp.recycler.OnRVItemClickListener;
@@ -54,7 +55,7 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
             "8.Cocos", "9.OpenGL", "10.DialogFragment", "11.转盘抽奖", "12.Vertical SeekBar",
             "13.Wait/Notify/NotifyAll", "14.Camera", "15.Google Software Engineer",
             "16.文件拷贝之assetsToSDCard", "17.引导图", "18.内存泄漏", "19.Glide图片", "20.声网",
-            "21.涟漪效果", "22.反射", "23.AIDL"
+            "21.涟漪效果", "22.反射", "23.AIDL", "24.Keyboard"
     };
 
     @Override
@@ -148,6 +149,8 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
                     case 23:
                         AIDLActivity.newInstance(MainActivity.this);
                         break;
+                    case 24:
+                        KeyboardActivity.newInstance(MainActivity.this);
                     default:
                         break;
                 }

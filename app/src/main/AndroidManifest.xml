@@ -89,6 +89,10 @@
         <activity android:name=".binder.AIDLActivity"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".business.KeyboardActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
+
         <!-- Service -->
         <service android:name=".binder.RemoteService"
             android:process=":remote" />
