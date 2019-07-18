@@ -3,9 +3,9 @@ package com.conquer.sharp.widget;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 
-public class KeyboardPanLayout extends RelativeLayout {
+public class KeyboardPanLayout extends LinearLayout {
     private int mHeight;
     private int mWidth;
     private Rect mRect;

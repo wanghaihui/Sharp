@@ -19,9 +19,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         initViews(savedInstanceState);
-
         mImmersionBar = ImmersionBar.with(this);
-        mImmersionBar.init();
+        initImmersionBar();
     }
 
     @Override
@@ -33,5 +32,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected abstract void initViews(Bundle savedInstanceState);
+
+    protected void initImmersionBar() {
+        mImmersionBar.init();
+    }
 
 }
