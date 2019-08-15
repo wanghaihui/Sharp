@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <ImageButton android:id="@+id/funcUseAudio"
+        android:contentDescription="@string/content_description"
+        android:layout_width="48dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:src="@drawable/live_room_use_audio"
+        android:scaleType="centerInside"
+        android:background="@android:color/transparent" />
+
+</FrameLayout>

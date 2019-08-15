@@ -93,6 +93,9 @@
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".business.SelectorActivity"
+            android:screenOrientation="portrait" />
+
         <!-- Service -->
         <service android:name=".binder.RemoteService"
             android:process=":remote" />
