@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.SwitchCompat;
 import android.util.AttributeSet;
 
-import com.conquer.sharp.util.system.ScreenUtils;
+import com.conquer.sharp.util.ScreenUtils;
 
 import java.lang.reflect.Field;
 

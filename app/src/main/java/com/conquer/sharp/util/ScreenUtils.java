@@ -1,4 +1,4 @@
-package com.conquer.sharp.util.system;
+package com.conquer.sharp.util;
 
 import android.content.Context;
 import android.util.DisplayMetrics;

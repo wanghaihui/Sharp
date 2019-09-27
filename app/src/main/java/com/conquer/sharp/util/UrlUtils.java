@@ -1,4 +1,4 @@
-package com.conquer.sharp.util.common;
+package com.conquer.sharp.util;
 
 public class UrlUtils {
     /**

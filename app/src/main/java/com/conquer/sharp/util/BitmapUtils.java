@@ -1,4 +1,4 @@
-package com.conquer.sharp.util.common;
+package com.conquer.sharp.util;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;

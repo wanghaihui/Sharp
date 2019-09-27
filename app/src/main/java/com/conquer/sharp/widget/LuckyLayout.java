@@ -10,12 +10,11 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.conquer.sharp.R;
-import com.conquer.sharp.util.system.ScreenUtils;
+import com.conquer.sharp.util.ScreenUtils;
 import com.conquer.sharp.view.LuckyWheelView;
 
 import java.lang.annotation.Retention;

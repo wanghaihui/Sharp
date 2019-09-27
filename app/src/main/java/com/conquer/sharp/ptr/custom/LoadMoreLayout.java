@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.conquer.sharp.R;
-import com.conquer.sharp.util.system.ScreenUtils;
+import com.conquer.sharp.util.ScreenUtils;
 
 /**
  * Created by ac on 18/7/16.

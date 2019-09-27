@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.conquer.sharp.R;
-import com.conquer.sharp.util.system.ScreenUtils;
+import com.conquer.sharp.util.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.List;

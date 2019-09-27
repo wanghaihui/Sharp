@@ -12,4 +12,5 @@
     <string name="second_level">2级</string>
     <string name="third_level">3级</string>
     <string name="no_more">已经到底了</string>
+    <string name="input_max_length">输入字数达到上限</string>
 </resources>

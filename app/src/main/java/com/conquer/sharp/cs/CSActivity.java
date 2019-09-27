@@ -11,7 +11,7 @@ import com.conquer.sharp.R;
 import com.conquer.sharp.base.BaseActivity;
 import com.conquer.sharp.base.glide.GlideApp;
 import com.conquer.sharp.photo.preview.PreviewPhotoActivity;
-import com.conquer.sharp.util.system.ScreenUtils;
+import com.conquer.sharp.util.ScreenUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

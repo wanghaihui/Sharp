@@ -17,7 +17,7 @@ public class SelectorActivity extends BaseActivity {
     @BindView(R.id.funcUseAudio)
     ImageButton funcUseAudio;
 
-    public static void newInstance(Context context) {
+    public static void launch(Context context) {
         Intent intent = new Intent(context, SelectorActivity.class);
         context.startActivity(intent);
     }

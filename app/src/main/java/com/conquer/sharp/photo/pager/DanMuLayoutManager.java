@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.View;
 
 import com.conquer.sharp.photo.pager.internal.ViewPagerLayoutManager;
-import com.conquer.sharp.util.system.ScreenUtils;
+import com.conquer.sharp.util.ScreenUtils;
 
 /**
  * Created by ac on 18/7/18.

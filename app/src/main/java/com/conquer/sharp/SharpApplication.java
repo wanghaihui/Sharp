@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.conquer.sharp.agora.live.WorkerThread;
 import com.conquer.sharp.api.SharpUIKit;
+import com.conquer.sharp.util.LogHelper;
 
 /**
  * Created by ac on 18/7/16.
@@ -20,6 +21,9 @@ public class SharpApplication extends Application {
 
     private void init() {
         SharpUIKit.init(this);
+        if (BuildConfig.DEBUG) {
+            LogHelper.setDebug(true);
+        }
     }
 
     private WorkerThread mWorkerThread;

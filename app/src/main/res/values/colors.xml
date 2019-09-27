@@ -25,4 +25,6 @@
     <!-- 主色调 -->
     <color name="main_color">#FFC335</color>
 
+    <color name="color_efefef">#efefef</color>
+
 </resources>

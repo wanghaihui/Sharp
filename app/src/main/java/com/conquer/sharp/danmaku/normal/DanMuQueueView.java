@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.conquer.sharp.R;
 import com.conquer.sharp.danmaku.bean.DanMu;
-import com.conquer.sharp.util.system.ScreenUtils;
+import com.conquer.sharp.util.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.List;

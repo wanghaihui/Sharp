@@ -17,13 +17,14 @@ import com.conquer.sharp.binder.AIDLActivity;
 import com.conquer.sharp.business.KeyboardActivity;
 import com.conquer.sharp.business.SelectorActivity;
 import com.conquer.sharp.dialog.fragment.DirectoryDialogFragment;
+import com.conquer.sharp.keyboard.EmotionKeyboardActivity;
 import com.conquer.sharp.ptr.PullToRefreshLayout;
 import com.conquer.sharp.recycler.OnRVItemClickListener;
 import com.conquer.sharp.recycler.decoration.SpacingDecoration;
 import com.conquer.sharp.recycler.extend.HFRecyclerAdapter;
 import com.conquer.sharp.recycler.photo.QuickPhotoRecyclerView;
-import com.conquer.sharp.util.common.FileUtils;
-import com.conquer.sharp.util.system.ScreenUtils;
+import com.conquer.sharp.util.FileUtils;
+import com.conquer.sharp.util.ScreenUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,7 +56,7 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
             "8.Cocos", "9.OpenGL", "10.DialogFragment", "11.转盘抽奖", "12.Vertical SeekBar",
             "13.Wait/Notify/NotifyAll", "14.Camera", "15.Google Software Engineer",
             "16.文件拷贝之assetsToSDCard", "17.引导图", "18.内存泄漏", "19.Glide图片", "20.声网",
-            "21.涟漪效果", "22.反射", "23.AIDL", "24.Keyboard", "25.Selector"
+            "21.涟漪效果", "22.反射", "23.AIDL", "24.Keyboard", "25.Selector", "26.表情键盘"
     };
 
     @Override
@@ -153,7 +154,10 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
                         KeyboardActivity.newInstance(MainActivity.this);
                         break;
                     case 25:
-                        SelectorActivity.newInstance(MainActivity.this);
+                        SelectorActivity.launch(MainActivity.this);
+                        break;
+                    case 26:
+                        EmotionKeyboardActivity.launch(MainActivity.this);
                         break;
                     default:
                         break;

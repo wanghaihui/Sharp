@@ -12,7 +12,7 @@ import com.conquer.sharp.base.glide.GlideApp;
 import com.conquer.sharp.bean.LuckyBean;
 import com.conquer.sharp.dialog.fragment.LuckyDialogFragment;
 import com.conquer.sharp.dialog.fragment.ScoreDialogFragment;
-import com.conquer.sharp.util.system.ScreenUtils;
+import com.conquer.sharp.util.ScreenUtils;
 import com.conquer.sharp.widget.LuckyLayout;
 import com.conquer.sharp.widget.ProgressLayout;
 import com.conquer.sharp.widget.StarLayout;
