@@ -14,17 +14,12 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <ListView android:id="@+id/message_list_view"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/message_list_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
-                android:cacheColorHint="@color/transparent"
-                android:divider="#f4f4f4"
-                android:dividerHeight="1dp"
-                android:fadingEdge="none"
-                android:fadingEdgeLength="0dp"
-                android:listSelector="@color/transparent"
-                android:scrollbars="none" />
+                android:layout_marginTop="48dp" />
 
         </RelativeLayout>
 

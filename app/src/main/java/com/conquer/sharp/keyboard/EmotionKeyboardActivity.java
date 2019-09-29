@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -13,12 +16,19 @@ import com.conquer.sharp.base.BaseActivity;
 import com.conquer.sharp.keyboard.base.EmotionKeyboardFragment;
 import com.conquer.sharp.keyboard.input.BaseInputFragment;
 import com.conquer.sharp.keyboard.input.MessageInputFragment;
+import com.conquer.sharp.recycler.decoration.SpacingDecoration;
+import com.conquer.sharp.util.ScreenUtils;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class EmotionKeyboardActivity extends BaseActivity {
 
+    @BindView(R.id.message_list_view)
+    RecyclerView messageListView;
+
     private MessageInputFragment mMessageKeyboard;
+    private MessageAdapter mMessageAdapter;
 
     public static void launch(Context context) {
         Intent intent = new Intent(context, EmotionKeyboardActivity.class);
@@ -67,6 +77,13 @@ public class EmotionKeyboardActivity extends BaseActivity {
         });
         mMessageKeyboard.prepare(getSupportFragmentManager(), R.id.fl_input);
 
+        // 消息列表
+        messageListView.setLayoutManager(new LinearLayoutManager(this));
+        SpacingDecoration mSpacingDecoration = new SpacingDecoration(ScreenUtils.dip2px(8),
+                ScreenUtils.dip2px(8), false);
+        messageListView.addItemDecoration(mSpacingDecoration);
+        mMessageAdapter = new MessageAdapter(this, R.layout.layout_message_text);
+        messageListView.setAdapter(mMessageAdapter);
     }
 
     protected void initImmersionBar() {
@@ -83,7 +100,10 @@ public class EmotionKeyboardActivity extends BaseActivity {
     }
 
     private void sendMessage(String message) {
-        // 发送消息
-
+        if (!TextUtils.isEmpty(message)) {
+            // 发送消息
+            mMessageAdapter.getDataList().add(message);
+            mMessageAdapter.notifyDataSetChanged();
+        }
     }
 }
