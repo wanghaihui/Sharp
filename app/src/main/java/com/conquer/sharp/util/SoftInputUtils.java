@@ -31,4 +31,16 @@ public class SoftInputUtils {
             imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
         }
     }
+
+    /**
+     * 根据activity当前获取焦点的控件隐藏软键盘
+     */
+    public static void hideSoftInputFromActivity(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        View view = activity.getCurrentFocus();
+        if (view != null && imm != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
+        }
+    }
 }

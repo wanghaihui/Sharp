@@ -50,7 +50,7 @@ public abstract class BaseEmotionKeyboardFragment extends Fragment implements Ke
     }
 
     /**
-     * 按下返回
+     * 按下返回--如果需要，自己重写扩展
      * @return true表示已经被处理, activity不会响应自己的后退操作
      */
     public boolean onBackPressed() {

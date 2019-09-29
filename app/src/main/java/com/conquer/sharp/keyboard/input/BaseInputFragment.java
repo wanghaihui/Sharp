@@ -87,6 +87,17 @@ public abstract class BaseInputFragment extends EmotionKeyboardFragment {
         FragmentUtils.hide(mFragmentManager, this);
     }
 
+    /**
+     * 软键盘隐藏
+     */
+    @Override
+    public void onKeyboardHide() {
+        super.onKeyboardHide();
+        if (getKeyboardStatus() == KeyboardStatus.KEYBOARD) {
+            notifyOnCancel();
+        }
+    }
+
     private void notifyOnCancel() {
         switch (mCloseMode) {
             case CLOSE_NORMAL:
@@ -98,12 +109,12 @@ public abstract class BaseInputFragment extends EmotionKeyboardFragment {
                 }
                 break;
             case CLOSE_INPUT_AFTER_BOARD_CLOSED:
-                /*if (getBoradStatus() == BoardStatus.NONE) {
+                if (getKeyboardStatus() == KeyboardStatus.NONE) {
                     closeInput();
                 } else {
-                    closeBoard();
+                    closeKeyboard();
                     notifyCloseListener(false);
-                }*/
+                }
                 break;
             case CLOSE_INPUT:
                 closeInput();
