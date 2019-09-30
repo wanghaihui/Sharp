@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import com.conquer.sharp.R;
 import com.conquer.sharp.base.BaseActivity;
@@ -26,6 +27,9 @@ public class EmotionKeyboardActivity extends BaseActivity {
 
     @BindView(R.id.message_list_view)
     RecyclerView messageListView;
+
+    @BindView(R.id.v_input_holder)
+    View vInputHolder;
 
     private MessageInputFragment mMessageKeyboard;
     private MessageAdapter mMessageAdapter;
@@ -65,7 +69,10 @@ public class EmotionKeyboardActivity extends BaseActivity {
         mMessageKeyboard.setKeyboardListener(new EmotionKeyboardFragment.KeyboardListener() {
             @Override
             public void onBoardHeightChanged(int height) {
-
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) vInputHolder.getLayoutParams();
+                params.height = height + mMessageKeyboard.getExtraHeight();
+                vInputHolder.setLayoutParams(params);
+                scrollToEnd();
             }
 
             @Override
@@ -104,6 +111,13 @@ public class EmotionKeyboardActivity extends BaseActivity {
             // 发送消息
             mMessageAdapter.getDataList().add(message);
             mMessageAdapter.notifyDataSetChanged();
+            scrollToEnd();
+        }
+    }
+
+    private void scrollToEnd() {
+        if (messageListView != null && mMessageAdapter != null && mMessageAdapter.getItemCount() >= 1) {
+            messageListView.scrollToPosition(mMessageAdapter.getItemCount() - 1);
         }
     }
 }

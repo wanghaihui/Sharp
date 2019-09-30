@@ -192,4 +192,8 @@ public abstract class BaseInputFragment extends EmotionKeyboardFragment {
     protected int onGetEmojiBoardHeight() {
         return 0;
     }
+
+    public int getExtraHeight() {
+        return llExtra == null ? 0 : llExtra.getHeight();
+    }
 }
