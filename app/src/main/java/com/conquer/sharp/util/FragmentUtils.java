@@ -42,4 +42,16 @@ public class FragmentUtils {
         }
     }
 
+    public static void pushNested(FragmentManager childManager, Fragment fr, int rootResId) {
+        if (fr == null) {
+            throw new RuntimeException("push a null fragment");
+        }
+        FragmentTransaction ft = childManager.beginTransaction();
+        ft.replace(rootResId, fr);
+        ft.commitAllowingStateLoss();
+        if (fr.getFragmentManager() != null) {
+            fr.getFragmentManager().executePendingTransactions();
+        }
+    }
+
 }

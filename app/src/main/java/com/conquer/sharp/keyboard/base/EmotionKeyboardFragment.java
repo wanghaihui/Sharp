@@ -55,6 +55,7 @@ public abstract class EmotionKeyboardFragment extends BaseEmotionKeyboardFragmen
         root.addView(mHeightControlView,
                 new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0));
         mEmotionContentView = new LinearLayout(getContext());
+        mEmotionContentView.setId(R.id.keyboard_emoji_view);
         mHeightControlView.addView(mEmotionContentView,
                 new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         return root;
@@ -125,6 +126,20 @@ public abstract class EmotionKeyboardFragment extends BaseEmotionKeyboardFragmen
             }
         }
     }
+    public void showEmojiBoard() {
+        if (mKeyboardStatus == KeyboardStatus.EMOTION_BOARD) {
+            return;
+        }
+        notifyAndSetStatus(KeyboardStatus.EMOTION_BOARD);
+        SoftInputUtils.hideSoftInputFromWindow(getActivity(), onGetEditText());
+        // 当前高度过渡到表情高度
+        keyboardHeightChanged(calcEmojiBoardHeight());
+        // 等键盘下去后再让表情区域平移上来
+        mHandler.postDelayed(() -> showEmotionView(true), duration);
+    }
+    protected int calcEmojiBoardHeight() {
+        return onGetEmojiBoardHeight() <= 0 ? mKeyboardHeight : onGetEmojiBoardHeight();
+    }
     /**
      * 主动显示表情
      */
@@ -182,6 +197,11 @@ public abstract class EmotionKeyboardFragment extends BaseEmotionKeyboardFragmen
         SoftInputUtils.hideSoftInputFromWindow(getActivity(), onGetEditText());
     }
 
+    /**
+     * 重写以设置表情container最大高度
+     * return <= 0表示使用键盘高度
+     */
+    protected abstract int onGetEmojiBoardHeight();
     protected abstract void onKeyboardStatusChanged(KeyboardStatus status);
     protected abstract EditText onGetEditText();
 
@@ -199,5 +219,9 @@ public abstract class EmotionKeyboardFragment extends BaseEmotionKeyboardFragmen
 
     public KeyboardStatus getKeyboardStatus() {
         return mKeyboardStatus;
+    }
+
+    public int getKeyboardContainerId() {
+        return mEmotionContentView.getId();
     }
 }

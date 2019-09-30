@@ -1,6 +1,7 @@
 package com.conquer.sharp.keyboard.input;
 
 import android.annotation.SuppressLint;
+import android.app.Instrumentation;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.conquer.sharp.R;
+import com.conquer.sharp.keyboard.emoji.EmojiFragment;
+import com.conquer.sharp.keyboard.emoji.EmojiParentFragment;
+import com.conquer.sharp.util.FragmentUtils;
 import com.conquer.sharp.util.StringUtils;
 
 public class InputFragment extends BaseInputFragment {
@@ -29,6 +33,10 @@ public class InputFragment extends BaseInputFragment {
     private int mInputMaxLength = Integer.MAX_VALUE;
 
     private InputListener mInputListener;
+
+    private EmojiParentFragment mEmojiFragment; // 当前的表情fragment
+
+    private EmojiInputFilter mEmojiFilter;
 
     @Nullable
     @Override
@@ -49,6 +57,8 @@ public class InputFragment extends BaseInputFragment {
         super.onViewCreated(view, savedInstanceState);
 
         initEditText();
+        setListeners();
+        pushEmojiFragment(EmojiParentFragment.TYPE.EMOJI);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -82,6 +92,33 @@ public class InputFragment extends BaseInputFragment {
             return false;
         });
         ivState.setImageResource(R.drawable.icon_emoji);
+    }
+
+    private void setListeners() {
+        ivState.setOnClickListener(v -> {
+            switch (getKeyboardStatus()) {
+                case KEYBOARD:
+                    if (!isShowEmojiFragment()) {
+                        pushEmojiFragment(EmojiParentFragment.TYPE.EMOJI);
+                    }
+                    showEmojiBoard();
+                    break;
+                case EMOTION_BOARD:
+                    showKeyBoard();
+                    break;
+                case NONE:
+                    if (!isShowEmojiFragment()) {
+                        pushEmojiFragment(EmojiParentFragment.TYPE.EMOJI);
+                    }
+                    showEmojiBoard();
+                    break;
+            }
+        });
+    }
+
+    protected void pushEmojiFragment(EmojiParentFragment.TYPE type) {
+        FragmentUtils.pushNested(getChildFragmentManager(), mEmojiFragment = getEmojiFragmentByType(type),
+                getKeyboardContainerId());
     }
 
     @Override
@@ -154,5 +191,63 @@ public class InputFragment extends BaseInputFragment {
                 return source;
             }
         }
+    }
+
+    protected boolean isShowEmojiFragment() {
+        return getShowingEmojiFragment().isShowing(EmojiFragment.class);
+    }
+
+    public EmojiParentFragment getShowingEmojiFragment() {
+        return mEmojiFragment;
+    }
+
+    @Override
+    public EmojiParentFragment onCreateEmojiParentFragment(EmojiParentFragment.TYPE type) {
+
+        if (type == EmojiParentFragment.TYPE.EMOJI) {
+            EmojiParentFragment emojiParentFragment = new EmojiParentFragment().showEmoji();
+            return emojiParentFragment.setInputListener(new EmojiParentFragment.OnEmojiListener() {
+                @Override
+                public void onDeleteClick() {
+                    new Thread(() -> {
+                        // 模拟按键
+                        Instrumentation inst = new Instrumentation();
+                        inst.sendKeyDownUpSync(KeyEvent.KEYCODE_DEL);
+                    }).start();
+                }
+
+                @Override
+                public void onSendClick() {
+                    notifyListener(inputEditText.getText().toString());
+                }
+
+                @Override
+                public boolean onFilter(String emoji) {
+                    if (mEmojiFilter != null) {
+                        return mEmojiFilter.onFilter(emoji);
+                    }
+                    return super.onFilter(emoji);
+                }
+
+                @Override
+                public void onInput(CharSequence sequence) {
+                    if (inputEditText != null) {
+                        inputEditText.getText().insert(inputEditText.getSelectionStart(), sequence);
+                    }
+                }
+            });
+        }
+        return null;
+    }
+
+    /**
+     * emoji输入过滤
+     */
+    public interface EmojiInputFilter {
+        /**
+         * @param emoji 输入的emoji unicode
+         * @return 是否需要展示到输入框
+         */
+        boolean onFilter(String emoji);
     }
 }

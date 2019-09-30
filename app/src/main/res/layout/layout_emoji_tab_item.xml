@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llEmotion"
+    android:layout_width="80dp"
+    android:layout_height="40dp">
+
+    <ImageView android:id="@+id/iv_icon"
+        android:contentDescription="@string/content_description"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true"
+        android:background="@drawable/btn_emoji_background"
+        android:padding="6dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/btn_emoji1" />
+
+    <View android:layout_width="0.00001dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center_vertical"
+        android:background="#c4c4c4" />
+
+</RelativeLayout>

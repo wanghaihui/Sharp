@@ -3,11 +3,9 @@ package com.conquer.sharp.opengl;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.View;
 
-import com.conquer.sharp.R;
 import com.conquer.sharp.base.BaseActivity;
 
 public class OpenGLActivity extends BaseActivity {
@@ -27,7 +25,6 @@ public class OpenGLActivity extends BaseActivity {
         mRenderer = new MyGLRenderer();
         mGLView.setRenderer(mRenderer);
         mGLView.setVisibility(View.VISIBLE);
-        Log.d("haihui", "set renderer");
     }
 
     // 内部类
@@ -50,7 +47,6 @@ public class OpenGLActivity extends BaseActivity {
         @Override
         public void surfaceCreated(SurfaceHolder holder) {
             super.surfaceCreated(holder);
-            Log.d("haihui", "surface created");
         }
     }
 }

@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -50,5 +52,13 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
 
     public List<T> getDataList() {
         return mDataList;
+    }
+
+    public void addAll(Collection<? extends T> data) {
+        if (mDataList == null) {
+            mDataList = new ArrayList<>();
+        }
+        mDataList.addAll(data);
+        notifyDataSetChanged();
     }
 }

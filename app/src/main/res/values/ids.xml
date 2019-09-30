@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <item name="small_video_view_dock" type="id" />
+    <item name="keyboard_emoji_view" type="id" />
 </resources>

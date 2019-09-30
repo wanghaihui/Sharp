@@ -13,8 +13,12 @@ import android.widget.LinearLayout;
 
 import com.conquer.sharp.R;
 import com.conquer.sharp.keyboard.base.EmotionKeyboardFragment;
+import com.conquer.sharp.keyboard.emoji.EmojiParentFragment;
 import com.conquer.sharp.util.FragmentUtils;
 import com.conquer.sharp.util.SoftInputUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class BaseInputFragment extends EmotionKeyboardFragment {
 
@@ -26,6 +30,9 @@ public abstract class BaseInputFragment extends EmotionKeyboardFragment {
     private FragmentManager mFragmentManager;
 
     private boolean blankEnable = true; // 空白区域是否响应关闭输入操作
+
+    // 为了支持多表情切换,由此集中管理表情fragment实例
+    private Map<EmojiParentFragment.TYPE, EmojiParentFragment> mEmojiParentFragments = new HashMap<>();
 
     /**
      * 输入法关闭模式
@@ -155,6 +162,8 @@ public abstract class BaseInputFragment extends EmotionKeyboardFragment {
 
     // 由子类创建功能条
     public abstract View onCreateExtraView();
+    // 创建一个表情fragment,为了单例管理,由InputFragment子类根据需要的表情TYPE创建对应的实例
+    public abstract EmojiParentFragment onCreateEmojiParentFragment(EmojiParentFragment.TYPE type);
 
     public void setOnCancelListener(OnCancelListener onCancelListener) {
         this.onCancelListener = onCancelListener;
@@ -168,5 +177,19 @@ public abstract class BaseInputFragment extends EmotionKeyboardFragment {
          * @param isReal true:关闭整个输入法 false:关闭输入区域，保留EditText
          */
         void onCancel(boolean isReal);
+    }
+
+    public EmojiParentFragment getEmojiFragmentByType(EmojiParentFragment.TYPE type) {
+        EmojiParentFragment phizFragment = mEmojiParentFragments.get(type);
+        if (phizFragment == null) {
+            EmojiParentFragment createFragment = onCreateEmojiParentFragment(type);
+            mEmojiParentFragments.put(type, createFragment);
+        }
+        return mEmojiParentFragments.get(type);
+    }
+
+    @Override
+    protected int onGetEmojiBoardHeight() {
+        return 0;
     }
 }

@@ -3,7 +3,6 @@ package com.conquer.sharp.util;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 
 public class BitmapUtils {
 
@@ -13,11 +12,6 @@ public class BitmapUtils {
         // Raw height and width of image
         final int height = options.outHeight;
         final int width = options.outWidth;
-
-        Log.d("haihui", "raw width: " + width);
-        Log.d("haihui", "target width: " + reqWidth);
-        Log.d("haihui", "raw height: " + height);
-        Log.d("haihui", "target height: " + reqHeight);
 
         int inSampleSize = 1;
 
@@ -32,8 +26,6 @@ public class BitmapUtils {
                 inSampleSize *= 2;
             }
         }
-
-        Log.d("haihui", "inSampleSize: " + inSampleSize);
 
         return inSampleSize;
     }
