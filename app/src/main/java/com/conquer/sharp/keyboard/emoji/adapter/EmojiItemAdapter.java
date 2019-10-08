@@ -9,22 +9,17 @@ import com.conquer.sharp.emoji.EmojiParser;
 import com.conquer.sharp.keyboard.emoji.event.EmojiClickEvent;
 import com.conquer.sharp.recycler.BaseRecyclerAdapter;
 import com.conquer.sharp.recycler.RecyclerViewHolder;
+import com.conquer.sharp.util.ScreenUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
 public class EmojiItemAdapter extends BaseRecyclerAdapter<Integer> {
 
     private int firstRealIndex; // 此页第一个emoji在整个emoji数组中的索引
-    private int itemHeight;
-    private int itemWidth;
-    private int itemPadding;
 
-    EmojiItemAdapter(Context context, int layoutId, int firstRealIndex, int itemHeight, int itemWidth, int itemPadding) {
+    EmojiItemAdapter(Context context, int layoutId, int firstRealIndex) {
         super(context, layoutId);
         this.firstRealIndex = firstRealIndex;
-        this.itemHeight = itemHeight;
-        this.itemWidth = itemWidth;
-        this.itemPadding = itemPadding;
     }
 
     @Override
@@ -32,11 +27,8 @@ public class EmojiItemAdapter extends BaseRecyclerAdapter<Integer> {
         holder.setImageResource(R.id.iv_emoji, iconRes);
 
         ImageView iv_emoji = holder.getView(R.id.iv_emoji);
-        iv_emoji.getLayoutParams().height = itemHeight;
-        iv_emoji.getLayoutParams().width = itemWidth;
-        if (itemPadding >= 0) {
-            iv_emoji.setPadding(itemPadding, itemPadding, itemPadding, itemPadding);
-        }
+        iv_emoji.getLayoutParams().height = ScreenUtils.dip2px(48);
+        iv_emoji.getLayoutParams().width = ScreenUtils.dip2px(48);
 
         holder.setOnClickListener(R.id.iv_emoji, v -> {
             int posInEmoji = firstRealIndex + position;

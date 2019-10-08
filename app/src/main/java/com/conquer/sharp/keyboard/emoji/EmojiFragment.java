@@ -43,9 +43,8 @@ public class EmojiFragment extends EmojiChildFragment {
     }
 
     private void initViewPager() {
-        EmojiPagerAdapter pagerAdapter = new EmojiPagerAdapter(4, 7, 0, 112);
+        EmojiPagerAdapter pagerAdapter = new EmojiPagerAdapter(5, 6, 0, 112);
         viewPager.setAdapter(pagerAdapter);
-        pagerAdapter.setItemPadding(ScreenUtils.dip2px(4));
     }
 
     private void initListener() {

@@ -84,4 +84,5 @@ public class SharedPrefsUtils {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     public static final String KEYBOARD_HEIGHT = "keyboard_height";
+    public static final String CONSTANT_KEYBOARD_HEIGHT = "constant_keyboard_height";
 }

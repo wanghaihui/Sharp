@@ -101,6 +101,7 @@ public class InputFragment extends BaseInputFragment {
                     if (!isShowEmojiFragment()) {
                         pushEmojiFragment(EmojiParentFragment.TYPE.EMOJI);
                     }
+                    inputEditText.requestFocus();
                     showEmojiBoard();
                     break;
                 case EMOTION_BOARD:
@@ -110,6 +111,7 @@ public class InputFragment extends BaseInputFragment {
                     if (!isShowEmojiFragment()) {
                         pushEmojiFragment(EmojiParentFragment.TYPE.EMOJI);
                     }
+                    inputEditText.requestFocus();
                     showEmojiBoard();
                     break;
             }
@@ -194,6 +196,9 @@ public class InputFragment extends BaseInputFragment {
     }
 
     protected boolean isShowEmojiFragment() {
+        if (getShowingEmojiFragment() == null) {
+            return false;
+        }
         return getShowingEmojiFragment().isShowing(EmojiFragment.class);
     }
 

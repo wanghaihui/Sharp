@@ -180,8 +180,8 @@ public abstract class BaseInputFragment extends EmotionKeyboardFragment {
     }
 
     public EmojiParentFragment getEmojiFragmentByType(EmojiParentFragment.TYPE type) {
-        EmojiParentFragment phizFragment = mEmojiParentFragments.get(type);
-        if (phizFragment == null) {
+        EmojiParentFragment emojiParentFragment = mEmojiParentFragments.get(type);
+        if (emojiParentFragment == null) {
             EmojiParentFragment createFragment = onCreateEmojiParentFragment(type);
             mEmojiParentFragments.put(type, createFragment);
         }

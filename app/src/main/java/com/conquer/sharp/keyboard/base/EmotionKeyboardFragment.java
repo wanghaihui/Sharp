@@ -86,8 +86,9 @@ public abstract class EmotionKeyboardFragment extends BaseEmotionKeyboardFragmen
             // 首次弹出键盘或者更换了键盘, 需要在此进行高度的动画
             keyboardHeightChanged(height);
             // 让表情平移下去, 不可见
-            mEmotionContentView.setTranslationY(height);
+            showEmotionView(false);
             saveKeyboardHeight(height);
+            putConstantKeyboardHeight(height);
         }
     }
     @Override
@@ -114,7 +115,7 @@ public abstract class EmotionKeyboardFragment extends BaseEmotionKeyboardFragmen
         if (lastSavedKeyboardHeight > 0) {
             // 保存过高度, 先进行动画再弹出键盘用户体验好
             keyboardHeightChanged(lastSavedKeyboardHeight);
-            mEmotionContentView.setTranslationY(lastSavedKeyboardHeight);
+            showEmotionView(false);
             mHandler.postDelayed(() -> {
                 if (getActivity() != null) {
                     SoftInputUtils.showSoftInputFromActivity(getActivity(), onGetEditText());
@@ -134,12 +135,25 @@ public abstract class EmotionKeyboardFragment extends BaseEmotionKeyboardFragmen
         SoftInputUtils.hideSoftInputFromWindow(getActivity(), onGetEditText());
         // 当前高度过渡到表情高度
         keyboardHeightChanged(calcEmojiBoardHeight());
+        emojiHeightChanged(calcEmojiBoardHeight());
         // 等键盘下去后再让表情区域平移上来
-        mHandler.postDelayed(() -> showEmotionView(true), duration);
+        mHandler.postDelayed(() -> {
+            showEmotionView(true);
+        }, duration);
     }
     protected int calcEmojiBoardHeight() {
-        return onGetEmojiBoardHeight() <= 0 ? mKeyboardHeight : onGetEmojiBoardHeight();
+        int emojiKeyboardHeight = onGetEmojiBoardHeight() <= 0 ? mKeyboardHeight : onGetEmojiBoardHeight();
+        if (emojiKeyboardHeight == 0) {
+            emojiKeyboardHeight = getConstantKeyboardHeight();
+        }
+        return emojiKeyboardHeight;
     }
+
+    private void emojiHeightChanged(int height) {
+        mEmotionContentView.getLayoutParams().height = height;
+        mEmotionContentView.setLayoutParams(mEmotionContentView.getLayoutParams());
+    }
+
     /**
      * 主动显示表情
      */
@@ -177,6 +191,15 @@ public abstract class EmotionKeyboardFragment extends BaseEmotionKeyboardFragmen
     private void saveKeyboardHeight(int height) {
         SharedPrefsUtils.putInt(getContext(), SharedPrefsUtils.KEYBOARD_HEIGHT, height);
     }
+
+    private int getConstantKeyboardHeight() {
+        return SharedPrefsUtils.getInt(getContext(), SharedPrefsUtils.CONSTANT_KEYBOARD_HEIGHT, 0);
+    }
+
+    private void putConstantKeyboardHeight(int height) {
+        SharedPrefsUtils.putInt(getContext(), SharedPrefsUtils.CONSTANT_KEYBOARD_HEIGHT, height);
+    }
+
 
     protected void notifyAndSetStatus(KeyboardStatus newStatus) {
         if (mKeyboardStatus != newStatus) {

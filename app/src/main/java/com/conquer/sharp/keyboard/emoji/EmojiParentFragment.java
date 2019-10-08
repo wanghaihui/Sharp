@@ -169,6 +169,23 @@ public class EmojiParentFragment extends Fragment {
 
             }
         });
+
+        tv_emoji_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onEmojiListener != null) {
+                    onEmojiListener.onSendClick();
+                }
+            }
+        });
+        emoji_btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onEmojiListener != null) {
+                    onEmojiListener.onDeleteClick();
+                }
+            }
+        });
     }
 
     private static class PagerAdapter extends FragmentPagerAdapter {

@@ -5,6 +5,7 @@ import android.content.Context;
 import com.conquer.sharp.R;
 import com.conquer.sharp.recycler.BaseRecyclerAdapter;
 import com.conquer.sharp.recycler.RecyclerViewHolder;
+import com.conquer.sharp.widget.EmojiTextView;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ public class MessageAdapter extends BaseRecyclerAdapter<String> {
     }
 
     public void convert(RecyclerViewHolder holder, String message, int position) {
-        holder.setText(R.id.emojiTextView, message);
+        EmojiTextView emojiTextView = holder.getView(R.id.emojiTextView);
+        emojiTextView.setText(message);
     }
 }

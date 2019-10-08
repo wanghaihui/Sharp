@@ -10,7 +10,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginEnd="20dp"
         android:textSize="16dp"
-        android:textColor="#212121"
+        android:textColor="@android:color/white"
         android:includeFontPadding="false"
         android:lineSpacingExtra="3dp"
         android:layout_gravity="center_vertical|end"

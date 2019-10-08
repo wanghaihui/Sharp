@@ -16,19 +16,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class EmojiPagerAdapter extends PagerAdapter {
-
-    private static final int CONTAINER_HEIGHT_DP = 140; // 外部显示表情区域的高度
-
     private int rows; // 行数
     private int columns; // 列数
     private int countPerPage; // 每页最大item数
 
     private int start; // 原数组起始位置
     private int length; // 复制原数组中数据的长度
-
-    private int itemHeight; // item最大高度
-    private int itemWidth; // item最大宽度
-    private int itemPadding; // itemPadding
 
     private Integer[] mDatas; // 该页可使用的数据
 
@@ -40,10 +33,6 @@ public class EmojiPagerAdapter extends PagerAdapter {
         init();
     }
 
-    public void setItemPadding(int itemPadding) {
-        this.itemPadding = itemPadding;
-    }
-
     private void init() {
         if (EmojiParser.DEFAULT_EMOJI_RES_IDS == null) {
             EmojiParser.getInstance();
@@ -51,9 +40,6 @@ public class EmojiPagerAdapter extends PagerAdapter {
         countPerPage = rows * columns;
         mDatas = new Integer[length];
         System.arraycopy(EmojiParser.DEFAULT_EMOJI_RES_IDS, start, mDatas, 0, length);
-
-        itemHeight = (int) (ScreenUtils.dip2px(CONTAINER_HEIGHT_DP) * 1f / rows);
-        itemWidth = (int) (ScreenUtils.screenWidth * 1f / columns);
     }
 
     @Override
@@ -78,8 +64,7 @@ public class EmojiPagerAdapter extends PagerAdapter {
         RecyclerView rcv = view.findViewById(R.id.rcv);
         rcv.setLayoutManager(new GridLayoutManager(context, columns));
         EmojiItemAdapter emojiItemAdapter = new EmojiItemAdapter(context,
-                R.layout.layout_emoji_item, position * countPerPage + start,
-                itemHeight, itemWidth, itemPadding);
+                R.layout.layout_emoji_item, position * countPerPage + start);
 
         int start = position * countPerPage;
         int end = (position + 1) * countPerPage;
