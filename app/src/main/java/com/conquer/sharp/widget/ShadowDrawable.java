@@ -16,8 +16,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
 import android.view.View;
 
-import com.conquer.sharp.util.ScreenUtils;
-
 public class ShadowDrawable extends Drawable {
 
     private Paint mShadowPaint;
@@ -35,7 +33,8 @@ public class ShadowDrawable extends Drawable {
     public final static int SHAPE_ROUND = 1;
     public final static int SHAPE_CIRCLE = 2;
 
-    private ShadowDrawable(int shape, int[] bgColor, int shapeRadius, int shadowColor, int shadowRadius, int offsetX, int offsetY) {
+    private ShadowDrawable(int shape, int[] bgColor, int shapeRadius, int shadowColor, int shadowRadius,
+                           int offsetX, int offsetY, int borderColor, int borderWidth) {
         this.mShape = shape;
         this.mBgColor = bgColor;
         this.mShapeRadius = shapeRadius;
@@ -54,9 +53,9 @@ public class ShadowDrawable extends Drawable {
 
         mWhiteBorderPaint = new Paint();
         mWhiteBorderPaint.setAntiAlias(true);
-        mWhiteBorderPaint.setColor(Color.WHITE);
+        mWhiteBorderPaint.setColor(borderColor);
         mWhiteBorderPaint.setStyle(Paint.Style.STROKE);
-        mWhiteBorderPaint.setStrokeWidth(ScreenUtils.dip2px(2));
+        mWhiteBorderPaint.setStrokeWidth(borderWidth);
     }
 
     @Override
@@ -148,7 +147,8 @@ public class ShadowDrawable extends Drawable {
         ViewCompat.setBackground(view, drawable);
     }
 
-    public static void setShadowDrawable(View view, int shape, int[] bgColor, int shapeRadius, int shadowColor, int shadowRadius, int offsetX, int offsetY) {
+    public static void setShadowDrawable(View view, int shape, int[] bgColor, int shapeRadius,
+                                         int shadowColor, int shadowRadius, int offsetX, int offsetY) {
         ShadowDrawable drawable = new ShadowDrawable.Builder()
                 .setShape(shape)
                 .setBgColor(bgColor)
@@ -162,25 +162,43 @@ public class ShadowDrawable extends Drawable {
         ViewCompat.setBackground(view, drawable);
     }
 
+    public static void setShadowDrawable(View view, int shape, int[] bgColor,
+                                         int shadowColor, int shadowRadius, int borderColor, int borderWidth) {
+        ShadowDrawable drawable = new ShadowDrawable.Builder()
+                .setShape(shape)
+                .setBgColor(bgColor)
+                .setShadowColor(shadowColor)
+                .setShadowRadius(shadowRadius)
+                .setBorderColor(borderColor)
+                .setBorderWidth(borderWidth)
+                .builder();
+        view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        ViewCompat.setBackground(view, drawable);
+    }
+
 
     public static class Builder {
         private int mShape;
         private int mShapeRadius;
         private int mShadowColor;
         private int mShadowRadius;
-        private int mOffsetX = 0;
-        private int mOffsetY = 0;
+        private int mOffsetX;
+        private int mOffsetY;
         private int[] mBgColor;
+        private int borderColor;
+        private int borderWidth;
 
         public Builder() {
             mShape = ShadowDrawable.SHAPE_ROUND;
-            mShapeRadius = 12;
+            mShapeRadius = 0;
             mShadowColor = Color.parseColor("#4d000000");
             mShadowRadius = 18;
             mOffsetX = 0;
             mOffsetY = 0;
             mBgColor = new int[1];
             mBgColor[0] = Color.TRANSPARENT;
+            borderColor = 0;
+            borderWidth = 0;
         }
 
         public Builder setShape(int mShape) {
@@ -223,8 +241,19 @@ public class ShadowDrawable extends Drawable {
             return this;
         }
 
+        public Builder setBorderColor(int color) {
+            this.borderColor = color;
+            return this;
+        }
+
+        public Builder setBorderWidth(int width) {
+            this.borderWidth = width;
+            return this;
+        }
+
         public ShadowDrawable builder() {
-            return new ShadowDrawable(mShape, mBgColor, mShapeRadius, mShadowColor, mShadowRadius, mOffsetX, mOffsetY);
+            return new ShadowDrawable(mShape, mBgColor, mShapeRadius, mShadowColor, mShadowRadius,
+                    mOffsetX, mOffsetY, borderColor, borderWidth);
         }
     }
 }

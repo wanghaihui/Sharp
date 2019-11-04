@@ -22,4 +22,61 @@
         android:text="Hello World!"
         android:textColor="@android:color/white" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_centerInParent="true">
+            <FrameLayout android:id="@+id/tiOuterLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="26dp">
+                <FrameLayout android:id="@+id/tiInnerLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </FrameLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </FrameLayout>
+            <FrameLayout android:id="@+id/baoOuterLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="26dp">
+                <FrameLayout android:id="@+id/baoInnerLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </FrameLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <TextView android:id="@+id/ivTi"
+            android:contentDescription="@string/content_description"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:padding="6dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="0dp"
+            android:layout_marginStart="0dp" />
+
+        <TextView android:id="@+id/ivBao"
+            android:contentDescription="@string/content_description"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:padding="6dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="0dp"
+            android:layout_marginEnd="0dp" />
+
+    </RelativeLayout>
+
 </LinearLayout>
