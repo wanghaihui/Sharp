@@ -101,6 +101,9 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustNothing" />
 
+        <activity android:name=".business.ShadowActivity"
+            android:screenOrientation="portrait" />
+
         <!-- Service -->
         <service android:name=".binder.RemoteService"
             android:process=":remote" />
