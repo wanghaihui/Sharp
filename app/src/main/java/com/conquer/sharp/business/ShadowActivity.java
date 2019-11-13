@@ -78,19 +78,19 @@ public class ShadowActivity extends BaseActivity {
     }
 
     private void updateOutLayoutWidth(int score) {
-        int tiOutWidht;
+        int tiOutWidth;
         LinearLayout.LayoutParams tiOuterParams = (LinearLayout.LayoutParams) tiOuterLayout.getLayoutParams();
         tiOuterParams.width = mPKWidth / 2;
-        tiOutWidht = tiOuterParams.width;
+        tiOutWidth = tiOuterParams.width;
         tiOuterLayout.setLayoutParams(tiOuterParams);
 
         LinearLayout.LayoutParams baoOuterParams = (LinearLayout.LayoutParams) baoOuterLayout.getLayoutParams();
-        baoOuterParams.width = mPKWidth - tiOutWidht;
+        baoOuterParams.width = mPKWidth - tiOutWidth;
         baoOuterLayout.setLayoutParams(baoOuterParams);
     }
 
     private void updateOutLayoutBackground() {
-        tiOuterLayout.setBackgroundResource(R.drawable.bg_ti_no_shadow);
+        tiOuterLayout.setBackgroundResource(R.drawable.bg_ti_shadow);
         baoOuterLayout.setBackgroundResource(R.drawable.bg_bao_no_shadow);
     }
 
