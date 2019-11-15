@@ -10,4 +10,4 @@ https://github.com/googlesamples
 表情键盘
 
 重叠头像--RecyclerView的巧妙实现
-
+![Image text](https://github.com/wanghaihui/Sharp/blob/master/image/overlay_avatar.jpeg)
