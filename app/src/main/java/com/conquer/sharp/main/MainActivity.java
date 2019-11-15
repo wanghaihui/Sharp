@@ -15,6 +15,7 @@ import com.conquer.sharp.api.SharpUIKit;
 import com.conquer.sharp.base.BaseActivity;
 import com.conquer.sharp.binder.AIDLActivity;
 import com.conquer.sharp.business.KeyboardActivity;
+import com.conquer.sharp.business.OverlayActivity;
 import com.conquer.sharp.business.SelectorActivity;
 import com.conquer.sharp.business.ShadowActivity;
 import com.conquer.sharp.dialog.fragment.DirectoryDialogFragment;
@@ -58,7 +59,7 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
             "13.Wait/Notify/NotifyAll", "14.Camera", "15.Google Software Engineer",
             "16.文件拷贝之assetsToSDCard", "17.引导图", "18.内存泄漏", "19.Glide图片", "20.声网",
             "21.涟漪效果", "22.反射", "23.AIDL", "24.Keyboard", "25.Selector", "26.表情键盘(Emoji Keyboard)",
-            "27.阴影"
+            "27.阴影", "28.重叠头像(RecyclerView的巧妙实现)"
     };
 
     @Override
@@ -164,6 +165,8 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
                     case 27:
                         ShadowActivity.launch(MainActivity.this);
                         break;
+                    case 28:
+                        OverlayActivity.launch(MainActivity.this);
                     default:
                         break;
                 }

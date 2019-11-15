@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.conquer.sharp.widget.CircleImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ivAvatar"
+    android:layout_width="22dp"
+    android:layout_height="22dp"
+    android:layout_marginTop="2dp"
+    android:layout_gravity="center_vertical"
+    app:border_color="@android:color/white"
+    app:border_width="1dp">
+</com.conquer.sharp.widget.CircleImageView>
