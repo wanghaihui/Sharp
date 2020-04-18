@@ -20,6 +20,7 @@ import com.conquer.sharp.business.SelectorActivity;
 import com.conquer.sharp.business.ShadowActivity;
 import com.conquer.sharp.dialog.fragment.DirectoryDialogFragment;
 import com.conquer.sharp.keyboard.EmotionKeyboardActivity;
+import com.conquer.sharp.optimize.OptimizeActivity;
 import com.conquer.sharp.ptr.PullToRefreshLayout;
 import com.conquer.sharp.recycler.OnRVItemClickListener;
 import com.conquer.sharp.recycler.decoration.SpacingDecoration;
@@ -59,7 +60,7 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
             "13.Wait/Notify/NotifyAll", "14.Camera", "15.Google Software Engineer",
             "16.文件拷贝之assetsToSDCard", "17.引导图", "18.内存泄漏", "19.Glide图片", "20.声网",
             "21.涟漪效果", "22.反射", "23.AIDL", "24.Keyboard", "25.Selector", "26.表情键盘(Emoji Keyboard)",
-            "27.阴影", "28.重叠头像(RecyclerView的巧妙实现)"
+            "27.阴影", "28.重叠头像(RecyclerView的巧妙实现)", "29.代码优化", "30.图片上传"
     };
 
     @Override
@@ -167,6 +168,13 @@ public class MainActivity extends BaseActivity implements PullToRefreshLayout.On
                         break;
                     case 28:
                         OverlayActivity.launch(MainActivity.this);
+                        break;
+                    case 29:
+                        OptimizeActivity.launch(MainActivity.this);
+                        break;
+                    case 30:
+                        // UploadPictureActivity.launch();
+                        break;
                     default:
                         break;
                 }
